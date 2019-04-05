@@ -10,7 +10,11 @@ This is a React on Rails app on Ruby 2.6.0 with webpacker.
 
 ## Installation
 
-0. If you do not have Ruby installed (check with `ruby -v`), follow the instructions for installing Ruby [here](https://www.ruby-lang.org/en/documentation/installation/).
+0. If you do not have Ruby installed (check with `ruby -v`), follow the instructions for installing Ruby [here](https://www.ruby-lang.org/en/documentation/installation/). Run
+   ```
+   brew install postgresql node yarn
+   ```
+   too for other basic dependencies.
 1. If you do not have rails installed (check with `rails --version`), run
    ```
    gem install rails
@@ -19,8 +23,22 @@ This is a React on Rails app on Ruby 2.6.0 with webpacker.
    ```
    bundle install
    ```
-   to install all dependencies for this project.
-3. Start the application with 
+   to install all rails dependencies for this project.
+   Run 
+   ```
+   yarn install
+   ```
+   to install all node dependencies.
+3. Start Postgres as a background service by running 
+   ```
+   brew services start postgresql
+   ```
+   If this is your first time starting Postgres, run
+   ```
+   rake db:setup
+   ```
+   which will create all the databases specified in `config/database.yml`.
+4. Start the application with 
    ```
    rails s
    ```
