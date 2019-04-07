@@ -19,12 +19,12 @@ export default class HelloWorld extends React.Component {
   }
 
   render() {
+    /*
+    Right now this is a "create survey component". We can add other things like review groups, finalize groups etc.
+    Create survey is really just for adding a new question right now
+    */ 
     return (
       <div>
-        /*
-        Right now this is a "create survey component". We can add other things like review groups, finalize groups etc.
-        Create survey is really just for adding a new question right now
-        */
         <CreateSurvey />
       </div>
     );
