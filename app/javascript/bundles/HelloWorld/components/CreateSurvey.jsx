@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import React from 'react';
 import MultipleChoiceQs from './MultipleChoiceQs'
 
@@ -46,7 +46,7 @@ export default class CreateSurvey extends React.Component {
       })
     }
 
-   //individual question HTML that is returned  
+   //individual question HTML that is returned
     return (
       <div>
         <h3>Creating a Student Survey</h3>
