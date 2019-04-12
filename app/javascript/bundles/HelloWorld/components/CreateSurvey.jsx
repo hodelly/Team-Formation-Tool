@@ -11,10 +11,11 @@ export default class CreateSurvey extends React.Component {
       questionAnswerMap: Map<Question, QuestionAnswers>
       Size: size of the map right now
     */
-    this.state={titleValue:"", answersValues: "", questionAnswerMap: new Map(), size:0};
+    this.state={titleValue:"", answersValues: "", questionAnswerMap: new Map(), size:0, questionType:"Multiple Choice"};
     this.handleTitleChange = this.handleTitleChange.bind(this); //method to handle changes when typing in input bar for question
     this.handleValuesChange = this.handleValuesChange.bind(this); //method to handle changes when typing in input for ansnwers
     this.handleSubmit = this.handleSubmit.bind(this); //method for when the submit button is clicked
+    this.changeQuestionType = this.changeQuestionType.bind(this); //change between boxes and multiple choice question type
   }
 
   // when the title is changed we update the titleValue state
@@ -34,6 +35,16 @@ export default class CreateSurvey extends React.Component {
     this.setState({size: this.state.size+1})
   }
 
+  // Change question type to be checkboxes
+  changeQuestionType() {
+    if(this.state.questionType === "Multiple Choice"){
+      this.setState({questionType: "Checkbox"})
+    }
+    else {
+      this.setState({questionType: "Multiple Choice"})
+    }
+  }
+
   render() {
     //going to be the variable that contains all the multiple choice questions  created
     let questions = null;
@@ -42,15 +53,19 @@ export default class CreateSurvey extends React.Component {
        questions = Object.keys(this.state.questionAnswerMap).map(question => {
          //for each key (questio) we are making a multuple choice question and sending it the answers indexed from
          // the map as well
-        return  <MultipleChoiceQs questions={question} answers={this.state.questionAnswerMap[question]}/>
+          if(this.state.questionType === "Multiple Choice"){
+            return  <MultipleChoiceQs questions={question} answers={this.state.questionAnswerMap[question]}/>
+          }
       })
     }
 
-   //individual question HTML that is returned  
+   //individual question HTML that is returned
     return (
       <div>
         <h3>Creating a Student Survey</h3>
-        <h1>Multiple Choice Questions </h1>
+        <h1>currently making {this.state.questionType} questions </h1>
+        <button  type='button' onClick={this.changeQuestionType}> Switch Question Type </button>
+
         <form onSubmit={this.handleSubmit}>
           <label>Question Title: <input type="text" value={this.state.titleValue} onChange={this.handleTitleChange} /></label>
           <label>Options: <input type="text" value={this.state.answersValues} onChange={this.handleValuesChange} /></label>
