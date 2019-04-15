@@ -15,7 +15,7 @@ export default class MultipleChoiceQs extends React.Component {
     const valString = "val" + String(randomnum)
     this.state= {valueString: valString}
   }
-
+    
   render() {
     // Go through each of the items in the answers list and make a radio button
     // using the randomly generated name variable here.

@@ -1,6 +1,5 @@
 //import PropTypes from 'prop-types';
 import React from 'react';
-import MultipleChoiceQs from './MultipleChoiceQs'
 import * as Survey from "survey-react";
 import "survey-react/survey.css";
 
@@ -90,18 +89,6 @@ export default class CreateSurvey extends React.Component {
 
 
   render() {
-    //going to be the variable that contains all the multiple choice questions  created
-    let questions = null;
-    console.log(this.state.surveyjs);
-    if(this.state.size > 0){ //checks to make sure we have thigns in the map
-      // turning all the keys into a list and looping through them
-       questions = Object.keys(this.state.questionAnswerMap).map(question => {
-         //for each key (questio) we are making a multuple choice question and sending it the answers indexed from
-         // the map as well
-        return  <MultipleChoiceQs questions={question} answers={this.state.questionAnswerMap[question]}/>
-      })
-    }
-
 
    //individual question HTML that is returned
    if(this.state.inPreview){

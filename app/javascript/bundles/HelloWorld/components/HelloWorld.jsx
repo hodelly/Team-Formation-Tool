@@ -16,13 +16,7 @@ export default class HelloWorld extends React.Component {
     // How to set initial state in ES6 class syntax
     // https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class
     this.state = { name: this.props.name };
-    this.onComplete = this.onComplete.bind(this); //method to handle changes when typing in input bar for question
 
-  }
-
-  onComplete(survey, options) {
-   //Write survey results into database
-   console.log("Survey results: " + JSON.stringify(survey.data));
   }
 
   render() {
