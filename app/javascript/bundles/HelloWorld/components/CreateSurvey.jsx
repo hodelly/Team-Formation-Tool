@@ -68,13 +68,16 @@ export default class CreateSurvey extends React.Component {
 
 
   handleNewQuestion(newQuestion) {
-    // const surveyData = this.state.surveyjs;
-    // surveyData.pages[0].questions.push(newQuestion);
+    const surveyData = this.state.surveyjs;
+    surveyData.pages[0].questions.push(newQuestion);
+
+    console.log(this.state);
     this.setState(prevState => ({
       questionMap: prevState.questionMap.set(prevState.id, Object.assign({}, prevState.questionMap, newQuestion)),
     }));
     this.setState(prevState => ({ id: prevState.id + 1 }));
-    this.setState(prevState => ({ surveyjs: prevState.surveyjs.pages[0].questions.push(newQuestion), justAddedQStep: !prevState.justAddedQStep }));
+
+    this.setState(prevState => ({ surveyjs: surveyData, justAddedQStep: !prevState.justAddedQStep }));
 
   //  this.setState({ surveyjs: surveyData, justAddedQStep: !this.state.justAddedQStep, id: newid });
   }
