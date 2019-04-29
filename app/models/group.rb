@@ -1,4 +1,4 @@
 class Group < ApplicationRecord
-    validates :score
-    serialized :sis_user_id # will be a serialized field, but is foreign key
+    validates :score, presence: true, length: { maximum: 32 }, numericality: true
+    serialize :sis_user_id, presence: true, length: { maximum: 32 }
 end

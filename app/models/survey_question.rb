@@ -1,6 +1,6 @@
 class SurveyQuestion < ApplicationRecord
-    belongs_to :survey 
-    belongs_to :question # how to associate with 2 other tables?
-    validates :weight # float value?
-    has_many :response
+  belongs_to :survey
+  has_one :question 
+  validates :weight, presence: true, numericality: true
+  has_many :response
 end
