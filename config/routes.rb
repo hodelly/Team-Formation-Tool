@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  resources :surveys
   namespace :api do 
     namespace :v1 do
       resource :sis_user, only: :show
-      resources :surveys, only: [:create, :destroy]
+      resources :surveys, only: [:create, :destroy, :index, :show]
     end
   end
   get 'hello_world', to: 'hello_world#index'
