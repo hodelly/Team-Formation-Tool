@@ -3,6 +3,7 @@ class Api::V1::SurveysController < ApplicationController
 
   def create
     # create survey but only for instructor
+    Survey.create(params[:survey]) # TODO: is survey one field or all params?
   end
 
   def destroy
@@ -19,5 +20,11 @@ class Api::V1::SurveysController < ApplicationController
     @survey = Survey.find(params[:id])
     render json: @survey
   end
+
+  private 
+    def survey_params
+      params.require(:course_id, :survey_questions, :sis_instructor_id, :group_size, :due_date)
+    end
+  # validate params?
 
 end
