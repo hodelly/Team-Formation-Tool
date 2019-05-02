@@ -22,9 +22,10 @@ class Api::V1::SurveysController < ApplicationController
   end
 
   private 
-    def survey_params
-      params.require(:course_id, :survey_questions, :sis_instructor_id, :group_size, :due_date)
-    end
+
   # validate params?
+  def survey_params
+    params.require(:course_id, :survey_questions, :sis_instructor_id, :group_size, :due_date)
+  end
 
 end
