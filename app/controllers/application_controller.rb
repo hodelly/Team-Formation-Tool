@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   # Authentication methods
   def authenticated?
     true
+    # session[:canvas_code].present? (possible canvas integration)
     # TODO: Uncomment this when we are ready for handoff
     # session[:netid].present? && current_sis_user.present?
   end
