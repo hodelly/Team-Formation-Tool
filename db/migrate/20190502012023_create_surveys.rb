@@ -2,7 +2,7 @@ class CreateSurveys < ActiveRecord::Migration[5.2]
   def change
     create_table :surveys do |t|
       t.string :course_id
-      t.reference :survey_questions
+      t.references :survey_questions
       t.string :sis_instructor_id
       t.integer :group_size
       t.datetime :due_date

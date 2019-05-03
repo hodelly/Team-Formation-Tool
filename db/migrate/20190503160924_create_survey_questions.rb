@@ -1,10 +1,10 @@
 class CreateSurveyQuestions < ActiveRecord::Migration[5.2]
   def change
     create_table :survey_questions do |t|
-      t.reference :surveys
-      t.reference :question
+      t.references :survey
+      t.references :question
       t.float :weight
-      t.reference :responses
+      t.references :responses
 
       t.timestamps
     end
