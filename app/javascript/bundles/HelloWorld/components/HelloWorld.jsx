@@ -9,6 +9,8 @@ export default class HelloWorld extends React.Component {
     // How to set initial state in ES6 class syntax
     // https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class
     this.state = { createSurvey: false };
+    console.log('in constrcutr');
+    console.log(props);
   }
 
   render() {
