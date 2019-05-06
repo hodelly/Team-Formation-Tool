@@ -4,6 +4,7 @@ require 'oauth/request_proxy/action_controller_request'
 $oauth_key = "test"
 $oauth_secret = "secret"
 class ApplicationController < ActionController::Base
+<<<<<<< HEAD
   ## Comes in here
   def get_canvas_auth
     ## comes in here
@@ -32,5 +33,28 @@ class ApplicationController < ActionController::Base
 
       # canvas_auth = CanvasAuth.new
       # session[:canvas_auth_id] = canvas_auth.session_code
+=======
+  protect_from_forgery with: :null_session
+
+  # Authentication methods
+  def authenticated?
+    true
+    # session[:canvas_code].present? (possible canvas integration)
+    # TODO: Uncomment this when we are ready for handoff
+    # session[:netid].present? && current_sis_user.present?
+  end
+
+  def current_sis_user # returns netid of user
+    @current_sis_user ||= '1' #??
+    # TODO: Uncomment this when we are ready for handoff
+    # @current_sis_user ||= session[:netid]
+  end
+
+  def require_authentication
+    unless authenticated?
+      session[:return_url] = request.url
+      redirect_to '/auth/cas'
+    end
+>>>>>>> 984b5b43880bb390d7982956e83084ad58101b44
   end
 end
