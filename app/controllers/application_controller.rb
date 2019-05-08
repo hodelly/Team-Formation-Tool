@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_sis_user # returns netid of user
-    @current_sis_user ||= '1' #??
+    @current_sis_user ||= '0' #??
     # TODO: Uncomment this when we are ready for handoff
     # @current_sis_user ||= session[:netid]
   end
