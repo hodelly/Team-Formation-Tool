@@ -12,7 +12,8 @@ class Api::V1::SurveysController < ApplicationController
 
   def index
     # different renders for instructors vs students? 
-    render json: Survey.for_instructor(current_sis_user)
+    # render json: Survey.for_instructor(current_sis_user)
+    render json: Survey.all
     # also consider for_course_id scope
   end
 
