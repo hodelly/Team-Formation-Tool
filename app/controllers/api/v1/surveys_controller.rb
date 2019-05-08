@@ -3,7 +3,9 @@ class Api::V1::SurveysController < ApplicationController
 
   def create
     # create survey but only for instructor
-    Survey.create(params[:survey]) # TODO: is survey one field or all params?
+    # Survey.create(params[:survey]) # TODO: is survey one field or all params?
+    Survey.create(survey_params)
+    # send error if creation failed
   end
 
   def destroy
