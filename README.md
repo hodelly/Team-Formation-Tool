@@ -37,6 +37,10 @@ This is a React on Rails app on Ruby 2.6.0 with webpacker.
    ```
    rake db:setup
    ```
+   followed by 
+   ```
+   rake db:migrate
+   ```
    which will create all the databases specified in `config/database.yml`.
 4. Start the application with 
    ```
