@@ -4,15 +4,16 @@ class ApplicationController < ActionController::Base
   # Authentication methods
   def authenticated?
     true
-    # session[:canvas_code].present? (possible canvas integration)
     # TODO: Uncomment this when we are ready for handoff
+    # session[:canvas_code].present? (possible canvas integration)
     # session[:netid].present? && current_sis_user.present?
   end
 
-  def current_sis_user # returns netid of user
-    @current_sis_user ||= '0' #??
+  # Returns user netid 
+  def current_sis_user 
+    @current_sis_user ||= '0'
     # TODO: Uncomment this when we are ready for handoff
-    # @current_sis_user ||= session[:netid]
+    # @current_sis_user ||= session[:netid] # TODO: Canvas capatibility
   end
 
   def require_authentication
