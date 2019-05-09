@@ -4,8 +4,16 @@ class Api::V1::SurveysController < ApplicationController
   def create
     # create survey but only for instructor
     # Survey.create(params[:survey]) # TODO: is survey one field or all params?
-    Survey.create(survey_params)
-    # send error if creation failed
+    # @survey = Survey.new(survey_params)
+    @survey = Survey.create_from_params(survey_params)
+
+    respond_to do |format|
+      if @survey.save
+        format.json { render json: @survey, status: :created, location: @survey }
+      else
+        format.json { render json: @survey.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
@@ -27,7 +35,8 @@ class Api::V1::SurveysController < ApplicationController
 
   # validate params?
   def survey_params
-    params.require(:course_id, :survey_questions, :sis_instructor_id, :group_size, :due_date)
+    params.require(:survey).permit(:course_id, :survey_questions, 
+      :sis_instructor_id, :group_size, :due_date)
   end
 
 end

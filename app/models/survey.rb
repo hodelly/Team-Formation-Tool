@@ -13,4 +13,14 @@ class Survey < ApplicationRecord
   scope :for_course_id, (lambda do |course_id|
     where(course_id: course_id) 
   end)
+
+  def self.create_from_params(params)
+    s = new
+    s.course_id = params[:course_id]
+    s.sis_instructor_id = params[:sis_instructor_id]
+    # s.survey_questions = params[:survey_questions] # handle creating another object
+    s.group_size = params[:group_size].to_i
+    s.due_date = Time.at(params[:due_date].to_f/1000)
+    s
+  end
 end
