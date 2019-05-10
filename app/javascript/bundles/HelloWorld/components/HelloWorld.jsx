@@ -21,40 +21,60 @@ export default class HelloWorld extends React.Component {
     };
   }
 
-goToQuestionsPage = () => {
-  this.setState({
-    onQuestionsPage: true,
-    onDashboard: false,
-  });
-}
-
-goToDashboard = () => {
-  this.setState({
-    onDashboard: true,
-    onQuestionsPage: false,
-
-  });
-}
-
-
-render() {
-  if (this.state.onQuestionsPage) {
-    return (
-      <div>
-        <QuestionsPage goToDashboard={this.goToDashboard} />
-      </div>
-    );
+  goToQuestionsPage = () => {
+    this.setState({
+      onQuestionsPage: true,
+      onDashboard: false,
+    });
   }
-  if (this.state.onDashboard) {
-    return (
-      <div>
-        <p> dashboard
-          <i className="fas fa-camera" />
-        </p>
-        <button type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
-      </div>
-    );
+
+  goToDashboard = () => {
+    this.setState({
+      onDashboard: true,
+      onQuestionsPage: false,
+
+    });
   }
-  return (null);
+
+
+  render() {
+    if (this.state.onQuestionsPage) {
+      return (
+        <div>
+          <QuestionsPage goToDashboard={this.goToDashboard} />
+        </div>
+      );
+    }
+    if (this.state.onDashboard) {
+      return (
+        <div>
+          <p> dashboard
+          </p>
+          <button type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
+        </div>
+      );
+    }
+    return (null);
+  }
 }
-}
+
+
+//   constructor(props) {
+//     super(props);
+//     // How to set initial state in ES6 class syntax
+//     // https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class
+//     this.state = { name: this.props.name };
+//   }
+//
+//   render() {
+//     /*
+//     Right now this is a "create survey component". We can add other things like review groups, finalize groups etc.
+//     Create survey is really just for adding a new question right now
+//     */
+//     return (
+//       <div>
+//         <CreateSurvey />
+//       </div>
+//     );
+//   }
+// }
