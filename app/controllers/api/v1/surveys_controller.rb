@@ -2,18 +2,27 @@ class Api::V1::SurveysController < ApplicationController
   before_action :require_authentication
 
   def create
-    # create survey but only for instructor
-    Survey.create(params[:survey]) # TODO: is survey one field or all params?
+    # create survey, instructor only
+    # TODO: add check to ensure only instructors have access to this end point
+    @survey = Survey.create_from_params(survey_params)
+
+    respond_to do |format|
+      if @survey.save
+        format.json { render json: @survey, status: :created, location: @survey }
+      else
+        format.json { render json: @survey.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
-    # delete survey but only for instructor
+    # delete survey, instructor only
   end
 
   def index
-    # different renders for instructors vs students? 
+    # TODO: different renders for instructors vs students? 
     render json: Survey.for_instructor(current_sis_user)
-    # also consider for_course_id scope
+    # TODO: also consider for_course_id scope for students
   end
 
   def show
@@ -23,9 +32,10 @@ class Api::V1::SurveysController < ApplicationController
 
   private 
 
-  # validate params?
+  # validate params
   def survey_params
-    params.require(:course_id, :survey_questions, :sis_instructor_id, :group_size, :due_date)
+    params.require(:survey).permit(:course_id, :survey_questions, 
+      :sis_instructor_id, :group_size, :due_date)
   end
 
 end
