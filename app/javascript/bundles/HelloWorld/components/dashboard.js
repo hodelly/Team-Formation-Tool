@@ -18,6 +18,10 @@ export default class Dashboard extends React.Component {
     return (
       <div>
         {pastSurveys}
+<<<<<<< HEAD
+=======
+        {pastSurveys}
+>>>>>>> react components on rails
       </div>
     );
   }
