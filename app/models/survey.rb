@@ -3,6 +3,7 @@ class Survey < ApplicationRecord
   has_many :survey_questions
   has_many :questions, through: :survey_questions
   validates :sis_instructor_id, presence: true # how to mark this as serialize ??
+  serialize :sis_instructor_id, JSON
   validates :group_size, presence: true, numericality: { only_integer: true }
   validates :due_date, presence: true, numericality: true
 

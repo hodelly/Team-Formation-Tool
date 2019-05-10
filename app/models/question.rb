@@ -7,6 +7,6 @@ class Question < ApplicationRecord
   QUESTION_TYPES = [
     MULTIPLE_CHOICE, CHECKBOX, SHORT_ANSWER, PARAGRAPH
   ].freeze
-  serialize :response_values # for multiple choice and checkbox
+  serialize :response_values, JSON # for multiple choice and checkbox
   validates :question_type, presence: true, length: { maximum: 32 }, inclusion: { in: QUESTION_TYPES }
 end
