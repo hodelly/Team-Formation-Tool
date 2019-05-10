@@ -1,4 +1,5 @@
 class Group < ApplicationRecord
     validates :score, presence: true, length: { maximum: 32 }, numericality: true
-    serialize :sis_user_id, presence: true, length: { maximum: 32 }
+    validates :sis_user_id, presence: true, length: { maximum: 32 }
+    serialize :sis_user_id, JSON
 end
