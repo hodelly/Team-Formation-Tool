@@ -32,7 +32,6 @@
             },
             "allowChildren": true
         }],
-        "react/prop-types": [<1>, { ignore: <ignore>, customValidators: <customValidator> }]
-
+        "react/prop-types": [<1>, { ignore: <ignore>, customValidators: <customValidator> }],
     }
 }
