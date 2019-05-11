@@ -55,6 +55,7 @@ export default class Question extends React.Component {
 
   render() {
     let options;
+    // const array = ['janvi', 'kalra', 'options'];
     if (this.state.questionType === 'radiogroup' || this.state.questionType === 'checkbox' || this.state.questionType === 'dropdown') {
       options = <Options questionID={this.state.questionID} updateOptions={this.props.updateOptions} choicesList={this.state.choices} />;
     } else {
