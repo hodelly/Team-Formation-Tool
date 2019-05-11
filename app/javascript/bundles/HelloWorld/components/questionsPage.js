@@ -1,9 +1,8 @@
 import React from 'react';
 import { Map } from 'immutable';
-// import '../style.scss';
-// import * as Survey from 'survey-react';
+import * as Survey from 'survey-react';
 import Question from './question';
-// import 'survey-react/survey.css';
+import 'survey-react/survey.css';
 
 export default class QuestionsPage extends React.Component {
   constructor(props) {

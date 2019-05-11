@@ -9,7 +9,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-on-rails": "11.2.2",
-    "survey-react": "^1.0.79"
+    "survey-react": "^1.0.84"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

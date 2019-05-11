@@ -1,0 +1,51 @@
+// to ensure bar are just lines
+input[type=options] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    font-size: 12px;
+    width: 200px;
+}
+
+input[type=title] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #000000;
+    font-size: 15px;
+    width: 300px;
+}
+
+// remove blue outline around buttons
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.question {
+  border: 1px solid #000000;
+}
+
+.q_header{
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+
+.q_subtext{
+  margin: 0;
+  margin-bottom: 10px;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+
+// #similar {
+//   position: element(#Range);
+//   transform: translateY(-100%);
+// }
+//
+// #dissimilar {
+//   position: element(#Range);
+//   right: 100px;
+// }
