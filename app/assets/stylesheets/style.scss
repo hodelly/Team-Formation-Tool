@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
 // FOR EVERYTHING
@@ -9,12 +10,18 @@
 }
 
 
+=======
+>>>>>>> rebase from react to rails complete
 // to ensure bar are just lines
 input[type=options] {
     background: transparent;
     border: none;
     border-bottom: 1px solid #000000;
+<<<<<<< HEAD
     // font-size: 12px;
+=======
+    font-size: 12px;
+>>>>>>> rebase from react to rails complete
     width: 200px;
 }
 
@@ -22,6 +29,7 @@ input[type=title] {
     background: transparent;
     border: none;
     border-bottom: 1px solid #000000;
+<<<<<<< HEAD
     font-size: 16px;
     width: 300px;
 }
@@ -50,6 +58,12 @@ input[type=title] {
 
 
 // BUTTON STYLING
+=======
+    font-size: 15px;
+    width: 300px;
+}
+
+>>>>>>> rebase from react to rails complete
 // remove blue outline around buttons
 input:focus,
 select:focus,
@@ -58,6 +72,7 @@ button:focus {
     outline: none;
 }
 
+<<<<<<< HEAD
 .invertedGreen{
   background-color: #FFFFFF;
   padding: 5px 27px; // QUESTION: better way to do this so that both buttons same width?
@@ -118,6 +133,25 @@ button:focus {
   font-weight: bold;
   color: #0000FF
 }
+=======
+.question {
+  border: 1px solid #000000;
+}
+
+.q_header{
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+
+.q_subtext{
+  margin: 0;
+  margin-bottom: 10px;
+  font-weight: normal;
+  font-size: 12px;
+}
+
+
+>>>>>>> rebase from react to rails complete
 // #similar {
 //   position: element(#Range);
 //   transform: translateY(-100%);
