@@ -134,6 +134,8 @@ export default class QuestionsPage extends React.Component {
         <Question questionID={key}
           title={this.state.questionMap.get(key).title}
           type={this.state.questionMap.get(key).type}
+          choices={this.state.questionMap.get(key).choices}
+
           deleteQuestion={this.deleteQuestion}
           updateQuestionType={this.updateQuestionType}
           updateQuestionTitle={this.updateQuestionTitle}

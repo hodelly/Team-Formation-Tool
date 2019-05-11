@@ -4,7 +4,6 @@ export default class Importance extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionWeight: 3,
     };
   }
 
@@ -13,16 +12,13 @@ export default class Importance extends React.Component {
   // };
 
 
-  handleSliderChange = (event) => {
-    this.setState({ questionWeight: event.target.value });
-  };
-
   render() {
     return (
       <div>
         <h4 className="q_header"> Distribution </h4>
-        <h6 className="q_subtext"> How should the algorithm distribute students with similar responses? </h6>
-        <input id="range" type="range" min="0" max="6" value={this.state.questionWeight} onChange={this.handleSliderChange} />
+        <h6 className="q_subtext"> How are students distributed accross groups? </h6>
+        <input type="radio" /> Students within groups are more similar
+        <input type="radio" /> Students within groups are more dissimilar
       </div>
     );
   }

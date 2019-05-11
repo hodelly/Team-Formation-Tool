@@ -7,34 +7,22 @@ export default class Options extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 1,
+      id: 2,
       choices: Map(),
     };
   }
 
   componentWillMount() {
-    // add first item
-    // let i;
-    // for (i = 0, i < this.state.choices.size, i += 1) {
-    //
-    // }
-    // this.state.choices.entrySeq().map(([key, value]) {
-    //   this.setState(prevState => ({
-    //     choices: prevState.initialOptions.set(0, 'option1'),
-    //   }));
-    // });
+    // look through the choices sent to initialize with
+    let choicesTemp = Map();
+    let i;
+    for (i = 0; i < this.props.choicesList.length; i += 1) {
+      choicesTemp = choicesTemp.set(i, this.props.choicesList[i]);
+    }
 
-    // PROBLEM - MOUNTING NEW MAP EVERYTIME. BUT MUST MOUNT ATLEAST 1 ITEM!
-    // HOW TO FIX?
-
+    // set current choices to what it was before
     this.setState(prevState => ({
-      choices: prevState.choices.set(0, 'option1'),
-    }));
-    this.setState(prevState => ({
-      choices: prevState.choices.set(1, 'option2'),
-    }));
-    this.setState(prevState => ({
-      choices: prevState.choices.set(2, 'add options'),
+      choices: choicesTemp,
     }));
   }
 
@@ -48,17 +36,20 @@ export default class Options extends React.Component {
   }
 
   makeNew = (string) => {
+    const text = 'add option';
     this.setState(prevState => ({
       id: prevState.id + 1,
-      choices: prevState.choices.set(prevState.id, 'add option'),
+      choices: prevState.choices.set(prevState.id, text),
     }));
+    this.updateChoices(this.state.id, text);
   }
 
+  // function that
   updateChoices = (id, string) => {
     this.setState(prevState => ({
       choices: prevState.choices.set(id, string),
     }));
-    // create an array of choices
+    // create an array of choices, to send up
     const options = [];
 
     let i;
@@ -72,7 +63,7 @@ export default class Options extends React.Component {
   }
 
   render() {
-    console.log(`${this.state.choices}`);
+    console.log(`Map:${this.state.choices}`);
 
     const options = this.state.choices.entrySeq().map(([key, value]) => {
       return (
@@ -92,10 +83,3 @@ export default class Options extends React.Component {
     );
   }
 }
-// {console.log(`${this.state.choices}`)}
-
-
-// <button type="button" onClick={this.handleDelete}> delete </button>
-
-
-// bars: List.ofBar(Bar),
