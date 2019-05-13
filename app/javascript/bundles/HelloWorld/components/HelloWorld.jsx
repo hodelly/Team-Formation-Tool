@@ -2,6 +2,7 @@
 import React from 'react';
 import QuestionsPage from './questionsPage';
 
+
 // The HelloWorld class used to have the starter code before and now it will be the basis of our code
 export default class HelloWorld extends React.Component {
   // static propTypes = {
@@ -16,12 +17,22 @@ export default class HelloWorld extends React.Component {
     super(props);
     this.state = {
       onQuestionsPage: false,
+      onDashboard: true,
     };
   }
 
 goToQuestionsPage = () => {
   this.setState({
     onQuestionsPage: true,
+    onDashboard: false,
+  });
+}
+
+goToDashboard = () => {
+  this.setState({
+    onDashboard: true,
+    onQuestionsPage: false,
+
   });
 }
 
@@ -30,15 +41,20 @@ render() {
   if (this.state.onQuestionsPage) {
     return (
       <div>
-        <QuestionsPage />
+        <QuestionsPage goToDashboard={this.goToDashboard} />
       </div>
     );
   }
-  return (
-    <div>
-      <p> dashboard </p>
-      <button type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
-    </div>
-  );
+  if (this.state.onDashboard) {
+    return (
+      <div>
+        <p> dashboard
+          <i className="fas fa-camera" />
+        </p>
+        <button type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
+      </div>
+    );
+  }
+  return (null);
 }
 }

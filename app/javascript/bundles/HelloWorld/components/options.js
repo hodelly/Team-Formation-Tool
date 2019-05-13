@@ -44,7 +44,7 @@ export default class Options extends React.Component {
     this.updateChoices(this.state.id, text);
   }
 
-  // function that
+  // function that updates the JSON choices string
   updateChoices = (id, string) => {
     this.setState(prevState => ({
       choices: prevState.choices.set(id, string),
@@ -63,7 +63,7 @@ export default class Options extends React.Component {
   }
 
   render() {
-    console.log(`Map:${this.state.choices}`);
+    // console.log(`Map:${this.state.choices}`);
 
     const options = this.state.choices.entrySeq().map(([key, value]) => {
       return (

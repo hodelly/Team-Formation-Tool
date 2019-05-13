@@ -1,8 +1,15 @@
 import React from 'react';
+// icons
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+// components
 import Options from './options';
 import Importance from './importance';
 import Distribution from './distribution';
 import QuestionHeader from './question_header';
+
+library.add(faTrash);
 
 
 export default class Question extends React.Component {
@@ -26,6 +33,13 @@ export default class Question extends React.Component {
     this.props.updateQuestionType(this.state.questionID, event.target.value);
   }
 
+  updateOptions = () => {
+    this.setState({
+      choices: [],
+    });
+    this.props.updateOptions(this.state.questionID, []);
+  }
+
   // WHY DOESN'T THIS WORK?
   // const distribution = (props) => {
   //     return (
@@ -41,11 +55,12 @@ export default class Question extends React.Component {
 
   render() {
     let options;
-    // const array = ['janvi', 'kalra', 'options'];
     if (this.state.questionType === 'radiogroup' || this.state.questionType === 'checkbox' || this.state.questionType === 'dropdown') {
       options = <Options questionID={this.state.questionID} updateOptions={this.props.updateOptions} choicesList={this.state.choices} />;
     } else {
       options = '';
+      // QUESTION: HOW DO I GET AROUND THIS?
+      // this.updateOptions();
     }
 
     return (
@@ -60,7 +75,7 @@ export default class Question extends React.Component {
         {options}
         <Importance />
         <Distribution />
-        <button type="button" onClick={this.deleteQuestion}> Delete Question </button>
+        <button type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon icon="trash" /> </button>
       </div>
     );
   }

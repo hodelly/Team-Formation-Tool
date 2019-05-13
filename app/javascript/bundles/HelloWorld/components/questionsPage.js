@@ -1,8 +1,13 @@
 import React from 'react';
 import { Map } from 'immutable';
 import * as Survey from 'survey-react';
-import Question from './question';
 import 'survey-react/survey.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import Question from './question';
+
+library.add(faChevronLeft);
 
 export default class QuestionsPage extends React.Component {
   constructor(props) {
@@ -130,6 +135,7 @@ export default class QuestionsPage extends React.Component {
 
   render() {
     const questions = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
+      console.log(`key:${key}, question:${questionObject.choices}`);
       return (
         <Question questionID={key}
           title={this.state.questionMap.get(key).title}
@@ -157,9 +163,11 @@ export default class QuestionsPage extends React.Component {
     } else {
       return (
         <div>
+          <button className="goToDashboard" type="button" onClick={this.props.goToDashboard}>   <FontAwesomeIcon icon="chevron-left" />Survey Dashboard </button>
+          <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
+          <button className="regularGreen" type="button" onClick={this.startPreview}> Publish Survey </button>
           {questions}
           <button type="button" onClick={this.addQuestion}> Add Question </button>
-          <button type="button" onClick={this.startPreview}> Start Preview </button>
         </div>
       );
     }

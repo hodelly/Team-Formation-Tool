@@ -2,6 +2,10 @@
   "name": "itc-team-formation",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.18",
+    "@fortawesome/free-regular-svg-icons": "^5.8.2",
+    "@fortawesome/free-solid-svg-icons": "^5.8.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
     "immutable": "^4.0.0-rc.12",

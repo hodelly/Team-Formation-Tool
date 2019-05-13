@@ -1,4 +1,11 @@
 import React from 'react';
+// font awesome icons
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCircle } from '@fortawesome/free-regular-svg-icons';
+
+library.add(faTimes, faCircle);
 
 
 export default class Bar extends React.Component {
@@ -33,8 +40,8 @@ export default class Bar extends React.Component {
   render() {
     return (
       <div>
-        <input autoFocus type="options" value={this.state.text} onChange={this.onInputChange} onKeyDown={this.onKeyDown} onFocus={this.handleFocus} id={this.state.id} />
-        <button type="button" onClick={this.handleDelete}> delete </button>
+        <FontAwesomeIcon icon={['far', 'circle']} /> <input autoFocus type="options" value={this.state.text} onChange={this.onInputChange} onKeyDown={this.onKeyDown} onFocus={this.handleFocus} id={this.state.id} />
+        <button type="button" onClick={this.handleDelete}> <FontAwesomeIcon icon="times" /> </button>
       </div>
     );
   }
