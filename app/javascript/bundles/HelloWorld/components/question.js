@@ -1,8 +1,15 @@
 import React from 'react';
+// icons
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+// components
 import Options from './options';
 import Importance from './importance';
 import Distribution from './distribution';
 import QuestionHeader from './question_header';
+
+library.add(faTrash);
 
 
 export default class Question extends React.Component {
@@ -32,6 +39,8 @@ export default class Question extends React.Component {
       options = <Options questionID={this.state.questionID} updateOptions={this.props.updateOptions} />;
     } else {
       options = '';
+      // QUESTION: HOW DO I GET AROUND THIS?
+      // this.updateOptions();
     }
 
     return (
@@ -46,7 +55,11 @@ export default class Question extends React.Component {
         {options}
         <Importance />
         <Distribution />
-        <button type="button" onClick={this.deleteQuestion}> Delete Question </button>
+        <button type="button" onClick={this.deleteQuestion}>
+          {' '}
+          <FontAwesomeIcon icon="trash" />
+          {' '}
+        </button>
       </div>
     );
   }

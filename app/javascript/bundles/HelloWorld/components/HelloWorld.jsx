@@ -2,6 +2,7 @@
 import React from 'react';
 import QuestionsPage from './questionsPage';
 
+
 // The HelloWorld class used to have the starter code before and now it will be the basis of our code
 export default class HelloWorld extends React.Component {
   // static propTypes = {
@@ -55,11 +56,6 @@ export default class HelloWorld extends React.Component {
     }
     return (null);
   }
-  return (
-    <div>
-      <p> dashboard </p>
-      <button type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
-    </div>
-  );
+  return (null);
 }
 }

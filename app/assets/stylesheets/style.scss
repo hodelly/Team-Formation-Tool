@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
 // FOR EVERYTHING
@@ -11,8 +10,6 @@
 
 
 
-=======
->>>>>>> rebase from react to rails complete
 // to ensure bar are just lines
 input[type=options] {
     background: transparent;
@@ -26,7 +23,6 @@ input[type=title] {
     background: transparent;
     border: none;
     border-bottom: 1px solid #000000;
-<<<<<<< HEAD
     font-size: 16px;
     width: 300px;
 }
@@ -67,26 +63,6 @@ input[type=title] {
 
 .q_header{
   font-size: 14px;
-=======
-    font-size: 15px;
-    width: 300px;
-}
-
-// remove blue outline around buttons
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}
-
-.question {
-  border: 1px solid #000000;
-}
-
-.q_header{
-  font-size: 15px;
->>>>>>> rebase from react to rails complete
   margin-bottom: 0px;
 }
 
@@ -94,7 +70,6 @@ button:focus {
   margin: 0;
   margin-bottom: 10px;
   font-weight: normal;
-<<<<<<< HEAD
 }
 
 
@@ -220,12 +195,6 @@ button:focus {
   font-weight: bold;
   color: #0000FF
 }
-=======
-  font-size: 12px;
-}
-
-
->>>>>>> rebase from react to rails complete
 // #similar {
 //   position: element(#Range);
 //   transform: translateY(-100%);
@@ -235,7 +204,6 @@ button:focus {
 //   position: element(#Range);
 //   right: 100px;
 // }
-<<<<<<< HEAD
 
 // Dashboard STYLING
 #create_survey {
@@ -299,5 +267,3 @@ button:focus {
   padding-right: 20px;
 
 }
-=======
->>>>>>> rebase from react to rails complete
