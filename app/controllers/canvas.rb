@@ -1,4 +1,5 @@
 require 'canvas-api'
+require 'json'
 
 class CanvasClass
 
@@ -9,7 +10,7 @@ class CanvasClass
             #     else
             #         ENV["CANVAS_API_HOST"]
             # end
-            @canvas = CanvasClass::API.new(:host => "https://dartmouth.test.instructure.com", :token => "1064~Eyi1dVNWY1qCjVFFgEExhB27oB5O2idT4aCnRFt7gyRoPoFN8lG2464lq4NNSpXD")
+            @canvas = Canvas::API.new(:host => "https://dartmouth.test.instructure.com", :token => "1064~Eyi1dVNWY1qCjVFFgEExhB27oB5O2idT4aCnRFt7gyRoPoFN8lG2464lq4NNSpXD")
         end
 
 
@@ -18,9 +19,8 @@ class CanvasClass
            sections=[]
            groups=[]
            group_memberships={}
-
-           canvas_hash = JSON.parse(IO.read("canvas_test_data.json").chomp)
+           canvas_hash = JSON.parse(IO.read("./canvas_test_data.json").chomp)
            enrollments = canvas_hash["enrollments"]
-           return {:enrollments=>enrollments, :sections=>sections, :groups=>groups, :group_memberships=>group_memberships}
+           return {:enrollments=>enrollments}
        end
 end

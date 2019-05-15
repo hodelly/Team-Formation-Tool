@@ -10,7 +10,10 @@ class HelloWorldController < ApplicationController
 
 
   def index
-    canvas = CanvasResolver.resolve(CanvasClass.new)
+    canvas = CanvasResolver.resolve(:canvas)
+    ## Question: This is null. Am I auppose to be able to get a value from this or should I be using the mocks?
+    course_id = session[:custom_canvas_course_id]
+    # Also saying that canvas_bulk_hash doesnt exist but I am not sure why?
     canvas_data = canvas.canvas_bulk_hash(course_id)
     enrollments = canvas_data[:enrollments]
     @hello_world_props = { name: "Stranger", canvas_enrollments: enrollments }
