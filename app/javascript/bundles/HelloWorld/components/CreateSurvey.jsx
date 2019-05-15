@@ -1,65 +1,140 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import React from 'react';
-import MultipleChoiceQs from './MultipleChoiceQs'
+import * as Survey from 'survey-react';
+import 'survey-react/survey.css';
+import { Map } from 'immutable';
+import InputSurveyTitle from './InputSurveyTitle';
+import AddQuestionToSurvey from './AddQuestionToSurvey';
+import Question from './Question';
+
 
 export default class CreateSurvey extends React.Component {
   constructor(props) {
     super(props);
-    /*
-      titleValue: When the user creates a new question, this is the title of the questionn
-      answerValues: These are the potential answers that the question can have. Also in the text bars
-      questionAnswerMap: Map<Question, QuestionAnswers>
-      Size: size of the map right now
-    */
-    this.state={titleValue:"", answersValues: "", questionAnswerMap: new Map(), size:0};
-    this.handleTitleChange = this.handleTitleChange.bind(this); //method to handle changes when typing in input bar for question
-    this.handleValuesChange = this.handleValuesChange.bind(this); //method to handle changes when typing in input for ansnwers
-    this.handleSubmit = this.handleSubmit.bind(this); //method for when the submit button is clicked
+    this.state = {
+      surveyValue: '', surveyjs: null, inPreview: false, titleStep: true, justAddedQStep: false, questionMap: new Map(), id: 0,
+    };
+    this.handleSurveyChange = this.handleSurveyChange.bind(this);
+    this.handleSurveyTitleChange = this.handleSurveyTitleChange.bind(this);
+    this.handlePreview = this.handlePreview.bind(this);
+    this.handleNewQuestion = this.handleNewQuestion.bind(this);
+    this.handleAddNewQuestion = this.handleAddNewQuestion.bind(this);
+    this.deleteQuestion = this.deleteQuestion.bind(this);
+    this.updateQuestion = this.updateQuestion.bind(this);
   }
 
-  // when the title is changed we update the titleValue state
-  handleTitleChange(event) {
-    this.setState({titleValue: event.target.value});
+  onComplete = (survey, options) => {
+    // Write survey results into database
+    console.log(`Survey results: ${JSON.stringify(survey.data)}`);
   }
 
-  // when the answer value inputs are changed then update the value state variable
-  handleValuesChange(event) {
-    this.setState({answersValues: event.target.value});
+  handleSurveyChange(event) {
+    this.setState({ surveyValue: event.target.value });
   }
 
-  // when the submit button is clicked we add the question and the answers (split into an array) to the map
-  // also update the size value for null check later
-  handleSubmit() {
-    this.state.questionAnswerMap[this.state.titleValue] = this.state.answersValues.split(",");
-    this.setState({size: this.state.size+1})
+  deleteQuestion(id) {
+    this.setState(prevState => ({
+      questionMap: prevState.questionMap.delete(id),
+    }));
   }
+
+  updateQuestion(id, fields) {
+    this.setState(prevState => ({
+      questionMap: prevState.questionMap.update(id, (q) => { return Object.assign({}, q, fields); }),
+    }));
+  }
+
+  handleSurveyTitleChange(title) {
+    this.setState({ surveyValue: title });
+    this.setState({ titleStep: false });
+    const surveyData = {
+      title,
+      pages: [
+        { name: 'page1', questions: [] },
+      ],
+    };
+    this.setState({ surveyjs: surveyData });
+  }
+
+  handlePreview(event) {
+    // this.setState({ inPreview: !this.state.inPreview });
+    this.setState(prevState => ({ inPreview: !prevState.inPreview }));
+  }
+
+  handleAddNewQuestion(event) {
+    // this.setState({ justAddedQStep: !this.state.justAddedQStep });
+    this.setState(prevState => ({ justAddedQStep: !prevState.justAddedQStep }));
+  }
+
+
+  handleNewQuestion(newQuestion) {
+    const surveyData = this.state.surveyjs;
+    surveyData.pages[0].questions.push(newQuestion);
+
+    console.log(this.state);
+    this.setState(prevState => ({
+      questionMap: prevState.questionMap.set(prevState.id, Object.assign({}, prevState.questionMap, newQuestion)),
+    }));
+    this.setState(prevState => ({ id: prevState.id + 1 }));
+
+    this.setState(prevState => ({ surveyjs: surveyData, justAddedQStep: !prevState.justAddedQStep }));
+
+  //  this.setState({ surveyjs: surveyData, justAddedQStep: !this.state.justAddedQStep, id: newid });
+  }
+
 
   render() {
-    //going to be the variable that contains all the multiple choice questions  created
-    let questions = null;
-    if(this.state.size > 0){ //checks to make sure we have thigns in the map
-      // turning all the keys into a list and looping through them
-       questions = Object.keys(this.state.questionAnswerMap).map(question => {
-         //for each key (questio) we are making a multuple choice question and sending it the answers indexed from
-         // the map as well
-        return  <MultipleChoiceQs questions={question} answers={this.state.questionAnswerMap[question]}/>
-      })
-    }
+    console.log(this.state);
+    if (this.state.inPreview) {
+      return (
+        <div>
+          <h1> Survey preview bellow </h1>
+          <script src="https://surveyjs.azureedge.net/1.0.79/survey.react.min.js" />
+          <link href="https://surveyjs.azureedge.net/1.0.79/survey.css" type="text/css" rel="stylesheet" />
+          <Survey.Survey json={this.state.surveyjs} onComplete={this.onComplete} />
+        </div>
+      );
+    } else {
+      const savedQuestions = this.state.questionMap.entrySeq().map(([id, question]) => {
+        return (
+          <Question
+            title={question.title}
+            choices={question.choices}
+            isRequired={question.isRequired}
+            type={question.type}
+            weight={question.weight}
+            id={id}
+            deleteQuestion={this.deleteQuestion}
+            updateQuestion={this.updateQuestion}
+          />
+        );
+      });
 
-   //individual question HTML that is returned  
-    return (
-      <div>
-        <h3>Creating a Student Survey</h3>
-        <h1>Multiple Choice Questions </h1>
-        <form onSubmit={this.handleSubmit}>
-          <label>Question Title: <input type="text" value={this.state.titleValue} onChange={this.handleTitleChange} /></label>
-          <label>Options: <input type="text" value={this.state.answersValues} onChange={this.handleValuesChange} /></label>
-        </form>
-        <button  type='button' onClick={this.handleSubmit}>
-          Submit
-        </button>
-        {questions}
-      </div>
-    );
+      let addButton = null;
+      if (this.state.justAddedQStep) {
+        addButton = <AddQuestionToSurvey handleNewQuestion={this.handleNewQuestion} />;
+      } else if (!this.state.titleStep) {
+        addButton = (
+          <div>
+            <button type="button" onClick={this.handleAddNewQuestion}>
+         Add A Question
+            </button>
+            <button type="button" onClick={this.handlePreview}>
+               Preview Survey
+            </button>
+          </div>
+        );
+      }
+
+
+      return (
+        <div>
+          <h3>Creating a Student Survey</h3>
+          <InputSurveyTitle handleSurveyTitleChange={this.handleSurveyTitleChange} />
+          {savedQuestions}
+          {addButton}
+        </div>
+      );
+    }
   }
 }

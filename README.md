@@ -4,9 +4,17 @@
 
 This repository hosts the ITC team formation tool to be integrated on Canvas and used by professors and students.
 
+## Designs
+
+Figma: https://www.figma.com/file/Ai38dTaRAbw1NQ0x7FSdhm/ITC-19S?node-id=1%3A3
+
 ## Architecture
 
 This is a React on Rails app on Ruby 2.6.0 with webpacker.
+
+## Style
+
+We are using react components. As of now, questions are components as are the title and creating a survey in general.
 
 ## Installation
 
@@ -24,12 +32,12 @@ This is a React on Rails app on Ruby 2.6.0 with webpacker.
    bundle install
    ```
    to install all rails dependencies for this project.
-   Run 
+   Run
    ```
    yarn install
    ```
    to install all node dependencies.
-3. Start Postgres as a background service by running 
+3. Start Postgres as a background service by running
    ```
    brew services start postgresql
    ```
@@ -42,7 +50,7 @@ This is a React on Rails app on Ruby 2.6.0 with webpacker.
    rake db:migrate
    ```
    which will create all the databases specified in `config/database.yml`.
-4. Start the application with 
+4. Start the application with
    ```
    rails s
    ```
@@ -76,3 +84,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## Authors
+
+Janvi, Annie, Morgan, Nitasha, Wylie
