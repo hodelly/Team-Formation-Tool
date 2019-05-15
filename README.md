@@ -45,6 +45,10 @@ We are using react components. As of now, questions are components as are the ti
    ```
    rake db:setup
    ```
+   followed by 
+   ```
+   rake db:migrate
+   ```
    which will create all the databases specified in `config/database.yml`.
 4. Start the application with
    ```
