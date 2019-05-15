@@ -14,13 +14,14 @@ class CanvasClass
         end
 
 
-        def canvas_bulk_hash(course_id)
+      def canvas_bulk_hash(course_id)
            enrollments=[]
            sections=[]
            groups=[]
            group_memberships={}
-           canvas_hash = JSON.parse(IO.read("./canvas_test_data.json").chomp)
+           print Dir.glob('*')
+           canvas_hash = JSON.parse(File.read("app/models/concerns/canvas_test_data.json").chomp)
            enrollments = canvas_hash["enrollments"]
-           return {:enrollments=>enrollments}
+           return {:enrollments=>enrollments, :sections=>sections, :groups=>groups, :group_memberships=>group_memberships}
        end
 end
