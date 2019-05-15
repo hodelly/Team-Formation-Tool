@@ -9,4 +9,5 @@ class Question < ApplicationRecord
   ].freeze
   serialize :response_values, JSON # for multiple choice and checkbox
   validates :question_type, presence: true, length: { maximum: 32 }, inclusion: { in: QUESTION_TYPES }
+  validates :is_default, inclusion: { in: [true, false] }
 end
