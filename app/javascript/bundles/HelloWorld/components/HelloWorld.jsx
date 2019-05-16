@@ -1,7 +1,9 @@
 // import PropTypes from 'prop-types';
 import React from 'react';
 import QuestionsPage from './questionsPage';
-
+import Dashboard from './dashboard';
+import Start from './start';
+import GroupNumber from './GroupNumber';
 
 // The HelloWorld class used to have the starter code before and now it will be the basis of our code
 export default class HelloWorld extends React.Component {
@@ -17,7 +19,9 @@ export default class HelloWorld extends React.Component {
     super(props);
     this.state = {
       onQuestionsPage: false,
-      onDashboard: true,
+      onDashboard: false,
+      onStart: false,
+      onGroupNumber: true,
     };
   }
 
@@ -25,6 +29,8 @@ export default class HelloWorld extends React.Component {
     this.setState({
       onQuestionsPage: true,
       onDashboard: false,
+      onStart: false,
+      onGroupNumber: false,
     });
   }
 
@@ -32,7 +38,16 @@ export default class HelloWorld extends React.Component {
     this.setState({
       onDashboard: true,
       onQuestionsPage: false,
-
+      onStart: false,
+      onGroupNumber: false,
+    });
+  }
+  goToGroupNumber = () => {
+    this.setState({
+      onDashboard: false,
+      onQuestionsPage: false,
+      onStart: false,
+      onGroupNumber: true,
     });
   }
 
@@ -48,11 +63,29 @@ export default class HelloWorld extends React.Component {
     if (this.state.onDashboard) {
       return (
         <div>
-          <p> dashboard
-          </p>
-          <button type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
+          <button className="regularGreen" type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
+          <Dashboard />
         </div>
       );
+    }
+    if (this.state.onStart) {
+      return(
+        <div>
+          <Start/>
+          <button className="regularGreen" type="button" onClick={this.goToDashboard}> Get Started </button>
+
+        </div>
+      )
+    }
+    if (this.state.onGroupNumber) {
+      return(
+        <div>
+          <GroupNumber/>
+          <button className="invertedGreen" type="button" onClick={this.goToDashboard}>Cancel</button>
+          <button className="regularGreen" type="button" onClick={this.goToDashboard}> Form Groups </button>
+
+        </div>
+      )
     }
     return (null);
   }
