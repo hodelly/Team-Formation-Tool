@@ -19,6 +19,13 @@ class Survey < ApplicationRecord
     where(course_id: course_id) 
   end)
 
+  def self.create_associated_survey_questions(questions)
+    puts questions
+    for question in questions
+      self.survey_questions.create_survey_question_and_question(question)
+    end
+  end
+
   def self.create_from_params(params)
     s = new
     s.course_id = params[:course_id]
@@ -27,7 +34,7 @@ class Survey < ApplicationRecord
     s.is_published = params[:is_published] == 'true'
     s.description = params[:description] || ''
     s.note_from_instructor = params[:note_from_instructor] || ''
-    # s.survey_questions = params[:survey_questions] # handle creating another object
+    create_associated_survey_questions(params[:survey_questions])
     s.group_size = params[:group_size].to_i
     s.due_date = Time.at(params[:due_date].to_f/1000)
     s
