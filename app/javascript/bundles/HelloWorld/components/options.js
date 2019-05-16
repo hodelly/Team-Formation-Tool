@@ -7,26 +7,7 @@ export default class Options extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputBarID: 3,
     };
-  }
-
-  deleteBar = (ID) => {
-    // find want index value the ID is at
-    if (this.state.choices.size > 1) {
-      this.setState(prevState => ({
-        choices: prevState.choices.delete(ID),
-      }));
-    }
-  }
-
-  addChoice = () => {
-    // update ID
-    this.setState(prevState => ({
-      inputBarID: prevState.inputBarID + 1,
-    }));
-
-    this.props.addChoice(this.props.questionID, this.state.inputBarID); // LEARNING: prev state updates state before moving on indeed!
   }
 
 
@@ -39,8 +20,9 @@ export default class Options extends React.Component {
           choices={this.props.choices}
 
           updateChoices={this.props.updateChoices}
-          addChoice={this.addChoice}
+          addChoice={this.props.addChoice}
           deleteChoice={this.props.deleteChoice}
+
         />
       );
     });

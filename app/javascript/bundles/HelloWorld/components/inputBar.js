@@ -23,7 +23,7 @@ export default class inputBar extends React.Component {
   onKeyDown = (event) => {
     // if the user presses enter, add a new Option
     if (event.keyCode === 13) {
-      this.props.addChoice(this.props.questionID);
+      this.props.addChoice(this.props.questionID, this.props.choices.size);
     }
   }
 

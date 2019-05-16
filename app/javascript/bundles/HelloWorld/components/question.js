@@ -38,6 +38,7 @@ export default class Question extends React.Component {
           updateChoices={this.props.updateChoices}
           addChoice={this.props.addChoice}
           deleteChoice={this.props.deleteChoice}
+          updateInputBarCount={this.props.updateInputBarCount}
         />
       );
     } else {
@@ -54,7 +55,7 @@ export default class Question extends React.Component {
           <option value="dropdown">Lookup</option>
         </select>
         {options}
-        <Importance />
+        <Importance updateImportance={this.props.updateImportance} />
         <Distribution />
         <button type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon icon="trash" /> </button>
       </div>

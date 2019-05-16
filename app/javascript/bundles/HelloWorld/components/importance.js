@@ -9,7 +9,7 @@ export default class Importance extends React.Component {
   }
 
   handleSliderChange = (event) => {
-    this.setState({ questionWeight: event.target.value });
+    this.props.updateImportance(this.props.questionID, event.target.value);
   };
 
   render() {
@@ -18,7 +18,7 @@ export default class Importance extends React.Component {
         <h4 className="q_header"> Priority Level </h4>
         <h6 className="q_subtext"> How strongly do you want the algorithm to consider this question? </h6>
 
-        <input id="range" type="range" min="0" max="6" value={this.state.questionWeight} onChange={this.handleSliderChange} />
+        <input id="range" type="range" min="0" max="6" value={this.props.importance} onChange={this.handleSliderChange} />
 
 
       </div>
