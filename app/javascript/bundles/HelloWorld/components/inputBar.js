@@ -16,23 +16,19 @@ export default class inputBar extends React.Component {
   }
 
   onInputChange = (event) => {
-  //  this.setState({ text: event.target.value });
-    this.props.updateChoices(this.props.questionID, this.props.inputbarID, event.target.value);
-    // console.log(`text: ${event.target.value}\n`);
-  //  this.onSubmit(event.target.value);
+    this.props.updateChoices(this.props.questionID, this.props.inputBarID, event.target.value);
   }
 
 
   onKeyDown = (event) => {
-    // if the user presses enter, call the makeNew function in Options
-    // that creates a new bar and adds it to the existing list
+    // if the user presses enter, add a new Option
     if (event.keyCode === 13) {
-      this.props.addChoice(this.props.questionID, this.props.inputbarID);
+      this.props.addChoice(this.props.questionID);
     }
   }
 
   handleDelete = () => {
-    this.props.deleteBar(this.props.id);
+    this.props.deleteChoice(this.props.questionID, this.props.inputBarID);
   }
 
 
@@ -42,7 +38,7 @@ export default class inputBar extends React.Component {
     // console.log(`choices for that question: ${this.props.choices}`);
     return (
       <div>
-        <FontAwesomeIcon icon={['far', 'circle']} /> <input autoFocus type="options" value={this.props.choices.get(this.props.inputbarID)} onChange={this.onInputChange} onKeyDown={this.onKeyDown} onFocus={this.handleFocus} id={this.props.id} />
+        <FontAwesomeIcon icon={['far', 'circle']} /> <input autoFocus type="options" value={this.props.choices.get(this.props.inputBarID)} onChange={this.onInputChange} onKeyDown={this.onKeyDown} onFocus={this.handleFocus} />
         <button type="button" onClick={this.handleDelete}> <FontAwesomeIcon icon="times" /> </button>
       </div>
     );

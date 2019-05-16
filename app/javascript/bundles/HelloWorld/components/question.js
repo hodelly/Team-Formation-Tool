@@ -32,11 +32,12 @@ export default class Question extends React.Component {
       options = (
         <Options
           questionID={this.props.questionID}
+          inputBarID={this.props.inputBarID}
           choices={this.props.choices}
 
-          updateOptions={this.props.updateOptions}
           updateChoices={this.props.updateChoices}
-          addChoice={this.addChoice}
+          addChoice={this.props.addChoice}
+          deleteChoice={this.props.deleteChoice}
         />
       );
     } else {

@@ -7,7 +7,7 @@ export default class Options extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ID: 2,
+      inputBarID: 3,
     };
   }
 
@@ -20,25 +20,27 @@ export default class Options extends React.Component {
     }
   }
 
-  makeNew = (string) => {
-    const text = 'add option';
+  addChoice = () => {
+    // update ID
     this.setState(prevState => ({
-      ID: prevState.ID + 1,
-      choices: prevState.choices.set(prevState.ID, text),
+      inputBarID: prevState.inputBarID + 1,
     }));
-    this.updateChoices(this.state.ID, text);
+
+    this.props.addChoice(this.props.questionID, this.state.inputBarID); // LEARNING: prev state updates state before moving on indeed!
   }
+
 
   render() {
     const options = this.props.choices.entrySeq().map(([key, value]) => {
       return (
         <InputBar
           questionID={this.props.questionID}
-          inputbarID={key}
+          inputBarID={key}
           choices={this.props.choices}
 
           updateChoices={this.props.updateChoices}
           addChoice={this.addChoice}
+          deleteChoice={this.props.deleteChoice}
         />
       );
     });
