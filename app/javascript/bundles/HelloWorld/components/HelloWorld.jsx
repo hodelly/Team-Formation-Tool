@@ -20,8 +20,8 @@ export default class HelloWorld extends React.Component {
     this.state = {
       onQuestionsPage: false,
       onDashboard: false,
-      onStart: false,
-      onGroupNumber: true,
+      onStart: true,
+      onGroupNumber: false,
     };
   }
 
