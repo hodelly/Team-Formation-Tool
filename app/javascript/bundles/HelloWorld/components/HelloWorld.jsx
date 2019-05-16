@@ -56,7 +56,7 @@ export default class HelloWorld extends React.Component {
     if (this.state.onQuestionsPage) {
       return (
         <div>
-          <QuestionsPage goToDashboard={this.goToDashboard} />
+          <QuestionsPage goToDashboard={this.goToDashboard} goToGroupNumber={this.goToGroupNumber}/>
         </div>
       );
     }
@@ -80,9 +80,8 @@ export default class HelloWorld extends React.Component {
     if (this.state.onGroupNumber) {
       return(
         <div>
-          <GroupNumber/>
-          <button className="invertedGreen" type="button" onClick={this.goToDashboard}>Cancel</button>
-          <button className="regularGreen" type="button" onClick={this.goToDashboard}> Form Groups </button>
+          <GroupNumber cancel={this.goToDashboard}/>
+
 
         </div>
       )
