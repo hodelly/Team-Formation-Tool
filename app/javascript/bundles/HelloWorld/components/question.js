@@ -11,62 +11,42 @@ import QuestionHeader from './question_header';
 
 library.add(faTrash);
 
-
 export default class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionID: this.props.questionID,
-      questionType: this.props.type,
-      choices: this.props.choices,
     };
   }
 
   deleteQuestion = () => {
-    this.props.deleteQuestion(this.state.questionID);
+    this.props.deleteQuestion(this.props.questionID);
   }
 
   onSelectChange = (event) => {
-    this.setState({
-      questionType: event.target.value,
-    });
-    this.props.updateQuestionType(this.state.questionID, event.target.value);
+    this.props.updateQuestionType(this.props.questionID, event.target.value);
   }
-
-  updateOptions = () => {
-    this.setState({
-      choices: [],
-    });
-    this.props.updateOptions(this.state.questionID, []);
-  }
-
-  // WHY DOESN'T THIS WORK?
-  // const distribution = (props) => {
-  //     return (
-  //       <div>
-  //         <h4 className="q_header"> Distribution </h4>
-  //         <h6 className="q_subtext"> How are students distributed accross groups? </h6>
-  //         <input type="radio" /> Students within groups are more similar
-  //         <input type="radio" /> Students within groups are more dissimilar
-  //       </div>
-  //     );
-  // }
-
 
   render() {
     let options;
-    if (this.state.questionType === 'radiogroup' || this.state.questionType === 'checkbox' || this.state.questionType === 'dropdown') {
-      options = <Options questionID={this.state.questionID} updateOptions={this.props.updateOptions} choicesList={this.state.choices} />;
+    if (this.props.type === 'radiogroup' || this.props.type === 'checkbox' || this.props.type === 'dropdown') {
+      options = (
+        <Options
+          questionID={this.props.questionID}
+          choices={this.props.choices}
+
+          updateOptions={this.props.updateOptions}
+          updateChoices={this.props.updateChoices}
+          addChoice={this.addChoice}
+        />
+      );
     } else {
       options = '';
-      // QUESTION: HOW DO I GET AROUND THIS?
-      // this.updateOptions();
     }
 
     return (
       <div className="question">
-        <QuestionHeader title={this.props.title} questionID={this.state.questionID} updateQuestionTitle={this.props.updateQuestionTitle} />
-        <select name="questionType" onChange={this.onSelectChange} value={this.state.questionType}>
+        <QuestionHeader title={this.props.title} questionID={this.props.questionID} updateQuestionTitle={this.props.updateQuestionTitle} />
+        <select name="questionType" onChange={this.onSelectChange} value={this.props.type}>
           <option value="checkbox">Checkbox</option>
           <option value="radiogroup">Multiple Choice</option>
           <option value="comment">Short Answer</option>
@@ -80,3 +60,6 @@ export default class Question extends React.Component {
     );
   }
 }
+
+// lEARNING: can print props
+// console.log(this.props);

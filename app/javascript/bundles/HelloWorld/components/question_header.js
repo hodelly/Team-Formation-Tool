@@ -5,14 +5,11 @@ export default class QuestionHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionID: this.props.questionID,
-      text: this.props.title,
     };
   }
 
   onInputChange = (event) => {
-    this.setState({ text: event.target.value });
-    this.props.updateQuestionTitle(this.state.questionID, event.target.value);
+    this.props.updateQuestionTitle(this.props.questionID, event.target.value);
   }
 
 
@@ -21,7 +18,7 @@ export default class QuestionHeader extends React.Component {
   render() {
     return (
       <div>
-        <input type="title" value={this.state.text} onChange={this.onInputChange} onFocus={this.handleFocus} questionID={this.state.questionID} />
+        <input type="title" value={this.props.title} onChange={this.onInputChange} onFocus={this.handleFocus} questionID={this.props.questionID} />
       </div>
     );
   }

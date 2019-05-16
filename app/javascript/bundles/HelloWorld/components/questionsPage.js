@@ -19,11 +19,12 @@ export default class QuestionsPage extends React.Component {
       title: 'questionTitle',
       isRequired: true,
       colCount: 4,
-      choices: ['choice1', 'choice2'],
+      choices: Map({ 0: 'choice1', 1: 'choice2', 2: 'choice3' }),
     };
     // set State
     this.state = {
       questionID: 2,
+      inputBarID: 3,
       inPreview: false,
       surveyjs: null,
       questionMap: Map(),
@@ -31,14 +32,24 @@ export default class QuestionsPage extends React.Component {
     };
   }
 
-  // initial set up of state variables
   componentWillMount() {
-    // add first item
+    // upon start, add one question to the page
     this.setState(prevState => ({
       questionMap: prevState.questionMap.set(1, prevState.questionType),
     }));
 
-    // create Survey Title
+    // upon start, add three questions to the choices
+    // const newQuestion = this.state.questionType;
+    // const map = newQuestion.choices;
+    // map.set(1, 'choice1');
+    // map.set(2, 'choice2');
+    // map.set(3, 'choice3');
+    //
+    // this.setState(prevState => ({
+    //   questionType: newQuestion,
+    // }));
+
+    // give the survey a title
     const surveyData = {
       title: 'Survey Default Title',
       pages: [
@@ -68,14 +79,22 @@ export default class QuestionsPage extends React.Component {
       ],
     };
     // put questionMap objects into surveyData
-    let i,
-      newQuestion;
-    for (i = 1; i < this.state.questionID; i += 1) {
+    for (let i = 1; i < this.state.questionID; i += 1) {
       // LEARNING: 'NULL' is 'undefined' in React
-      newQuestion = this.state.questionMap.get(i);
+      const question = this.state.questionMap.get(i);
+      const newQuestion = Object.assign({}, question);
+      const array = [];
       if (newQuestion !== undefined) {
-        surveyData.pages[0].questions.push(newQuestion);
+        // create an array for choices
+        let j;
+        for (j = 0; j < this.state.inputBarID; j += 1) {
+          array[j] = newQuestion.choices.get(j.toString()); // LEARNING: map stores the keys as strings too!!!
+        }
       }
+      // change choices question item to an array
+      newQuestion.choices = array;
+      // put the new question into surveyData
+      surveyData.pages[0].questions.push(newQuestion);
     }
     // update surveyjs
     this.setState({ surveyjs: surveyData });
@@ -126,30 +145,67 @@ export default class QuestionsPage extends React.Component {
     }));
   }
 
-  updateOptions = (questionID, options) => {
-    // add new object to the Map & increment the id
+  updateChoices = (questionID, inputbarID) => {
+    // get the question at that ID
+    const oldQuestion = this.state.questionMap.get(questionID);
+    const question = Object.assign({}, oldQuestion); // LEARNING: talk to tim about this. But if i don't create a new object, why woult it change objects other than itself?! I don't understand!!!!!
+
+    // update it's choices
+    const choicesMap = question.choices;
+    const newChoicesMap = choicesMap.set(inputbarID.toString(), text); // LEARNING: must save the map.set into a variable. It doesn't update the map you call it on!! That's point of immutableJS!
+    question.choices = newChoicesMap;
+
+    // set the updated question as the question in state
     this.setState(prevState => ({
-      questionMap: prevState.questionMap.setIn([questionID, 'choices'], options),
+      questionMap: prevState.questionMap.set(questionID, question),
+    }));
+
+    // console.log(`${newChoicesMap}`); // LEARNING: to print map in {}, must print within ``
+  }
+
+  addChoice = (questionID, inputbarID, text) => {
+    // increase inputbarID by 1
+    this.setState(prevState => ({
+      inputbarID: prevState.inputbarID + 1,
+    }));
+
+    const oldQuestion = this.state.questionMap.get(questionID);
+    const question = Object.assign({}, oldQuestion);
+
+    // update it's choices
+    const choicesMap = question.choices;
+    const newChoicesMap = choicesMap.add((inputbarID + 1).toString());
+    question.choices = newChoicesMap;
+
+    // set the updated question as the question in state
+    this.setState(prevState => ({
+      questionMap: prevState.questionMap.set(questionID + 1, question),
     }));
   }
 
   render() {
+    console.log(this.state.questionMap);
     const questions = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
-      console.log(`key:${key}, question:${questionObject.choices}`);
+      // console.log(`${questionObject.choices}`);
       return (
-        <Question questionID={key}
-          title={this.state.questionMap.get(key).title}
-          type={this.state.questionMap.get(key).type}
-          choices={this.state.questionMap.get(key).choices}
+        <Question
+          questionID={key}
+          inputBarID={questionObject.inputBarID}
+          title={questionObject.title}
+          type={questionObject.type}
+          choices={questionObject.choices}
+
 
           deleteQuestion={this.deleteQuestion}
           updateQuestionType={this.updateQuestionType}
           updateQuestionTitle={this.updateQuestionTitle}
-          updateOptions={this.updateOptions}
-          key={key}
+
+          updateChoices={this.updateChoices}
+          addChoice={this.addChoice}
         />
       );
     });
+
 
     if (this.state.inPreview) {
       return (
@@ -173,12 +229,7 @@ export default class QuestionsPage extends React.Component {
     }
   }
 }
-// {console.log(`map state: ${this.state.questionMap}`)}
-
-// {console.log(`${this.state.questionMap.get(1).choices}`)}
 
 // {this.state.questionMap.forEach(this.generateQuestion)}
 
 // {this.state.questions.map(x => (<Question ={x} addQuestion={this.addQuestion} deleteQuestion={this.deleteQuestion} key={x} />))}
-
-// <button type="button" onClick={this.handleClick}>delete</button>
