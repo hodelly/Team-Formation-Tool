@@ -3,6 +3,7 @@ import React from 'react';
 export default class GroupNumber extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       total: 25,
       class: 'ENGS 21',

@@ -1,5 +1,6 @@
 // import PropTypes from 'prop-types';
 import React from 'react';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import QuestionsPage from './questionsPage';
 import Dashboard from './dashboard';
 import Start from './start';
@@ -17,6 +18,7 @@ export default class HelloWorld extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       onQuestionsPage: false,
       onDashboard: false,
@@ -53,39 +55,85 @@ export default class HelloWorld extends React.Component {
 
 
   render() {
-    if (this.state.onQuestionsPage) {
-      return (
-        <div>
-          <QuestionsPage goToDashboard={this.goToDashboard} goToGroupNumber={this.goToGroupNumber}/>
-        </div>
-      );
-    }
-    if (this.state.onDashboard) {
-      return (
-        <div>
-          <button className="regularGreen" type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
-          <Dashboard />
-        </div>
-      );
-    }
-    if (this.state.onStart) {
-      return(
-        <div>
-          <Start/>
-          <button className="regularGreen" type="button" onClick={this.goToDashboard}> Get Started </button>
-
-        </div>
-      )
-    }
-    if (this.state.onGroupNumber) {
-      return(
-        <div>
-          <GroupNumber cancel={this.goToDashboard}/>
-
-
-        </div>
-      )
-    }
+    return(
+      <Router>
+        <Switch>
+          <Route
+              exact
+              path='/'
+              render={(routeProps) => (
+                  <Dashboard
+                  {...routeProps}
+                  />
+              )}
+          />
+          <Route
+              path='/dashboard'
+              render={(routeProps) => (
+                  <Dashboard
+                  {...routeProps}
+                  />
+              )}
+          />
+          <Route
+              path='/surveycreation'
+              render={(routeProps) => (
+                  <QuestionsPage
+                  {...routeProps}
+                  />
+              )}
+          />
+          <Route
+              path='/groupsize'
+              render={(routeProps) => (
+                  <GroupNumber
+                  {...routeProps}
+                  />
+              )}
+          />
+          <Route
+              path='/start'
+              render={(routeProps) => (
+                  <Start
+                  {...routeProps}
+                  />
+              )}
+          />
+        </Switch>
+      </Router>
+    );
+    // if (this.state.onQuestionsPage) {
+    //   return (
+    //     <div>
+    //       <QuestionsPage goToDashboard={this.goToDashboard} goToGroupNumber={this.goToGroupNumber}/>
+    //     </div>
+    //   );
+    // }
+    // if (this.state.onDashboard) {
+    //   return (
+    //     <div>
+    //       <button className="regularGreen" type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
+    //       <Dashboard />
+    //     </div>
+    //   );
+    // }
+    // if (this.state.onStart) {
+    //   return(
+    //     <div>
+    //       <Start/>
+    //       <button className="regularGreen" type="button" onClick={this.goToDashboard}> Get Started </button>
+    //
+    //     </div>
+    //   )
+    // }
+    // if (this.state.onGroupNumber) {
+    //   return(
+    //     <div>
+    //       <GroupNumber cancel={this.goToDashboard}/>
+    //
+    //     </div>
+    //   )
+    // }
     return (null);
   }
   return (null);

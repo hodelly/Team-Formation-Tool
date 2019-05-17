@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 export default class Start extends React.Component {
   constructor(props) {
@@ -11,7 +13,8 @@ export default class Start extends React.Component {
   render() {
     return (
       <div>
-        <p>The Group Formation Tool is designed to help instructors create successful student teams by intentionally
+        <p>
+The Group Formation Tool is designed to help instructors create successful student teams by intentionally
         forming them based on chosen criteria.
         </p>
         <p>
@@ -21,8 +24,12 @@ export default class Start extends React.Component {
         in groups that are as optimal as possible based on the criteria.
         </p>
         <p>
-        If you have questions about the use of this tool, please contact <b>learning.design.tech@dartmouth.edu</b>.
+        If you have questions about the use of this tool, please contact
+          {' '}
+          <b>learning.design.tech@dartmouth.edu</b>
+.
         </p>
+        <Link to="/dashboard"><button className="regularGreen" type="button"> Get Started </button></Link>
       </div>
     );
   }
