@@ -1,5 +1,6 @@
 import React from 'react';
 import { Map } from 'immutable';
+import { Link } from 'react-router-dom';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -276,7 +277,7 @@ Survey Dashboard
             {' '}
           </button>
           <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
-          <button className="regularGreen" type="button" onClick={this.startPreview}> Publish Survey </button>
+          <Link to="/groupsize"><button className="regularGreen" type="button"> Publish Survey </button></Link>
           {questions}
           <button type="button" onClick={this.addQuestion}> Add Question </button>
         </div>

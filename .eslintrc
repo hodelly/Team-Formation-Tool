@@ -3,7 +3,7 @@
     "parser": "babel-eslint",
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
     },
     "rules": {
         "strict": 0,
@@ -16,6 +16,7 @@
         "no-underscore-dangle": 0,
         "arrow-body-style": 0,
         "one-var": ["error", { "uninitialized": "always", "initialized": "never" }],
+        "react/destructuring-assignment": [<enabled>, 'never'],
         "one-var-declaration-per-line": ["error", "initializations"],
         "max-len": ["error", 200],
         "no-extra-parens": 0,
@@ -38,8 +39,17 @@
           "required": {
               "every": [ "nesting", "id" ]
           },
-          "allowChildren": true
+          "allowChildren": true,
       }],
       "react/prop-types": [<1>, { ignore: <ignore>, customValidators: <customValidator> }],
+         "jsx-a11y/label-has-for": [ 2, {
+            "components": [ "Label" ],
+            "required": {
+                "every": [ "nesting", "id" ]
+            },
+            "allowChildren": true,
+        }],
+        "react/prop-types": [<1>, { ignore: <ignore>, customValidators: <customValidator> }]
+
     }
 }

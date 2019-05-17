@@ -25,12 +25,3 @@ export default class Importance extends React.Component {
     );
   }
 }
-
-
-// <form action="">
-//   <input type="radio" name="importance" value="other" /> This question has no weight on the group selection.<br />
-//   <input type="radio" name="importance" value="low" /> Low<br />
-//   <input type="radio" name="importance" value="normal" /> Normal<br />
-//   <input type="radio" name="importance" value="importance" /> Important<br />
-//   <input type="radio" name="importance" value="critical" /> Critical
-// </form>

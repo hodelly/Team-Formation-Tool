@@ -1,7 +1,10 @@
 // import PropTypes from 'prop-types';
 import React from 'react';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import QuestionsPage from './questionsPage';
-
+import Dashboard from './dashboard';
+import Start from './start';
+import GroupNumber from './GroupNumber';
 
 // The HelloWorld class used to have the starter code before and now it will be the basis of our code
 export default class HelloWorld extends React.Component {
@@ -15,45 +18,63 @@ export default class HelloWorld extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-      onQuestionsPage: false,
-      onDashboard: true,
+      // onQuestionsPage: false,
+      // onDashboard: false,
+      // onStart: true,
+      // onGroupNumber: false,
     };
   }
 
-  goToQuestionsPage = () => {
-    this.setState({
-      onQuestionsPage: true,
-      onDashboard: false,
-    });
-  }
-
-  goToDashboard = () => {
-    this.setState({
-      onDashboard: true,
-      onQuestionsPage: false,
-
-    });
-  }
-
-
   render() {
-    if (this.state.onQuestionsPage) {
-      return (
-        <div>
-          <QuestionsPage goToDashboard={this.goToDashboard} />
-        </div>
-      );
-    }
-    if (this.state.onDashboard) {
-      return (
-        <div>
-          <p> dashboard
-          </p>
-          <button type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
-        </div>
-      );
-    }
+    return(
+      <Router>
+        <Switch>
+          <Route
+              exact
+              path='/'
+              render={(routeProps) => (
+                  <Dashboard
+                  {...routeProps}
+                  />
+              )}
+          />
+          <Route
+              path='/dashboard'
+              render={(routeProps) => (
+                  <Dashboard
+                  {...routeProps}
+                  />
+              )}
+          />
+          <Route
+              path='/surveycreation'
+              render={(routeProps) => (
+                  <QuestionsPage
+                  {...routeProps}
+                  />
+              )}
+          />
+          <Route
+              path='/groupsize'
+              render={(routeProps) => (
+                  <GroupNumber
+                  {...routeProps}
+                  />
+              )}
+          />
+          <Route
+              path='/start'
+              render={(routeProps) => (
+                  <Start
+                  {...routeProps}
+                  />
+              )}
+          />
+        </Switch>
+      </Router>
+    );
     return (null);
   }
 }
