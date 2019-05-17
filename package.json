@@ -2,6 +2,10 @@
   "name": "itc-team-formation",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.18",
+    "@fortawesome/free-regular-svg-icons": "^5.8.2",
+    "@fortawesome/free-solid-svg-icons": "^5.8.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
     "immutable": "^4.0.0-rc.12",
@@ -9,7 +13,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-on-rails": "11.2.2",
-    "survey-react": "^1.0.79"
+    "survey-react": "^1.0.84"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -18,7 +22,8 @@
     "eslint-loader": "^2.1.2",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react": "^7.13.0",
+    "surge": "^0.20.4",
     "webpack-dev-server": "2.11.2"
   }
 }

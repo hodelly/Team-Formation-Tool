@@ -26,6 +26,9 @@ gem 'jbuilder', '~> 2.5'
 gem "react_on_rails", "11.1.4" # Update to the current version
 gem "webpacker", "~> 3" # Newer versions might be supported
 
+# font awesome!
+gem "font-awesome-rails"
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
