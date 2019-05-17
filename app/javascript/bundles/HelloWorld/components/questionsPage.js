@@ -16,30 +16,31 @@ export default class QuestionsPage extends React.Component {
     // create a question object
     const newQuestion = {
       type: 'checkbox',
-      name: 'id',
+      name: '0', // is this the reason everything was getting checked at once? Hm..
       title: 'questionTitle',
       isRequired: true,
       colCount: 4,
-      choices: ['choice1', 'choice2'],
+      choices: Map({ 0: 'choice1', 1: 'choice2', 2: 'choice3' }), // LEARNING: map stores the keys as strings when defining it over here. Uses keys to reference into the map!!!
+      importance: 5,
     };
     // set State
     this.state = {
-      questionID: 2,
+      questionID: 1,
       inPreview: false,
       surveyjs: null,
       questionMap: Map(),
       questionType: newQuestion,
+      largestInputID: 3,
     };
   }
 
-  // initial set up of state variables
   componentWillMount() {
-    // add first item
+    // upon start, add one question to the page
     this.setState(prevState => ({
-      questionMap: prevState.questionMap.set(1, prevState.questionType),
+      questionMap: prevState.questionMap.set(0, prevState.questionType),
     }));
 
-    // create Survey Title
+    // give the survey a title
     const surveyData = {
       title: 'Survey Default Title',
       pages: [
@@ -59,6 +60,7 @@ export default class QuestionsPage extends React.Component {
 
   startPreview = () => {
     // surveyData blank slate
+
     const surveyData = {
       title: 'Default Title',
       pages: [
@@ -69,16 +71,33 @@ export default class QuestionsPage extends React.Component {
       ],
     };
     // put questionMap objects into surveyData
-    let i,
-      newQuestion;
-    for (i = 1; i < this.state.questionID; i += 1) {
+    for (let i = 0; i <= this.state.questionID; i += 1) {
       // LEARNING: 'NULL' is 'undefined' in React
-      newQuestion = this.state.questionMap.get(i);
-      if (newQuestion !== undefined) {
-        surveyData.pages[0].questions.push(newQuestion);
+      const question = this.state.questionMap.get(i);
+      const newQuestion = Object.assign({}, question);
+      let array = [];
+      if (newQuestion !== undefined && newQuestion.choices !== undefined) {
+        // create an array for choices
+        array = newQuestion.choices.valueSeq().toArray();
+        // let j;
+        // for (j = 0; j <= this.state.largestInputID; j += 1) {
+        //   if (newQuestion.choices.get(j.toString(10)) === undefined) {
+        //     console.log(`undefined for question ${i} bar ${j}\n`);
+        //   } else if (newQuestion.choices.get(j.toString(10)) !== undefined) {
+        //     // console.log(`${newQuestion.choices.get(j.toString())}\n`);
+        //     array[j] = newQuestion.choices.get(j.toString());
+        //   }
+        // }
       }
+      // console.log(`array: ${array}`);
+      // change choices question item to an array
+      console.log(`ARRAY: ${array}`);
+      newQuestion.choices = array;
+      // put the new question into surveyData
+      surveyData.pages[0].questions.push(newQuestion);
     }
     // update surveyjs
+    console.log(surveyData);
     this.setState({ surveyjs: surveyData });
 
     this.setState({
@@ -102,15 +121,26 @@ export default class QuestionsPage extends React.Component {
   }
 
   addQuestion = () => {
-    // lEARNING - doesn't actually change state until complete RENDER (all the functions complete in that render round). So:
-    // 1. console print statements shouldn't be INSIDE function but outside.
-    // 2. if were to split into 2 setState functions, prevstate.ID is still the old ID!
+    // add new object to the Map with a new 'name'
+    const oldQuestion = this.state.questionType;
+    const newQuestion = Object.assign({}, oldQuestion);
+    newQuestion.name = this.state.questionID.toString();
 
-    // add new object to the Map & increment the id
+    // set the updated question as the question in state
     this.setState(prevState => ({
-      questionMap: prevState.questionMap.set(prevState.questionID, prevState.questionType),
+      questionMap: prevState.questionMap.set(prevState.questionID, newQuestion),
+    }));
+
+    // update the ID
+    this.setState(prevState => ({
       questionID: prevState.questionID + 1,
     }));
+
+
+    // this.setState(prevState => ({
+    //   questionMap: prevState.questionMap.set(prevState.questionID, prevState.questionType),
+    //   questionID: prevState.questionID + 1,
+    // }));
   }
 
   updateQuestionType = (questionID, type) => {
@@ -127,32 +157,106 @@ export default class QuestionsPage extends React.Component {
     }));
   }
 
-  updateOptions = (questionID, options) => {
-    // add new object to the Map & increment the id
+  updateChoices = (questionID, inputBarID, text) => {
+    // get the question at that ID
+    const oldQuestion = this.state.questionMap.get(questionID);
+    const question = Object.assign({}, oldQuestion); // LEARNING: talk to tim about this. But if i don't create a new object, why woult it change objects other than itself?! I don't understand!!!!!
+
+    // update it's choices
+    const choicesMap = question.choices;
+    const newChoicesMap = choicesMap.set(inputBarID.toString(), text); // LEARNING: must save the map.set into a variable. It doesn't update the map you call it on!! That's point of immutableJS!
+    question.choices = newChoicesMap;
+
+    // set the updated question as the question in state
     this.setState(prevState => ({
-      questionMap: prevState.questionMap.setIn([questionID, 'choices'], options),
+      questionMap: prevState.questionMap.set(questionID, question),
+    }));
+
+    // console.log(`${newChoicesMap}`); // LEARNING: to print map in {}, must print within ``
+  }
+
+  addChoice = (questionID, inputBarID) => {
+    const oldQuestion = this.state.questionMap.get(questionID);
+    const question = Object.assign({}, oldQuestion);
+
+    // increases everytime someone adds
+    this.setState(prevState => ({
+      largestInputID: prevState.largestInputID + 1,
+    }));
+
+
+    // update it's choices
+    const choicesMap = question.choices;
+    const newChoicesMap = choicesMap.set(this.state.largestInputID.toString(), 'addChoice');
+    question.choices = newChoicesMap;
+
+    // set the updated question as the question in state
+    this.setState(prevState => ({
+      questionMap: prevState.questionMap.set(questionID, question),
+    }));
+  }
+
+  deleteChoice = (questionID, inputBarID) => {
+    // console.log(`questionID: ${questionID}`);
+    // console.log(`inputBarID: ${inputBarID}`);
+
+    const oldQuestion = this.state.questionMap.get(questionID);
+    const question = Object.assign({}, oldQuestion);
+
+    // update it's choices, only if more than 1 inputBar
+    const choicesMap = question.choices;
+    if (choicesMap.size > 1) {
+      const newChoicesMap = choicesMap.delete(inputBarID);
+      console.log(newChoicesMap);
+      question.choices = newChoicesMap;
+
+      // set the updated question as the question in state
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(questionID, question),
+      }));
+    }
+  }
+
+  updateImportance = (questionID, value) => {
+    const oldQuestion = this.state.questionMap.get(questionID);
+    const question = Object.assign({}, oldQuestion);
+
+    // update it's slider value
+    question.importance = value;
+
+    // set the updated question as the question in state
+    this.setState(prevState => ({
+      questionMap: prevState.questionMap.set(questionID, question),
     }));
   }
 
   render() {
-    console.log('on questions page');
+    // console.log(this.state.questionMap);
     const questions = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
-      console.log(`key:${key}, question:${questionObject.choices}`);
+      // console.log(`${questionObject.choices}`);
       return (
         <Question
+          key={key}
           questionID={key}
-          title={this.state.questionMap.get(key).title}
-          type={this.state.questionMap.get(key).type}
-          choices={this.state.questionMap.get(key).choices}
+          inputBarID={questionObject.inputBarID}
+          title={questionObject.title}
+          type={questionObject.type}
+          choices={questionObject.choices}
 
           deleteQuestion={this.deleteQuestion}
           updateQuestionType={this.updateQuestionType}
           updateQuestionTitle={this.updateQuestionTitle}
-          updateOptions={this.updateOptions}
-          key={key}
+
+          updateChoices={this.updateChoices}
+          addChoice={this.addChoice}
+          deleteChoice={this.deleteChoice}
+
+          importance={questionObject.importance}
+          updateImportance={this.updateImportance}
         />
       );
     });
+
 
     if (this.state.inPreview) {
       return (
@@ -181,12 +285,7 @@ Survey Dashboard
     }
   }
 }
-// {console.log(`map state: ${this.state.questionMap}`)}
-
-// {console.log(`${this.state.questionMap.get(1).choices}`)}
 
 // {this.state.questionMap.forEach(this.generateQuestion)}
 
 // {this.state.questions.map(x => (<Question ={x} addQuestion={this.addQuestion} deleteQuestion={this.deleteQuestion} key={x} />))}
-
-// <button type="button" onClick={this.handleClick}>delete</button>

@@ -77,6 +77,4 @@ export default class HelloWorld extends React.Component {
     );
     return (null);
   }
-  return (null);
-}
 }
