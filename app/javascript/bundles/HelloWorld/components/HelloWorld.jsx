@@ -20,38 +20,38 @@ export default class HelloWorld extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      onQuestionsPage: false,
-      onDashboard: false,
-      onStart: true,
-      onGroupNumber: false,
+      // onQuestionsPage: false,
+      // onDashboard: false,
+      // onStart: true,
+      // onGroupNumber: false,
     };
   }
-
-  goToQuestionsPage = () => {
-    this.setState({
-      onQuestionsPage: true,
-      onDashboard: false,
-      onStart: false,
-      onGroupNumber: false,
-    });
-  }
-
-  goToDashboard = () => {
-    this.setState({
-      onDashboard: true,
-      onQuestionsPage: false,
-      onStart: false,
-      onGroupNumber: false,
-    });
-  }
-  goToGroupNumber = () => {
-    this.setState({
-      onDashboard: false,
-      onQuestionsPage: false,
-      onStart: false,
-      onGroupNumber: true,
-    });
-  }
+  //
+  // goToQuestionsPage = () => {
+  //   this.setState({
+  //     onQuestionsPage: true,
+  //     onDashboard: false,
+  //     onStart: false,
+  //     onGroupNumber: false,
+  //   });
+  // }
+  //
+  // goToDashboard = () => {
+  //   this.setState({
+  //     onDashboard: true,
+  //     onQuestionsPage: false,
+  //     onStart: false,
+  //     onGroupNumber: false,
+  //   });
+  // }
+  // goToGroupNumber = () => {
+  //   this.setState({
+  //     onDashboard: false,
+  //     onQuestionsPage: false,
+  //     onStart: false,
+  //     onGroupNumber: true,
+  //   });
+  // }
 
 
   render() {
