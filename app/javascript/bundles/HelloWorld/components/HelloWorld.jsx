@@ -26,33 +26,6 @@ export default class HelloWorld extends React.Component {
       // onGroupNumber: false,
     };
   }
-  //
-  // goToQuestionsPage = () => {
-  //   this.setState({
-  //     onQuestionsPage: true,
-  //     onDashboard: false,
-  //     onStart: false,
-  //     onGroupNumber: false,
-  //   });
-  // }
-  //
-  // goToDashboard = () => {
-  //   this.setState({
-  //     onDashboard: true,
-  //     onQuestionsPage: false,
-  //     onStart: false,
-  //     onGroupNumber: false,
-  //   });
-  // }
-  // goToGroupNumber = () => {
-  //   this.setState({
-  //     onDashboard: false,
-  //     onQuestionsPage: false,
-  //     onStart: false,
-  //     onGroupNumber: true,
-  //   });
-  // }
-
 
   render() {
     return(
@@ -102,38 +75,6 @@ export default class HelloWorld extends React.Component {
         </Switch>
       </Router>
     );
-    // if (this.state.onQuestionsPage) {
-    //   return (
-    //     <div>
-    //       <QuestionsPage goToDashboard={this.goToDashboard} goToGroupNumber={this.goToGroupNumber}/>
-    //     </div>
-    //   );
-    // }
-    // if (this.state.onDashboard) {
-    //   return (
-    //     <div>
-    //       <button className="regularGreen" type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
-    //       <Dashboard />
-    //     </div>
-    //   );
-    // }
-    // if (this.state.onStart) {
-    //   return(
-    //     <div>
-    //       <Start/>
-    //       <button className="regularGreen" type="button" onClick={this.goToDashboard}> Get Started </button>
-    //
-    //     </div>
-    //   )
-    // }
-    // if (this.state.onGroupNumber) {
-    //   return(
-    //     <div>
-    //       <GroupNumber cancel={this.goToDashboard}/>
-    //
-    //     </div>
-    //   )
-    // }
     return (null);
   }
   return (null);
