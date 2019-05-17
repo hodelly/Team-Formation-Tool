@@ -74,21 +74,23 @@ export default class QuestionsPage extends React.Component {
       // LEARNING: 'NULL' is 'undefined' in React
       const question = this.state.questionMap.get(i);
       const newQuestion = Object.assign({}, question);
-      const array = [];
+      let array = [];
       if (newQuestion !== undefined && newQuestion.choices !== undefined) {
         // create an array for choices
-        let j;
-        for (j = 0; j <= this.state.largestInputID; j += 1) {
-          if (newQuestion.choices.get(j.toString(10)) === undefined) {
-            console.log(`undefined for question ${i} bar ${j}\n`);
-          } else if (newQuestion.choices.get(j.toString(10)) !== undefined) {
-            // console.log(`${newQuestion.choices.get(j.toString())}\n`);
-            array[j] = newQuestion.choices.get(j.toString());
-          }
-        }
+        array = newQuestion.choices.valueSeq().toArray();
+        // let j;
+        // for (j = 0; j <= this.state.largestInputID; j += 1) {
+        //   if (newQuestion.choices.get(j.toString(10)) === undefined) {
+        //     console.log(`undefined for question ${i} bar ${j}\n`);
+        //   } else if (newQuestion.choices.get(j.toString(10)) !== undefined) {
+        //     // console.log(`${newQuestion.choices.get(j.toString())}\n`);
+        //     array[j] = newQuestion.choices.get(j.toString());
+        //   }
+        // }
       }
       // console.log(`array: ${array}`);
       // change choices question item to an array
+      console.log(`ARRAY: ${array}`);
       newQuestion.choices = array;
       // put the new question into surveyData
       surveyData.pages[0].questions.push(newQuestion);
@@ -203,7 +205,7 @@ export default class QuestionsPage extends React.Component {
     // update it's choices, only if more than 1 inputBar
     const choicesMap = question.choices;
     if (choicesMap.size > 1) {
-      const newChoicesMap = choicesMap.delete(inputBarID); // BUG! CAN'T FIX!
+      const newChoicesMap = choicesMap.delete(inputBarID);
       console.log(newChoicesMap);
       question.choices = newChoicesMap;
 
@@ -214,19 +216,18 @@ export default class QuestionsPage extends React.Component {
     }
   }
 
-  // talk through this with annie
-  // updateImportance = (questionID, value) => {
-  //   const oldQuestion = this.state.questionMap.get(questionID);
-  //   const question = Object.assign({}, oldQuestion);
-  //
-  //   // update it's choices
-  //   question.importance = value;
-  //
-  //   // set the updated question as the question in state
-  //   this.setState(prevState => ({
-  //     questionMap: prevState.questionMap.set(questionID, question),
-  //   }));
-  // }
+  updateImportance = (questionID, value) => {
+    const oldQuestion = this.state.questionMap.get(questionID);
+    const question = Object.assign({}, oldQuestion);
+
+    // update it's slider value
+    question.importance = value;
+
+    // set the updated question as the question in state
+    this.setState(prevState => ({
+      questionMap: prevState.questionMap.set(questionID, question),
+    }));
+  }
 
   render() {
     // console.log(this.state.questionMap);
@@ -234,12 +235,12 @@ export default class QuestionsPage extends React.Component {
       // console.log(`${questionObject.choices}`);
       return (
         <Question
+          key={key}
           questionID={key}
           inputBarID={questionObject.inputBarID}
           title={questionObject.title}
           type={questionObject.type}
           choices={questionObject.choices}
-          importance={questionObject.importance}
 
           deleteQuestion={this.deleteQuestion}
           updateQuestionType={this.updateQuestionType}
@@ -249,6 +250,7 @@ export default class QuestionsPage extends React.Component {
           addChoice={this.addChoice}
           deleteChoice={this.deleteChoice}
 
+          importance={questionObject.importance}
           updateImportance={this.updateImportance}
         />
       );

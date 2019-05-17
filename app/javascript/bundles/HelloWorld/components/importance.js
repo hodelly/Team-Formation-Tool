@@ -4,7 +4,7 @@ export default class Importance extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questionWeight: 3,
+      // questionWeight: 3,
     };
   }
 

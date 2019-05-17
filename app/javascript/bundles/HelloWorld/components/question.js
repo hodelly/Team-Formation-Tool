@@ -31,6 +31,7 @@ export default class Question extends React.Component {
     if (this.props.type === 'radiogroup' || this.props.type === 'checkbox' || this.props.type === 'dropdown') {
       options = (
         <Options
+          key={this.props.questionID}
           questionID={this.props.questionID}
           inputBarID={this.props.inputBarID}
           choices={this.props.choices}
@@ -55,7 +56,7 @@ export default class Question extends React.Component {
           <option value="dropdown">Lookup</option>
         </select>
         {options}
-        <Importance updateImportance={this.props.updateImportance} />
+        <Importance importance={this.props.importance} updateImportance={this.props.updateImportance} />
         <Distribution />
         <button type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon icon="trash" /> </button>
       </div>
