@@ -18,7 +18,6 @@ export default class Dashboard extends React.Component {
     return (
       <div>
         {pastSurveys}
-        {pastSurveys}
       </div>
     );
   }
