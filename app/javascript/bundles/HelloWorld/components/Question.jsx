@@ -1,111 +1,72 @@
 import React from 'react';
+// icons
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+// components
+import Options from './options';
+import Importance from './importance';
+import Distribution from './distribution';
+import QuestionHeader from './questionHeader';
+
+library.add(faTrash);
 
 export default class Question extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { editState: false, titleValue: props.title };
-    this.deleteMe = this.deleteMe.bind(this);
-    this.saveMe = this.saveMe.bind(this);
-    this.editMe = this.editMe.bind(this);
-    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.state = {
+    };
   }
 
-  deleteMe() {
-    this.props.deleteQuestion(this.props.id);
+  deleteQuestion = () => {
+    this.props.deleteQuestion(this.props.questionID);
   }
 
-  saveMe() {
-    this.props.updateQuestion(this.props.id, { title: this.state.titleValue });
-    this.setState({ editState: false });
-  }
-
-  editMe() {
-    this.setState({ editState: true });
-  }
-
-  handleTitleChange(event) {
-    this.setState({ titleValue: event.target.value });
+  onSelectChange = (event) => {
+    this.props.updateQuestionType(this.props.questionID, event.target.value);
   }
 
   render() {
-    const divStyle = {
-      background: '40%',
-      color: '#5d4bdf',
-      border: '5px solid pink',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-    };
+    let options;
+    if (this.props.type === 'radiogroup' || this.props.type === 'checkbox' || this.props.type === 'dropdown') {
+      options = (
+        <Options
+          key={this.props.questionID}
+          questionID={this.props.questionID}
+          inputBarID={this.props.inputBarID}
+          choices={this.props.choices}
 
-    const title = this.state.editState
-      ? (
-        <label htmlFor="title">
-Question Title:
-          <input type="text" value={this.state.titleValue} onChange={this.handleTitleChange} />
-        </label>
-      )
-      : (
-        <h2>
-          {' '}
-title
-          {this.props.title}
-          {' '}
-
-        </h2>
+          updateChoices={this.props.updateChoices}
+          addChoice={this.props.addChoice}
+          deleteChoice={this.props.deleteChoice}
+          updateInputBarCount={this.props.updateInputBarCount}
+        />
       );
+    } else {
+      options = '';
+    }
 
-    const buttons = this.state.editState
-      ? (
-        <button type="button" onClick={this.saveMe}>
-        Save
-        </button>
-      )
-      : (
-        <div>
-          <button type="button" onClick={this.deleteMe}>
-          Delete
-          </button>
-          <button type="button" onClick={this.editMe}>
-          Edit
-          </button>
-        </div>
-      );
-
-    console.log('props');
-    console.log(this.props);
     return (
-      <div style={divStyle}>
-        {title}
-        <p>
+      <div className="question">
+        <QuestionHeader title={this.props.title} questionID={this.props.questionID} updateQuestionTitle={this.props.updateQuestionTitle} />
+        <select name="questionType" onChange={this.onSelectChange} value={this.props.type}>
+          <option value="checkbox">Checkbox</option>
+          <option value="radiogroup">Multiple Choice</option>
+          <option value="comment">Short Answer</option>
+          <option value="dropdown">Lookup</option>
+        </select>
+        {options}
+        <Importance importance={this.props.importance} updateImportance={this.props.updateImportance} />
+        <Distribution />
+        <button type="button" onClick={this.deleteQuestion}>
           {' '}
-choices
-          {this.props.choices}
+          <FontAwesomeIcon icon="trash" />
           {' '}
-
-        </p>
-        <p>
-          {' '}
-isRequired
-          {String(this.props.isRequired)}
-          {' '}
-
-        </p>
-        <p>
-          {' '}
-type
-          {this.props.type}
-          {' '}
-
-        </p>
-        <p>
-          {' '}
-weight
-          {this.props.weight}
-          {' '}
-
-        </p>
-        {buttons}
+        </button>
       </div>
     );
   }
 }
+
+// lEARNING: can print props
+// console.log(this.props);

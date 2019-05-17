@@ -269,7 +269,12 @@ export default class QuestionsPage extends React.Component {
     } else {
       return (
         <div>
-          <button className="goToDashboard" type="button" onClick={this.props.goToDashboard}>   <FontAwesomeIcon icon="chevron-left" />Survey Dashboard </button>
+          <button className="goToDashboard" type="button" onClick={this.props.goToDashboard}>
+            {' '}
+            <FontAwesomeIcon icon="chevron-left" />
+Survey Dashboard
+            {' '}
+          </button>
           <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
           <button className="regularGreen" type="button" onClick={this.startPreview}> Publish Survey </button>
           {questions}
