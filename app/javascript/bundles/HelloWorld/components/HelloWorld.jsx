@@ -1,6 +1,6 @@
 // import PropTypes from 'prop-types';
 import React from 'react';
-import QuestionsPage from './questionsPage';
+import Survey from './survey';
 
 
 // The HelloWorld class used to have the starter code before and now it will be the basis of our code
@@ -16,14 +16,14 @@ export default class HelloWorld extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      onQuestionsPage: false,
+      startCreation: false,
       onDashboard: true,
     };
   }
 
   goToQuestionsPage = () => {
     this.setState({
-      onQuestionsPage: true,
+      startCreation: true,
       onDashboard: false,
     });
   }
@@ -31,17 +31,16 @@ export default class HelloWorld extends React.Component {
   goToDashboard = () => {
     this.setState({
       onDashboard: true,
-      onQuestionsPage: false,
-
+      startCreation: false,
     });
   }
 
 
   render() {
-    if (this.state.onQuestionsPage) {
+    if (this.state.startCreation) {
       return (
         <div>
-          <QuestionsPage goToDashboard={this.goToDashboard} />
+          <Survey goToDashboard={this.goToDashboard} />
         </div>
       );
     }
