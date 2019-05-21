@@ -1,7 +1,11 @@
 // import PropTypes from 'prop-types';
 import React from 'react';
-import Survey from './survey';
-
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import Dashboard from './dashboard';
+import SurveyResults from './surveyResults';
+import SurveyCreate from './surveyCreate';
+import Start from './start';
+import GroupNumber from './GroupNumber';
 
 // The HelloWorld class used to have the starter code before and now it will be the basis of our code
 export default class HelloWorld extends React.Component {
@@ -15,44 +19,67 @@ export default class HelloWorld extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-      startCreation: false,
-      onDashboard: true,
+
     };
   }
 
-  goToQuestionsPage = () => {
-    this.setState({
-      startCreation: true,
-      onDashboard: false,
-    });
-  }
-
-  goToDashboard = () => {
-    this.setState({
-      onDashboard: true,
-      startCreation: false,
-    });
-  }
-
-
   render() {
-    if (this.state.startCreation) {
-      return (
-        <div>
-          <Survey goToDashboard={this.goToDashboard} />
-        </div>
-      );
-    }
-    if (this.state.onDashboard) {
-      return (
-        <div>
-          <p> dashboard
-          </p>
-          <button type="button" onClick={this.goToQuestionsPage}> Create Survey </button>
-        </div>
-      );
-    }
-    return (null);
+    return (
+      <Router>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={routeProps => (
+              <Dashboard
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/dashboard"
+            render={routeProps => (
+              <Dashboard
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/surveycreate"
+            render={routeProps => (
+              <SurveyCreate
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/surveyresults"
+            render={routeProps => (
+              <SurveyResults
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/groupsize"
+            render={routeProps => (
+              <GroupNumber
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/start"
+            render={routeProps => (
+              <Start
+                {...routeProps}
+              />
+            )}
+          />
+        </Switch>
+      </Router>
+    );
   }
 }

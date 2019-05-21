@@ -1,11 +1,15 @@
 import React from 'react';
 import { Map } from 'immutable';
+import { Link } from 'react-router-dom';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Question from './question';
+import {
+  classScheduleQuestion, cantWorkWithQuestion, prefWorkingTimeQuestion, workingStylesQuestion, genderQuestion, ethnicityQuestion,
+} from '../utils/standardQuestions';
 
 library.add(faChevronLeft);
 
@@ -35,17 +39,50 @@ export default class QuestionsPage extends React.Component {
   }
 
   componentWillMount() {
-    // if there are no bucket questions, add one default question to the page
-    if (this.props.initialQuestionMap.size === 0) {
+    // upon start, add all the bucket questions to the page
+    // ****i know this is terrible practice, but i can't think of a better way to do this :(*****
+    console.log(`${this.props.initialQuestionMap}`);
+    if (this.props.initialQuestionMap.get('classSchedule')) {
       this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(0, prevState.questionType),
+        questionMap: prevState.questionMap.set(1, classScheduleQuestion),
+        id: prevState + 1,
       }));
     }
-    // else, upon start, add all the bucket questions to the page
-    else {
+    if (this.props.initialQuestionMap.get('cantWorkWith')) {
       this.setState(prevState => ({
-        questionMap: this.props.initialQuestionMap,
-        questionID: this.props.initialQuestionMap.size + 1,
+        questionMap: prevState.questionMap.set(prevState.id, cantWorkWithQuestion),
+        id: prevState + 1,
+      }));
+    }
+    if (this.props.initialQuestionMap.get('prefWorkingTime')) {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.id, prefWorkingTimeQuestion),
+        id: prevState + 1,
+      }));
+    }
+    if (this.props.initialQuestionMap.get('workingStyles')) {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.id, workingStylesQuestion),
+        id: prevState + 1,
+      }));
+    }
+    if (this.props.initialQuestionMap.get('ethnicity')) {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.id, ethnicityQuestion),
+        id: prevState + 1,
+      }));
+    }
+    if (this.props.initialQuestionMap.get('gender')) {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.id, genderQuestion),
+        id: prevState + 1,
+      }));
+    }
+    // if at this point, nothing has been added, add one default question to the page
+    if (this.state.id === 1) {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(0, prevState.questionType),
+        id: prevState + 1,
       }));
     }
 
@@ -279,11 +316,11 @@ export default class QuestionsPage extends React.Component {
     } else {
       return (
         <div>
-          <button className="goToDashboard" type="button" onClick={this.props.goToDashboard}>
-            <FontAwesomeIcon icon="chevron-left" /> Survey Dashboard
-          </button>
+          <Link to="/dashboard">
+            <button className="goToDashboard" type="button"> <FontAwesomeIcon icon="chevron-left" /> Survey Dashboard </button>
+          </Link>
           <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
-          <button className="regularGreen" type="button" onClick={this.startPreview}> Publish Survey </button>
+          <Link to="/groupsize"><button className="regularGreen" type="button"> Publish Survey </button></Link>
           {questions}
           <button type="button" onClick={this.addQuestion}> Add Question </button>
         </div>
