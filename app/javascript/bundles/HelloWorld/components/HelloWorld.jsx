@@ -20,10 +20,6 @@ export default class HelloWorld extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      // onQuestionsPage: false,
-      // onDashboard: false,
-      // onStart: true,
-      // onGroupNumber: false,
     };
   }
 
