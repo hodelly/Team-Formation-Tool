@@ -36,10 +36,9 @@ class Api::V1::SurveysController < ApplicationController
 
   # validate params
   def survey_params
-    params.require(:survey).permit(:course_id,
-                                   :sis_instructor_id, :group_size, :due_date,
-                                   :title, :description, :note_from_instructor,
-                                   :is_published)
+    params.require(:survey).permit(:course_id, :sis_instructor_id, :group_size, 
+                                   :due_date, :title, :description, 
+                                   :note_from_instructor, :is_published)
   end
 
 end
