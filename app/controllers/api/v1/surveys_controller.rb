@@ -10,7 +10,7 @@ class Api::V1::SurveysController < ApplicationController
 
     respond_to do |format|
       if @survey.save
-        format.json { render json: @survey, status: :created, location: @survey }
+        format.json { render json: @survey, status: :created }
       else
         format.json { render json: @survey.errors, status: :unprocessable_entity }
       end
