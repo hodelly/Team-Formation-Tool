@@ -12,7 +12,7 @@ export const genderQuestion = {
     1: 'Male',
     2: 'Prefer not to say',
   }),
-  importance: 5,
+  importance: 3,
   similar: true,
 };
 
@@ -32,7 +32,7 @@ export const ethnicityQuestion = {
     4: 'White',
     5: 'Prefer not to say',
   }),
-  importance: 5,
+  importance: 3,
   similar: true,
 };
 
@@ -48,8 +48,8 @@ export const workingStylesQuestion = {
     2: 'Collaborative: I like to help people get things done. If there is a conflict on a team I like to help people work it out. I like to mediate and facilitate conversations.',
     3: 'Creative: I like to see things from many angles. I don\'t rush to a solution. If we have to take a step back and approach a problem from a new direction that\'s OK with me.',
   }),
-  importance: 5,
-  similar: true,
+  importance: 3,
+  similar: false,
 };
 
 export const prefWorkingTimeQuestion = {
@@ -67,7 +67,7 @@ export const prefWorkingTimeQuestion = {
     5: 'Late evening (9:00 pm - 12:00 am)',
     6: 'Other: 12:00 am - 3:00 am)',
   }),
-  importance: 5,
+  importance: 3,
   similar: true,
 };
 
@@ -80,19 +80,45 @@ export const cantWorkWithQuestion = {
   choices: Map({
     0: 'inputStudent1', 1: 'inputStudent2', 2: 'inputStudent3', 3: 'inputStudent4', 4: 'inputStudent5',
   }),
-  importance: 5,
+  importance: 3,
   similar: true,
 };
 
 export const classScheduleQuestion = {
   type: 'checkbox',
   name: 'classSchedule',
-  title: 'During which time blocks do you have classes or obligations?',
+  title: 'What time blocks do you have classes or obligations during?',
   isRequired: true,
   colCount: 4,
   choices: Map({
     0: '9L', 1: '10', 2: '10A', 3: '11', 4: '12', 5: '2', 6: '2A', 7: '3A', 8: '3B', 9: '6A', 10: '6B',
   }),
-  importance: 5,
+  importance: 3,
   similar: true,
+};
+
+export const athleticsQuestion = {
+  type: 'radiogroup',
+  name: 'athletics',
+  title: 'Do you play a varsity sport?',
+  isRequired: true,
+  colCount: 4,
+  choices: Map({
+    0: 'Yes', 1: 'No',
+  }),
+  importance: 3,
+  similar: false,
+};
+
+export const greekLifeQuestion = {
+  type: 'radiogroup',
+  name: 'athletics',
+  title: 'Are you affilated with Greek Life?',
+  isRequired: true,
+  colCount: 4,
+  choices: Map({
+    0: 'Yes', 1: 'No',
+  }),
+  importance: 3,
+  similar: false,
 };

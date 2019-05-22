@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Question from './question';
 import {
-  classScheduleQuestion, cantWorkWithQuestion, prefWorkingTimeQuestion, workingStylesQuestion, genderQuestion, ethnicityQuestion,
+  classScheduleQuestion, cantWorkWithQuestion, prefWorkingTimeQuestion, workingStylesQuestion, genderQuestion, ethnicityQuestion, athleticsQuestion, greekLifeQuestion,
 } from '../utils/standardQuestions';
 
 library.add(faChevronLeft);
@@ -20,7 +20,7 @@ export default class QuestionsPage extends React.Component {
     const newQuestion = {
       type: 'checkbox',
       name: '0',
-      title: 'questionTitle',
+      title: 'Question Title',
       isRequired: true,
       colCount: 4,
       choices: Map({ 0: 'choice1', 1: 'choice2', 2: 'choice3' }), // LEARNING: map stores the keys as strings when defining it over here. Uses keys to reference into the map!!!
@@ -40,51 +40,13 @@ export default class QuestionsPage extends React.Component {
 
   componentWillMount() {
     // upon start, add all the bucket questions to the page
-    // ****i know this is terrible practice, but i can't think of a better way to do this :(*****
-    console.log(`${this.props.initialQuestionMap}`);
-    if (this.props.initialQuestionMap.get('classSchedule')) {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(1, classScheduleQuestion),
-        id: prevState + 1,
-      }));
-    }
-    if (this.props.initialQuestionMap.get('cantWorkWith')) {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.id, cantWorkWithQuestion),
-        id: prevState + 1,
-      }));
-    }
-    if (this.props.initialQuestionMap.get('prefWorkingTime')) {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.id, prefWorkingTimeQuestion),
-        id: prevState + 1,
-      }));
-    }
-    if (this.props.initialQuestionMap.get('workingStyles')) {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.id, workingStylesQuestion),
-        id: prevState + 1,
-      }));
-    }
-    if (this.props.initialQuestionMap.get('ethnicity')) {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.id, ethnicityQuestion),
-        id: prevState + 1,
-      }));
-    }
-    if (this.props.initialQuestionMap.get('gender')) {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.id, genderQuestion),
-        id: prevState + 1,
-      }));
-    }
-    // if at this point, nothing has been added, add one default question to the page
-    if (this.state.id === 1) {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(0, prevState.questionType),
-        id: prevState + 1,
-      }));
-    }
+    this.props.initialQuestionMap.forEach(this.addToMap);
+
+    // add 1 question
+    this.setState(prevState => ({
+      questionMap: prevState.questionMap.set(prevState.id, prevState.questionType),
+      id: prevState + 1,
+    }));
 
     // give the survey a title
     const surveyData = {
@@ -104,6 +66,51 @@ export default class QuestionsPage extends React.Component {
     // console.log(`Survey Questions: ${JSON.stringify(survey)}`);
     console.log(`Survey Results: ${JSON.stringify(survey.data)}`);
   }
+
+  addToMap = (value, key, map) => {
+    if (value && key === 'classSchedule') {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.questionID, classScheduleQuestion),
+        questionID: prevState.questionID + 1,
+      }));
+    } else if (value && key === 'cantWorkWith') {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.questionID, cantWorkWithQuestion),
+        questionID: prevState.questionID + 1,
+      }));
+    } else if (value && key === 'prefWorkingTime') {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.questionID, prefWorkingTimeQuestion),
+        questionID: prevState.questionID + 1,
+      }));
+    } else if (value && key === 'workingStyles') {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.questionID, workingStylesQuestion),
+        questionID: prevState.questionID + 1,
+      }));
+    } else if (value && key === 'ethnicity') {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.questionID, ethnicityQuestion),
+        questionID: prevState.questionID + 1,
+      }));
+    } else if (value && key === 'gender') {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.questionID, genderQuestion),
+        questionID: prevState.questionID + 1,
+      }));
+    } else if (value && key === 'athletics') {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.questionID, athleticsQuestion),
+        questionID: prevState.questionID + 1,
+      }));
+    } else if (value && key === 'greekLife') {
+      this.setState(prevState => ({
+        questionMap: prevState.questionMap.set(prevState.questionID, greekLifeQuestion),
+        questionID: prevState.questionID + 1,
+      }));
+    }
+  }
+
 
   startPreview = () => {
     // surveyData blank slate
@@ -275,6 +282,7 @@ export default class QuestionsPage extends React.Component {
 
   render() {
     // console.log(this.state.questionMap);
+    console.log(`${this.state.questionMap}`);
     const questions = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
       // console.log(`${questionObject.choices}`);
       return (

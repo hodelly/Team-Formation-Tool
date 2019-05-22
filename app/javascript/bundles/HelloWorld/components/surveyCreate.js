@@ -15,7 +15,7 @@ export default class SurveyCreate extends React.Component {
     // initial questions
     this.state = {
       initialQuestionMap: Map({
-        classSchedule: false, cantWorkWith: false, prefWorkingTime: false, workingStyles: false, ethnicity: false, gender: false,
+        classSchedule: false, cantWorkWith: false, prefWorkingTime: false, workingStyles: false, ethnicity: true, gender: true, athletics: false, greekLife: false,
       }),
       preSelection: true,
     };

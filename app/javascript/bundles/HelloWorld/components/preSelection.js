@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-
+import SimpleModal from './modal';
 
 library.add(faTrash);
 
@@ -15,14 +15,15 @@ export default class PreSelection extends React.Component {
     };
   }
 
+
   render() {
     // if continue button not clicked display buckets
     const buttons = this.props.initialQuestionMap.entrySeq().map(([key, clicked]) => {
       if (clicked) {
-        return (<button className="bucket" type="button" style={{ border: '4px solid #518063' }} onClick={() => { this.props.handleClick(key); }}> {key} </button>);
+        return (<button className="bucket" type="button" style={{ border: '4px solid #518063' }} onClick={() => { this.props.handleClick(key); }}> {key} <SimpleModal /> </button>);
       }
       // else
-      return (<button className="bucket" type="button" style={{ border: '1px solid #DEDEDE' }} onClick={() => { this.props.handleClick(key); }}> {key} </button>);
+      return (<button className="bucket" type="button" style={{ border: '1px solid #DEDEDE' }} onClick={() => { this.props.handleClick(key); }}> {key} <SimpleModal /> </button>);
     });
 
     return (
@@ -36,6 +37,7 @@ export default class PreSelection extends React.Component {
           Click on a highlighted tile to remove it from your survey. Click the expand icon to view the exact question wording and the answers. You can also
           access the bucket anytime underneath the question menu bar on the right side of the screen.
         </p>
+
         {buttons}
       </div>
     );
