@@ -32,14 +32,14 @@ class CanvasClass
            #canvas_hash = JSON.parse(File.read("app/models/concerns/canvas_test_data.json").chomp)
            #enrollments = canvas_hash["enrollments"]# DEBUG
            enrollments = get_canvas("/api/v1/courses/#{course_id}/enrollments?per_page=50")
-            canvas_sections = get_canvas("/api/v1/courses/#{course_id}/sections")
-            sections = canvas_sections if canvas_sections.length > 1
-            groups = get_canvas("/api/v1/courses/#{course_id}/groups")
+           canvas_sections = get_canvas("/api/v1/courses/#{course_id}/sections")
+           sections = canvas_sections if canvas_sections.length > 1
+           groups = get_canvas("/api/v1/courses/#{course_id}/groups")
 
-            groups.each do |group|
+           groups.each do |group|
                 memberships = get_canvas("/api/v1/groups/#{group["id"]}/memberships") #check per_page
                 group_memberships[group["id"]] = memberships.collect {|m| m["user_id"]}
-            end
+           end
 
            return {:enrollments=>enrollments, :sections=>sections, :groups=>groups, :group_memberships=>group_memberships}
        end
