@@ -15,6 +15,7 @@ export default class Options extends React.Component {
     const options = this.props.choices.entrySeq().map(([key, value]) => {
       return (
         <InputBar
+          key={key}
           questionID={this.props.questionID}
           inputBarID={key}
           choices={this.props.choices}

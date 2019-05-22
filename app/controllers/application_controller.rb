@@ -1,12 +1,3 @@
-#var certOptions = {
-#  key: fs.readFileSync(path.resolve('build/cert/server.key')),
-#  cert: fs.readFileSync(path.resolve('build/cert/server.crt'))
-#}
-
-#var app = express()
-
-#var server = https.createServer(certOptions, app).listen(443)
-
 class ApplicationController < ActionController::Base
   ## Comes in here
       # session[:canvas_auth_id] = canvas_auth.session_code

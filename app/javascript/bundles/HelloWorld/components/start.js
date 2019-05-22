@@ -14,7 +14,7 @@ export default class Start extends React.Component {
     return (
       <div>
         <p>
-The Group Formation Tool is designed to help instructors create successful student teams by intentionally
+        The Group Formation Tool is designed to help instructors create successful student teams by intentionally
         forming them based on chosen criteria.
         </p>
         <p>

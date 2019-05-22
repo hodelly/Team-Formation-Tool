@@ -11,6 +11,8 @@ class Survey < ApplicationRecord
   validates :due_date, presence: true, numericality: true
   validates :is_published, inclusion: { in: [true, false] }
 
+  accepts_nested_attributes_for :survey_questions
+
   scope :for_instructor, (lambda do |sis_instructor_id|
     where(sis_instructor_id: sis_instructor_id) # TODO: what about a serialized id though
   end)
@@ -27,7 +29,6 @@ class Survey < ApplicationRecord
     s.is_published = params[:is_published] == 'true'
     s.description = params[:description] || ''
     s.note_from_instructor = params[:note_from_instructor] || ''
-    # s.survey_questions = params[:survey_questions] # handle creating another object
     s.group_size = params[:group_size].to_i
     s.due_date = Time.at(params[:due_date].to_f/1000)
     s

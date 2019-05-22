@@ -5,6 +5,8 @@ class Api::V1::SurveysController < ApplicationController
     # create survey, instructor only
     # TODO: add check to ensure only instructors have access to this end point
     @survey = Survey.create_from_params(survey_params)
+    @survey_questions = SurveyQuestion.create_from_params(params[:survey_questions])
+    @survey.survey_questions << @survey_questions
 
     respond_to do |format|
       if @survey.save
@@ -27,17 +29,18 @@ class Api::V1::SurveysController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
-    render json: @survey
+    respond_to do |format|
+      format.json { render json: @survey.to_json(:include => [:questions]), status: :ok}
+    end
   end
 
   private 
 
   # validate params
   def survey_params
-    params.require(:survey).permit(:course_id, :survey_questions,
-                                   :sis_instructor_id, :group_size, :due_date,
-                                   :title, :description, :note_from_instructor,
-                                   :is_published)
+    params.require(:survey).permit(:course_id, :sis_instructor_id, :group_size, 
+                                   :due_date, :title, :description, 
+                                   :note_from_instructor, :is_published)
   end
 
 end
