@@ -1,8 +1,9 @@
 // import PropTypes from 'prop-types';
 import React from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import QuestionsPage from './questionsPage';
 import Dashboard from './dashboard';
+import SurveyResults from './surveyResults';
+import SurveyCreate from './surveyCreate';
 import Start from './start';
 import GroupNumber from './GroupNumber';
 
@@ -20,61 +21,65 @@ export default class HelloWorld extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      // onQuestionsPage: false,
-      // onDashboard: false,
-      // onStart: true,
-      // onGroupNumber: false,
+
     };
   }
 
   render() {
-    return(
+    return (
       <Router>
         <Switch>
           <Route
-              exact
-              path='/'
-              render={(routeProps) => (
-                  <Dashboard
-                  {...routeProps}
-                  />
-              )}
+            exact
+            path="/"
+            render={routeProps => (
+              <Dashboard
+                {...routeProps}
+              />
+            )}
           />
           <Route
-              path='/dashboard'
-              render={(routeProps) => (
-                  <Dashboard
-                  {...routeProps}
-                  />
-              )}
+            path="/dashboard"
+            render={routeProps => (
+              <Dashboard
+                {...routeProps}
+              />
+            )}
           />
           <Route
-              path='/surveycreation'
-              render={(routeProps) => (
-                  <QuestionsPage
-                  {...routeProps}
-                  />
-              )}
+            path="/surveycreate"
+            render={routeProps => (
+              <SurveyCreate
+                {...routeProps}
+              />
+            )}
           />
           <Route
-              path='/groupsize'
-              render={(routeProps) => (
-                  <GroupNumber
-                  {...routeProps}
-                  />
-              )}
+            path="/surveyresults"
+            render={routeProps => (
+              <SurveyResults
+                {...routeProps}
+              />
+            )}
           />
           <Route
-              path='/start'
-              render={(routeProps) => (
-                  <Start
-                  {...routeProps}
-                  />
-              )}
+            path="/groupsize"
+            render={routeProps => (
+              <GroupNumber
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/start"
+            render={routeProps => (
+              <Start
+                {...routeProps}
+              />
+            )}
           />
         </Switch>
       </Router>
     );
-    return (null);
   }
 }

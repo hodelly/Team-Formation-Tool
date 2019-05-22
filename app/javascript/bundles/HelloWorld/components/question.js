@@ -7,7 +7,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import Options from './options';
 import Importance from './importance';
 import Distribution from './distribution';
-import QuestionHeader from './questionHeader';
+import QuestionTitle from './questionTitle';
 
 library.add(faTrash);
 
@@ -48,7 +48,7 @@ export default class Question extends React.Component {
 
     return (
       <div className="question">
-        <QuestionHeader title={this.props.title} questionID={this.props.questionID} updateQuestionTitle={this.props.updateQuestionTitle} />
+        <QuestionTitle title={this.props.title} questionID={this.props.questionID} updateQuestionTitle={this.props.updateQuestionTitle} />
         <select name="questionType" onChange={this.onSelectChange} value={this.props.type}>
           <option value="checkbox">Checkbox</option>
           <option value="radiogroup">Multiple Choice</option>
@@ -56,12 +56,10 @@ export default class Question extends React.Component {
           <option value="dropdown">Lookup</option>
         </select>
         {options}
-        <Importance importance={this.props.importance} updateImportance={this.props.updateImportance} />
-        <Distribution />
+        <Importance questionID={this.props.questionID} importance={this.props.importance} updateImportance={this.props.updateImportance} />
+        <Distribution questionID={this.props.questionID} similar={this.props.similar} updateDistribution={this.props.updateDistribution} />
         <button type="button" onClick={this.deleteQuestion}>
-          {' '}
           <FontAwesomeIcon icon="trash" />
-          {' '}
         </button>
       </div>
     );

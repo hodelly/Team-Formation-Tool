@@ -78,7 +78,7 @@ export default class Dashboard extends React.Component {
     return (
       <div>
         <div id="create_survey">
-          <Link to="/surveycreation"><button className="regularGreen" type="button"> Create Survey </button></Link>
+          <Link to="/surveycreate"><button className="regularGreen" type="button"> Create Survey </button></Link>
         </div>
         <h1>Ongoing Surveys:</h1>
         {this.renderSurvey()}
