@@ -29,7 +29,9 @@ class Api::V1::SurveysController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
-    render json: @survey
+    respond_to do |format|
+      format.json { render json: @survey.to_json(:include => [:questions]), status: :ok}
+    end
   end
 
   private 

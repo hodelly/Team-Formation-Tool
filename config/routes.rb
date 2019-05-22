@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :surveys
   namespace :api do
     namespace :v1 do
       resource :sis_user, only: :show
