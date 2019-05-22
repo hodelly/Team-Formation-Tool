@@ -11,6 +11,8 @@ class Survey < ApplicationRecord
   validates :due_date, presence: true, numericality: true
   validates :is_published, inclusion: { in: [true, false] }
 
+  accepts_nested_attributes_for :survey_questions
+
   scope :for_instructor, (lambda do |sis_instructor_id|
     where(sis_instructor_id: sis_instructor_id) # TODO: what about a serialized id though
   end)
@@ -18,13 +20,6 @@ class Survey < ApplicationRecord
   scope :for_course_id, (lambda do |course_id|
     where(course_id: course_id) 
   end)
-
-  def self.create_associated_survey_questions(questions)
-    puts questions
-    for question in questions
-      self.survey_questions.create_survey_question_and_question(question)
-    end
-  end
 
   def self.create_from_params(params)
     s = new
@@ -34,7 +29,6 @@ class Survey < ApplicationRecord
     s.is_published = params[:is_published] == 'true'
     s.description = params[:description] || ''
     s.note_from_instructor = params[:note_from_instructor] || ''
-    create_associated_survey_questions(params[:survey_questions])
     s.group_size = params[:group_size].to_i
     s.due_date = Time.at(params[:due_date].to_f/1000)
     s
