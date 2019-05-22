@@ -39,14 +39,7 @@ class Api::V1::SurveysController < ApplicationController
     params.require(:survey).permit(:course_id,
                                    :sis_instructor_id, :group_size, :due_date,
                                    :title, :description, :note_from_instructor,
-                                   :is_published, survey_questions: [
-                                     :question_type,
-                                     :weight,
-                                     :is_default,
-                                     :question_title,
-                                     :is_enabled,
-                                     :response_values => []
-                                   ])
+                                   :is_published)
   end
 
 end
