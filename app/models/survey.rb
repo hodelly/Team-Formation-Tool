@@ -2,14 +2,14 @@ class Survey < ApplicationRecord
   validates :course_id, presence: true, length: { maximum: 32 }
   validates :title, presence: true
   attribute :description 
-  attribute :note_from_instructor
   has_many :survey_questions
   has_many :questions, through: :survey_questions
-  validates :sis_instructor_id, presence: true # how to mark this as serialize ??
+  validates :sis_instructor_id, presence: true 
   serialize :sis_instructor_id, JSON
   validates :group_size, presence: true, numericality: { only_integer: true }
   validates :due_date, presence: true, numericality: true
   validates :is_published, inclusion: { in: [true, false] }
+  has_many :survey_responses
 
   accepts_nested_attributes_for :survey_questions
 
