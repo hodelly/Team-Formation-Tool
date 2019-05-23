@@ -8,7 +8,7 @@ class Api::V1::SurveyResponsesController < ApplicationController
     def index
       # render this specific student's survey responses (for all surveys)
       # currently for debugging
-      render json: 'hi'
+      render json: canvas_data
     end
   
     def show
