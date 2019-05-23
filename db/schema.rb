@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_22_032633) do
+ActiveRecord::Schema.define(version: 2019_05_23_001131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,8 +39,9 @@ ActiveRecord::Schema.define(version: 2019_05_22_032633) do
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_submitted"
+    t.bigint "survey_response_id"
     t.index ["survey_question_id"], name: "index_responses_on_survey_question_id"
+    t.index ["survey_response_id"], name: "index_responses_on_survey_response_id"
   end
 
   create_table "survey_questions", force: :cascade do |t|
@@ -56,6 +57,17 @@ ActiveRecord::Schema.define(version: 2019_05_22_032633) do
     t.index ["survey_id"], name: "index_survey_questions_on_survey_id"
   end
 
+  create_table "survey_responses", force: :cascade do |t|
+    t.bigint "survey_id"
+    t.bigint "survey_questions_id"
+    t.string "sis_user_id"
+    t.boolean "is_submitted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_survey_responses_on_survey_id"
+    t.index ["survey_questions_id"], name: "index_survey_responses_on_survey_questions_id"
+  end
+
   create_table "surveys", force: :cascade do |t|
     t.string "course_id"
     t.bigint "survey_questions_id"
@@ -67,9 +79,12 @@ ActiveRecord::Schema.define(version: 2019_05_22_032633) do
     t.string "title"
     t.boolean "is_published"
     t.string "description"
-    t.string "note_from_instructor"
+    t.bigint "survey_responses_id"
     t.index ["survey_questions_id"], name: "index_surveys_on_survey_questions_id"
+    t.index ["survey_responses_id"], name: "index_surveys_on_survey_responses_id"
   end
 
   add_foreign_key "questions", "survey_questions"
+  add_foreign_key "responses", "survey_responses"
+  add_foreign_key "surveys", "survey_responses", column: "survey_responses_id"
 end
