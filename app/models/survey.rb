@@ -28,7 +28,6 @@ class Survey < ApplicationRecord
     s.title = params[:title]
     s.is_published = params[:is_published] == 'true'
     s.description = params[:description] || ''
-    s.note_from_instructor = params[:note_from_instructor] || ''
     s.group_size = params[:group_size].to_i
     s.due_date = Time.at(params[:due_date].to_f/1000)
     s
