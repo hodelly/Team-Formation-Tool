@@ -1,15 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import { fetchSurveys } from '../actions';
+import axios from 'axios';
+import DonutChart from 'react-svg-donut-chart';
+
 
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      surveys: '',
     };
   }
 
+  componentDidMount(props) {
+    // fetchSurveys();
+    axios.get('http://localhost:3000/api/v1/surveys').then((response) => {
+      console.log(response.data);
+      this.setState({ surveys: response.data });
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
   renderSurvey = () => {
-    if (true) {
+    if (!this.state.surveys.length) {
       return (
         <div className="survey_box">
           <h1>You do not have any ongoing surveys!</h1>
@@ -20,10 +35,17 @@ export default class Dashboard extends React.Component {
       );
     } else {
       return (
-        <div className="survey_box">
-          <div className="surveyRow">
-            <p>Survey Title</p>
-            <p>Month, Day, Year</p>
+        <div className="ongoingsurvey_box">
+          <div className="dashboard_chart">
+            <DonutChart data={[{ stroke: '#245336', value: 50 }, { value: 50, stroke: '#c4c4c4' }]} />
+            <h1>{this.state.surveys[0].title}</h1>
+          </div>
+          <div className="dashboard_survey">
+            <p>16/32 Students have completed this survey.</p>
+            <div id="dashboard_buttons">
+              <button className="regularGreen" type="button"> View Results </button>
+              <button className="regularGreen" type="button"> Send Reminder </button>
+            </div>
           </div>
         </div>
       );

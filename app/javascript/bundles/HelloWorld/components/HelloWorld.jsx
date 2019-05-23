@@ -1,5 +1,6 @@
 // import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Dashboard from './dashboard';
 import SurveyResults from './surveyResults';
@@ -23,6 +24,13 @@ export default class HelloWorld extends React.Component {
     this.state = {
     };
   }
+  // useEffect(() => {
+  //   axios.get('/api/v1/surveys').then( (response) => {
+  //     console.log(response.data);
+  //   }).catch( error => {
+  //     console.log(error);
+  //   })
+  // }, []);
 
   render() {
     return (
