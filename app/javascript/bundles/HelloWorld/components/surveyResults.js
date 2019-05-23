@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 export default class surveyResults extends React.Component {
   constructor(props) {
@@ -10,12 +10,11 @@ export default class surveyResults extends React.Component {
   }
 
   componentDidMount(props) {
-    // axios.get(`http://localhost:3000/api/v1/surveys/${this.props.match.params.id}`).then((response) => {
-    //   console.log(response.data);
-    //   this.setState({ survey: response.data });
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
+    axios.get(`http://localhost:3000/api/v1/surveys/${this.props.match.params.id}`).then((response) => {
+      this.setState({ survey: response.data });
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
 
