@@ -50,6 +50,7 @@ export default class HelloWorld extends React.Component {
             render={routeProps => (
               <Dashboard
                 {...routeProps}
+                canvas={this.props}
               />
             )}
           />

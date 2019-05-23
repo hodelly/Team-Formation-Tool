@@ -28,20 +28,21 @@ export default class Dashboard extends React.Component {
       return (
         <div className="survey_box">
           <h1>You do not have any ongoing surveys!</h1>
-
           <h1>Click “Create Survey” to make your first survey for this class.</h1>
         </div>
 
       );
     } else {
+      const done = (5 / this.props.canvas.canvas_enrollments.length) * 100;
+      const notDone = 100 - done;
       return (
         <div className="ongoingsurvey_box">
           <div className="dashboard_chart">
-            <DonutChart data={[{ stroke: '#245336', value: 50 }, { value: 50, stroke: '#c4c4c4' }]} />
+            <DonutChart data={[{ stroke: '#245336', value: done }, { value: notDone, stroke: '#c4c4c4' }]} />
             <h1>{this.state.surveys[0].title}</h1>
           </div>
           <div className="dashboard_survey">
-            <p>16/32 Students have completed this survey.</p>
+            <p>5/{this.props.canvas.canvas_enrollments.length} Students have completed this survey.</p>
             <div id="dashboard_buttons">
               <button className="regularGreen" type="button"> View Results </button>
               <button className="regularGreen" type="button"> Send Reminder </button>
