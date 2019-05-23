@@ -7,9 +7,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Question from './question';
-import {
-  classScheduleQuestion, cantWorkWithQuestion, prefWorkingTimeQuestion, workingStylesQuestion, genderQuestion, ethnicityQuestion, athleticsQuestion, greekLifeQuestion,
-} from '../utils/standardQuestions';
 
 library.add(faChevronLeft);
 
@@ -19,18 +16,17 @@ export default class QuestionsPage extends React.Component {
     // create a question object
     const newQuestion = {
       type: 'checkbox',
-      name: '0',
-      title: 'Question Title',
+      name: '0', // is this the reason everything was getting checked at once? Hm..
+      title: 'questionTitle',
       isRequired: true,
       colCount: 4,
       choices: Map({ 0: 'choice1', 1: 'choice2', 2: 'choice3' }), // LEARNING: map stores the keys as strings when defining it over here. Uses keys to reference into the map!!!
       importance: 5,
-      similar: true,
     };
     // set State
     this.state = {
-      inPreview: false,
       questionID: 1,
+      inPreview: false,
       surveyjs: null,
       questionMap: Map(),
       questionType: newQuestion,
@@ -39,13 +35,9 @@ export default class QuestionsPage extends React.Component {
   }
 
   componentWillMount() {
-    // upon start, add all the bucket questions to the page
-    this.props.initialQuestionMap.forEach(this.addToMap);
-
-    // add 1 question
+    // upon start, add one question to the page
     this.setState(prevState => ({
-      questionMap: prevState.questionMap.set(prevState.id, prevState.questionType),
-      id: prevState + 1,
+      questionMap: prevState.questionMap.set(0, prevState.questionType),
     }));
 
     // give the survey a title
@@ -61,56 +53,10 @@ export default class QuestionsPage extends React.Component {
     this.setState({ surveyjs: surveyData });
   }
 
-  onComplete = (survey) => {
-  // Print on results into console on Complete
-    // console.log(`Survey Questions: ${JSON.stringify(survey)}`);
-    console.log(`Survey Results: ${JSON.stringify(survey.data)}`);
+  onComplete = (survey, options) => {
+  // Write survey results into database
+    console.log(`Survey results: ${JSON.stringify(survey.data)}`);
   }
-
-  addToMap = (value, key, map) => {
-    if (value && key === 'classSchedule') {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, classScheduleQuestion),
-        questionID: prevState.questionID + 1,
-      }));
-    } else if (value && key === 'cantWorkWith') {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, cantWorkWithQuestion),
-        questionID: prevState.questionID + 1,
-      }));
-    } else if (value && key === 'prefWorkingTime') {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, prefWorkingTimeQuestion),
-        questionID: prevState.questionID + 1,
-      }));
-    } else if (value && key === 'workingStyles') {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, workingStylesQuestion),
-        questionID: prevState.questionID + 1,
-      }));
-    } else if (value && key === 'ethnicity') {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, ethnicityQuestion),
-        questionID: prevState.questionID + 1,
-      }));
-    } else if (value && key === 'gender') {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, genderQuestion),
-        questionID: prevState.questionID + 1,
-      }));
-    } else if (value && key === 'athletics') {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, athleticsQuestion),
-        questionID: prevState.questionID + 1,
-      }));
-    } else if (value && key === 'greekLife') {
-      this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, greekLifeQuestion),
-        questionID: prevState.questionID + 1,
-      }));
-    }
-  }
-
 
   startPreview = () => {
     // surveyData blank slate
@@ -128,19 +74,30 @@ export default class QuestionsPage extends React.Component {
     for (let i = 0; i <= this.state.questionID; i += 1) {
       // LEARNING: 'NULL' is 'undefined' in React
       const question = this.state.questionMap.get(i);
-      const newQuestion = Object.assign({}, question); // KEY LEARNING! if modifying an object, want to create a copy of it first in react.
+      const newQuestion = Object.assign({}, question);
       let array = [];
       if (newQuestion !== undefined && newQuestion.choices !== undefined) {
         // create an array for choices
-        // LEARNING: whenever you can, try to use an automatic converted to an Array instead of using a forloop, saves a lot of potential bugs
         array = newQuestion.choices.valueSeq().toArray();
+        // let j;
+        // for (j = 0; j <= this.state.largestInputID; j += 1) {
+        //   if (newQuestion.choices.get(j.toString(10)) === undefined) {
+        //     console.log(`undefined for question ${i} bar ${j}\n`);
+        //   } else if (newQuestion.choices.get(j.toString(10)) !== undefined) {
+        //     // console.log(`${newQuestion.choices.get(j.toString())}\n`);
+        //     array[j] = newQuestion.choices.get(j.toString());
+        //   }
+        // }
       }
+      // console.log(`array: ${array}`);
       // change choices question item to an array
+      console.log(`ARRAY: ${array}`);
       newQuestion.choices = array;
       // put the new question into surveyData
       surveyData.pages[0].questions.push(newQuestion);
     }
     // update surveyjs
+    console.log(surveyData);
     this.setState({ surveyjs: surveyData });
 
     this.setState({
@@ -178,6 +135,12 @@ export default class QuestionsPage extends React.Component {
     this.setState(prevState => ({
       questionID: prevState.questionID + 1,
     }));
+
+
+    // this.setState(prevState => ({
+    //   questionMap: prevState.questionMap.set(prevState.questionID, prevState.questionType),
+    //   questionID: prevState.questionID + 1,
+    // }));
   }
 
   updateQuestionType = (questionID, type) => {
@@ -267,22 +230,8 @@ export default class QuestionsPage extends React.Component {
     }));
   }
 
-  updateDistribution = (questionID, value) => {
-    const oldQuestion = this.state.questionMap.get(questionID);
-    const question = Object.assign({}, oldQuestion);
-
-    // update it's slider value
-    question.similar = value;
-
-    // set the updated question as the question in state
-    this.setState(prevState => ({
-      questionMap: prevState.questionMap.set(questionID, question),
-    }));
-  }
-
   render() {
     // console.log(this.state.questionMap);
-    console.log(`${this.state.questionMap}`);
     const questions = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
       // console.log(`${questionObject.choices}`);
       return (
@@ -304,9 +253,6 @@ export default class QuestionsPage extends React.Component {
 
           importance={questionObject.importance}
           updateImportance={this.updateImportance}
-
-          similar={questionObject.similar}
-          updateDistribution={this.updateDistribution}
         />
       );
     });
@@ -324,9 +270,12 @@ export default class QuestionsPage extends React.Component {
     } else {
       return (
         <div>
-          <Link to="/dashboard">
-            <button className="goToDashboard" type="button"> <FontAwesomeIcon icon="chevron-left" /> Survey Dashboard </button>
-          </Link>
+          <button className="goToDashboard" type="button" onClick={this.props.goToDashboard}>
+            {' '}
+            <FontAwesomeIcon icon="chevron-left" />
+Survey Dashboard
+            {' '}
+          </button>
           <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
           <Link to="/groupsize"><button className="regularGreen" type="button"> Publish Survey </button></Link>
           {questions}

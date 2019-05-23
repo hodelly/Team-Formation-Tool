@@ -12,6 +12,8 @@ library.add(faChevronLeft);
 export default class SurveyCreate extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
+    console.log('on survey create');
     // initial questions
     this.state = {
       initialQuestionMap: Map({
