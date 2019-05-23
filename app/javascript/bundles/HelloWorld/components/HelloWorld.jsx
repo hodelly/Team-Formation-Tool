@@ -42,6 +42,7 @@ export default class HelloWorld extends React.Component {
             render={routeProps => (
               <Dashboard
                 {...routeProps}
+                canvas={this.props}
               />
             )}
           />
@@ -63,7 +64,7 @@ export default class HelloWorld extends React.Component {
             )}
           />
           <Route
-            path="/surveyresults"
+            path="/surveyresults/:id"
             render={routeProps => (
               <SurveyResults
                 {...routeProps}
