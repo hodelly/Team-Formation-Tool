@@ -9,6 +9,7 @@ class Survey < ApplicationRecord
   validates :group_size, presence: true, numericality: { only_integer: true }
   validates :due_date, presence: true, numericality: true
   validates :is_published, inclusion: { in: [true, false] }
+  has_many :survey_responses
 
   accepts_nested_attributes_for :survey_questions
 

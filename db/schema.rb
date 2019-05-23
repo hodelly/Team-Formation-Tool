@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_23_000643) do
+ActiveRecord::Schema.define(version: 2019_05_23_001131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,9 +79,12 @@ ActiveRecord::Schema.define(version: 2019_05_23_000643) do
     t.string "title"
     t.boolean "is_published"
     t.string "description"
+    t.bigint "survey_responses_id"
     t.index ["survey_questions_id"], name: "index_surveys_on_survey_questions_id"
+    t.index ["survey_responses_id"], name: "index_surveys_on_survey_responses_id"
   end
 
   add_foreign_key "questions", "survey_questions"
   add_foreign_key "responses", "survey_responses"
+  add_foreign_key "surveys", "survey_responses", column: "survey_responses_id"
 end

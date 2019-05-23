@@ -1,4 +1,4 @@
-class Response < ApplicationRecord
+class SurveyResponse < ApplicationRecord
     belongs_to :survey
     validates :sis_user_id, presence: true, length: { maximum: 32 }
     has_many :responses
