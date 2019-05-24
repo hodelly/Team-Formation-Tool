@@ -24,4 +24,12 @@ class ApplicationController < ActionController::Base
       redirect_to '/auth/cas'
     end
   end
+
+  def canvas_data
+    canvas = CanvasResolver.resolve(:canvas)
+    ## Question: This is null. Am I auppose to be able to get a value from this or should I be using the mocks?
+    course_id = 34590
+    # Also saying that canvas_bulk_hash doesnt exist but I am not sure why?
+    @canvas_data = canvas.canvas_bulk_hash(course_id)
+  end 
 end
