@@ -220,20 +220,16 @@ button:focus {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 196px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   text-align: center;
   margin:20px;
 }
 .ongoingsurvey_box {
-  background: rgba(225, 237, 230, 0.17);
-  border: 1px solid #E4E4E4;
-  box-sizing: border-box;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  padding:20px;
   margin:20px
 }
 
@@ -261,7 +257,9 @@ button:focus {
   margin-left: 50px;
   width: 100px;
 }
-
+.survey_box a {
+  text-decoration: none;
+}
 // GroupNumber page Styling
 .groupNumber {
   display: flex;

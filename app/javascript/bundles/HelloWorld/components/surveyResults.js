@@ -21,7 +21,7 @@ export default class surveyResults extends React.Component {
   render() {
     console.log(this.state.survey);
     return (
-      <div>survey results for {this.props.match.params.id}</div>
+      <div>survey results for {this.state.survey.id}</div>
     );
   }
 }
