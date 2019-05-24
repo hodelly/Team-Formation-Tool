@@ -13,6 +13,7 @@ class HelloWorldController < ApplicationController
     # Also saying that canvas_bulk_hash doesnt exist but I am not sure why?
     canvas_data = canvas.canvas_bulk_hash(course_id)
     enrollments = canvas_data[:enrollments]
+    canvas.make_new_group(course_id, canvas_data[:enrollments])
     @hello_world_props = { name: "Stranger", canvas_enrollments: enrollments }
   end
 end

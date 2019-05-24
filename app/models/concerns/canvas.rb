@@ -21,6 +21,54 @@ class CanvasClass
             records
         end
 
+      def make_new_group(courseid, enrollments)
+        path = "/api/v1/courses/#{courseid}/group_categories"
+        group_set  = @canvas.post(path, {'name' => 'morgan_test'})
+        groupset_id = group_set["id"]
+        split_into_groups(enrollments, groupset_id)
+        # add_people_to_one_group(enrollments, group_id)
+      end
+
+      def split_into_groups(enrollments, groupset_id)
+        totalEnrollment = enrollments.length
+        numGroups = 4
+
+        counter = 0
+        currentSpace = 0
+
+        while counter < numGroups do
+          groupEnrollment = []
+          path2 = "/api/v1/group_categories/#{groupset_id}/groups"
+          groupTitle = 'group'  + (counter+1).to_s
+          group  = @canvas.post(path2, {'name' => groupTitle})
+          group_id = group["id"]
+
+          while currentSpace < ((counter + 1) * (totalEnrollment/numGroups) + 1) do
+            if currentSpace < totalEnrollment
+              current_user = enrollments[currentSpace]
+              user_id = current_user["user_id"]
+              groupEnrollment.push(user_id)
+            end
+            currentSpace = currentSpace + 1
+          end
+          counter = counter + 1
+          add_people_to_one_group(groupEnrollment, group_id)
+
+        end
+
+      end
+
+      def add_people_to_one_group(enrollments, group_id)
+        totalEnrollment = enrollments.length
+        grouppath = "/api/v1/groups/#{group_id}/memberships"
+        counter =  0
+        while counter < totalEnrollment  do
+          user_id = enrollments[counter]
+          membermayble  = @canvas.post(grouppath, {'user_id' => user_id, 'group_id': group_id })
+          counter = counter + 1
+        end
+      end
+
       def canvas_bulk_hash(course_id)
            enrollments=[]
            sections=[]
