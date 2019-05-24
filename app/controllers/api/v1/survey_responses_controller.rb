@@ -17,7 +17,7 @@ class Api::V1::SurveyResponsesController < ApplicationController
     def index
       # render this specific student's survey responses (for all surveys)
       # currently for debugging
-      render json: canvas_data
+      render json: SurveyResponse.all.to_json(:include => [:responses])
     end
   
     def show
