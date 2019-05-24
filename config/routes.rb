@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resource :sis_user, only: :show
       resources :surveys, only: [:create, :destroy, :index, :show]
+      resources :survey_responses, only: [:create, :index, :show]
     end
   end
   get 'hello_world/index'
