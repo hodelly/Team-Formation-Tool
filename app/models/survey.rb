@@ -25,6 +25,20 @@ class Survey < ApplicationRecord
     survey_responses.size
   end
 
+  def as_json(options={})
+    if true # is_instructor? TODO: find out best practice for working with user type
+      super(:only => [:id, :course_id, :title, :description, :group_size, :due_date],
+            :methods => [:num_responses],
+            :include => [:questions, :survey_responses]
+      )
+    else
+      super(:only => [:course_id, :title, :description, :group_size, :due_date],
+            :methods => [:num_responses],
+            :include => [:questions]
+      )
+    end
+  end
+
   def self.create_from_params(params)
     s = new
     s.course_id = params[:course_id]
