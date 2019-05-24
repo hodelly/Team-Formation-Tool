@@ -73,7 +73,8 @@ input[type=title] {
 }
 
 
-// BUTTON STYLING
+/*************** BUTTON STYLING ***************/
+
 // remove blue outline around buttons
 input:focus,
 select:focus,
@@ -82,6 +83,7 @@ button:focus {
     outline: none;
 }
 
+// white button, green text
 .invertedGreen{
   background-color: #FFFFFF;
   padding: 5px 27px; // QUESTION: better way to do this so that both buttons same width?
@@ -91,6 +93,7 @@ button:focus {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+// green button, white text
 .regularGreen{
   background-color: #518063;
   border: none;
@@ -100,8 +103,25 @@ button:focus {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+// plain text
 .goToDashboard{
   border: none;
+}
+
+// plain white rounded button square
+// LEARNING: If you set box-sizing: border-box; on an element padding and border are included in the width and height <-- use this for boxes of same size but different amount of content inside
+.bucket {
+  box-sizing: border-box;
+  width: 150px;
+  height: 50px;
+  border: 1px solid #DEDEDE;
+  background: #FFFFFF;
+  margin: 20px;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  // WHY does the up down thing only happen when i add padding?
+  padding: 60px 0px;
 }
 
 .distributionSelected {
@@ -144,58 +164,6 @@ button:focus {
 }
 
 
-.regularGreen{
-  background-color: #518063;
-  border: none;
-  padding: 5px 20px;
-  border-radius: 10px;
-  color: #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin:10px;
-}
-
-.goToDashboard{
-  border: none;
-}
-
-.distributionSelected {
-  background: #FFFFFF;
-  border: 1px solid #DEDEDE;
-  box-sizing: border-box;
-  border-radius: 15px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 15px;
-  margin: 10px;
-  width: 25%;
-}
-
-.distributionDisselected {
-  background: rgba(222, 222, 222, 0.3);
-  border: 1px solid #DEDEDE;
-  box-sizing: border-box;
-  border-radius: 15px;
-  padding: 15px;
-  margin: 10px;
-  width: 25%;
-}
-
-
-.blueUser {
-  color: #181d27
-}
-.darkGreenUser {
-  color: #FFFFFF
-}
-
-.redText{
-  font-weight: bold;
-  color: #FF0000
-}
-
-.blueText{
-  font-weight: bold;
-  color: #0000FF
-}
 // #similar {
 //   position: element(#Range);
 //   transform: translateY(-100%);
@@ -222,21 +190,7 @@ button:focus {
   justify-content: center;
   height: 196px;
   text-align: center;
-  margin:20px;
 }
-.ongoingsurvey_box {
-  background: rgba(225, 237, 230, 0.17);
-  border: 1px solid #E4E4E4;
-  box-sizing: border-box;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding:20px;
-  margin:20px
-}
-
 .surveyRow {
   display: flex;
   flex-direction: row;
@@ -250,16 +204,6 @@ button:focus {
 }
 .surveyRow p {
   padding: 5px;
-}
-.dashboard_chart {
-  align-self:center;
-  height: 200px;
-  width: 200px;
-}
-.dashboard_chart h1 {
-  margin:-115px;
-  margin-left: 50px;
-  width: 100px;
 }
 
 // GroupNumber page Styling
