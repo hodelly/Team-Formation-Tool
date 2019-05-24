@@ -3,7 +3,6 @@ class SurveyQuestion < ApplicationRecord
   has_one :question
   validates :weight, presence: true, numericality: true
   has_many :responses
-  validates :is_enabled, inclusion: { in: [true, false] }
 
   accepts_nested_attributes_for :question
 
@@ -15,7 +14,6 @@ class SurveyQuestion < ApplicationRecord
                         is_default: params[:is_default] == 'true')
     sq.question = q
     sq.weight = params[:weight].to_f
-    sq.is_enabled = params[:is_enabled] == 'true'
     sq
   end
 
