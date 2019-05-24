@@ -1,0 +1,37 @@
+{
+    "enrollments": [{
+        "id": 1,
+        "course_id": 1,
+        "course_section_id": 1,
+        "enrollment_state": "active",
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "role_id": 1,
+        "user": {
+            "name": "Scott Shumway",
+            "id": "f0032yx",
+            "login_id": "f0032yx"
+        }
+    }, {
+        "id": 2,
+        "course_id": 1,
+        "course_section_id": 1,
+        "enrollment_state": "active",
+        "type": "StudentEnrollment",
+        "role": "StudentEnrollment",
+        "role_id": 1,
+        "user": {
+            "name": "Emily Dryden",
+            "id": "f0028pv",
+            "login_id": "f0028pv"
+        }
+    }],
+    "sections": [{
+        "id": 1,
+        "name": "Section A",
+        "course_id": 1,
+        "total_students": 1
+    }],
+    "groups": [],
+    "group_memberships": []
+}

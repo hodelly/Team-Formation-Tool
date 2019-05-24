@@ -1,8 +1,14 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import CreateSurvey from './CreateSurvey';
+// import PropTypes from 'prop-types';
+import React, {useEffect} from 'react';
+import axios from 'axios';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import Dashboard from './dashboard';
+import SurveyResults from './surveyResults';
+import SurveyCreate from './surveyCreate';
+import Start from './start';
+import GroupNumber from './GroupNumber';
 
-//The HelloWorld class used to have the starter code before and now it will be the basis of our code
+// The HelloWorld class used to have the starter code before and now it will be the basis of our code
 export default class HelloWorld extends React.Component {
   // static propTypes = {
   //   name: PropTypes.string.isRequired, // this is passed from the Rails view
@@ -11,22 +17,78 @@ export default class HelloWorld extends React.Component {
   /**
    * @param props - Comes from your rails view.
    */
+
   constructor(props) {
     super(props);
-    // How to set initial state in ES6 class syntax
-    // https://reactjs.org/docs/state-and-lifecycle.html#adding-local-state-to-a-class
-    this.state = { name: this.props.name };
+    console.log(props);
+    this.state = {
+    };
   }
+  // useEffect(() => {
+  //   axios.get('/api/v1/surveys').then( (response) => {
+  //     console.log(response.data);
+  //   }).catch( error => {
+  //     console.log(error);
+  //   })
+  // }, []);
 
   render() {
-    /*
-    Right now this is a "create survey component". We can add other things like review groups, finalize groups etc.
-    Create survey is really just for adding a new question right now
-    */ 
     return (
-      <div>
-        <CreateSurvey />
-      </div>
+      <Router>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={routeProps => (
+              <Dashboard
+                {...routeProps}
+                canvas={this.props}
+              />
+            )}
+          />
+          <Route
+            path="/dashboard"
+            render={routeProps => (
+              <Dashboard
+                {...routeProps}
+                canvas={this.props}
+              />
+            )}
+          />
+          <Route
+            path="/surveycreate"
+            render={routeProps => (
+              <SurveyCreate
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/surveyresults/:id"
+            render={routeProps => (
+              <SurveyResults
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/groupsize"
+            render={routeProps => (
+              <GroupNumber
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/start"
+            render={routeProps => (
+              <Start
+                {...routeProps}
+              />
+            )}
+          />
+        </Switch>
+      </Router>
     );
   }
 }
