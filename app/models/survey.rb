@@ -21,6 +21,10 @@ class Survey < ApplicationRecord
     where(course_id: course_id) 
   end)
 
+  def num_responses
+    survey_responses.size
+  end
+
   def self.create_from_params(params)
     s = new
     s.course_id = params[:course_id]

@@ -15,8 +15,7 @@ class Api::V1::SurveyResponsesController < ApplicationController
     end
   
     def index
-      # render this specific student's survey responses (for all surveys)
-      # currently for debugging
+      # what should this be?? swap it with the function underneath??
       render json: SurveyResponse.all.to_json(:include => [:responses])
     end
   
