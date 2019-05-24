@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
     # @current_sis_user ||= session[:netid] # TODO: Canvas capatibility
   end
 
+  def is_instructor?
+    true
+  end
+
   def require_authentication
     unless authenticated?
       session[:return_url] = request.url
