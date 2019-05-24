@@ -8,12 +8,10 @@ class Api::V1::SurveysController < ApplicationController
     @survey_questions = SurveyQuestion.create_from_params(params[:survey_questions])
     @survey.survey_questions << @survey_questions
 
-    respond_to do |format|
-      if @survey.save
-        format.json { render json: @survey, status: :created, location: @survey }
-      else
-        format.json { render json: @survey.errors, status: :unprocessable_entity }
-      end
+    if @survey.save
+      render json: @survey, status: :created 
+    else
+      render json: @survey.errors, status: :unprocessable_entity
     end
   end
 
@@ -29,9 +27,7 @@ class Api::V1::SurveysController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
-    respond_to do |format|
-      format.json { render json: @survey.to_json(:include => [:questions]), status: :ok}
-    end
+    render json: @survey.to_json(:include => [:questions]), status: :ok
   end
 
   private 

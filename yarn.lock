@@ -3740,6 +3740,11 @@ hyphenate-style-name@^1.0.2:
   resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.3.tgz#097bb7fa0b8f1a9cf0bd5c734cf95899981a9b48"
   integrity sha512-EcuixamT82oplpoJ2XU4pDtKGWQ7b00CD9f1ug9IaQ3p1bkHMiKCZ9ut9QDI6qsa6cpUuB+A/I+zLtdNK4n2DQ==
 
+i@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/i/-/i-0.3.6.tgz#d96c92732076f072711b6b10fd7d4f65ad8ee23d"
+  integrity sha1-2WyScyB28HJxG2sQ/X1PZa2O4j0=
+
 iconv-lite@0.4.24, iconv-lite@^0.4.24, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -6450,6 +6455,13 @@ react-router@5.0.0:
     react-is "^16.6.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
+
+react-svg-donut-chart@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-svg-donut-chart/-/react-svg-donut-chart-1.1.0.tgz#b9bef6efda70f0e96b3383bb68f7c34c4490ec9f"
+  integrity sha512-8wSTAahM7YDXovXzVLvoRJHmUJ/TkLNI/pIeKi+xgNFucq6U5VfaOTGxf8SFn/yN+OHSyMbE0YlQYyd7IWiLGQ==
+  dependencies:
+    prop-types "^15.6.0"
 
 react-transition-group@^2.2.1:
   version "2.9.0"

@@ -2,14 +2,15 @@ import axios from 'axios';
 
 const ROOT_URL = 'http://localhost:3000';
 
-export function fetchSurvey() {
-  return (dispatch) => {
-    axios.get(`${ROOT_URL}/api/v1/surveys`).then((response) => {
-      console.log(response.data);
-    }).catch((error) => {
-      console.log(error);
-    });
-  };
+export function fetchSurveys() {
+  // return (dispatch) => {
+  console.log('in fetch surveys');
+  axios.get(`${ROOT_URL}/api/v1/surveys`).then((response) => {
+    console.log(response.data);
+  }).catch((error) => {
+    console.log(error);
+  });
+  // };
 }
 
 export function postSurvey(survey) {

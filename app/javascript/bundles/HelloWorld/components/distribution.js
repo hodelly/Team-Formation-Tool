@@ -7,18 +7,22 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 library.add(faUser);
 
 
-export default class Distribution extends React.Component {
+export default class Importance extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = { similar: true };
   }
 
   setSimilar = () => {
-    this.props.updateDistribution(this.props.questionID, true);
+    this.setState(prevState => ({
+      similar: true,
+    }));
   };
 
   setDissimilar = () => {
-    this.props.updateDistribution(this.props.questionID, false);
+    this.setState(prevState => ({
+      similar: false,
+    }));
   };
 
 
@@ -29,7 +33,9 @@ export default class Distribution extends React.Component {
         <h6 className="q_subtext"> How are students distributed accross groups? </h6>
         <button type="button" onClick={this.setSimilar} className="distributionSelected">
         Students within groups are more
+          {' '}
           <span className="blueText">similar</span>
+          {' '}
           <FontAwesomeIcon icon="user" />
           <FontAwesomeIcon icon="user" />
           <FontAwesomeIcon icon="user" />
@@ -37,8 +43,10 @@ export default class Distribution extends React.Component {
           <FontAwesomeIcon icon="user" />
         </button>
         <button type="button" onClick={this.setDissimilar} className="distributionDisselected">
-        Students within groups are more
+          {' '}
+Students within groups are more
           <span className="redText">dissimilar</span>
+          {' '}
           <FontAwesomeIcon icon="user" color="#FFFFFF" />
           <FontAwesomeIcon id="darkGreenUser" icon="user" />
           <FontAwesomeIcon id="medGreenUser" icon="user" />

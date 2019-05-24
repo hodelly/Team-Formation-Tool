@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Map } from 'immutable';
 import { Link } from 'react-router-dom';
@@ -336,7 +337,3 @@ export default class QuestionsPage extends React.Component {
     }
   }
 }
-
-// {this.state.questionMap.forEach(this.generateQuestion)}
-
-// {this.state.questions.map(x => (<Question ={x} addQuestion={this.addQuestion} deleteQuestion={this.deleteQuestion} key={x} />))}

@@ -1,5 +1,6 @@
 // import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Dashboard from './dashboard';
 import SurveyResults from './surveyResults';
@@ -21,9 +22,15 @@ export default class HelloWorld extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-
     };
   }
+  // useEffect(() => {
+  //   axios.get('/api/v1/surveys').then( (response) => {
+  //     console.log(response.data);
+  //   }).catch( error => {
+  //     console.log(error);
+  //   })
+  // }, []);
 
   render() {
     return (
@@ -35,6 +42,7 @@ export default class HelloWorld extends React.Component {
             render={routeProps => (
               <Dashboard
                 {...routeProps}
+                canvas={this.props}
               />
             )}
           />
@@ -43,6 +51,7 @@ export default class HelloWorld extends React.Component {
             render={routeProps => (
               <Dashboard
                 {...routeProps}
+                canvas={this.props}
               />
             )}
           />
@@ -55,7 +64,7 @@ export default class HelloWorld extends React.Component {
             )}
           />
           <Route
-            path="/surveyresults"
+            path="/surveyresults/:id"
             render={routeProps => (
               <SurveyResults
                 {...routeProps}
