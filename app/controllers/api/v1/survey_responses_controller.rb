@@ -3,16 +3,14 @@ class Api::V1::SurveyResponsesController < ApplicationController
   
     def create
       # submit a survey response (should only be used by students)
-      @sr = SurveyResponse.create_from_params(params[:responses])
+      @sr = SurveyResponse.create_from_params(params)
       @survey = Survey.find(params[:survey_id])
       @survey.survey_responses << @sr
 
-      respond_to do |format|
-        if @sr.save
-          format.json { render json: @sr, status: :created }
-        else
-          format.json { render json: @sr.errors, status: :unprocessable_entity }
-        end
+      if @sr.save
+        render json: @sr, status: :created 
+      else
+        render json: @sr.errors, status: :unprocessable_entity 
       end
     end
   
@@ -25,8 +23,6 @@ class Api::V1::SurveyResponsesController < ApplicationController
     def show
       @survey = Survey.find(params[:survey_id]) # should it be in the link?
       @survey_response = @survey.survey_response.fine(curr_sis_user)
-      respond_to do |format|
-        format.json { render json: @survey_response.to_json(:include => [:responses]), status: :ok}
-      end
+      render json: @survey_response.to_json(:include => [:responses]), status: :ok
     end
   end
