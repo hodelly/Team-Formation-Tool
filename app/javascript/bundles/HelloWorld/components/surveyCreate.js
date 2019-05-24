@@ -17,9 +17,12 @@ export default class SurveyCreate extends React.Component {
     // initial questions
     this.state = {
       initialQuestionMap: Map({
-        classSchedule: false, cantWorkWith: false, prefWorkingTime: false, workingStyles: false, ethnicity: true, gender: true, athletics: false, greekLife: false,
+        classSchedule: false, cantWorkWith: false, prefWorkingTime: false, workingStyle: false, ethnicity: true, gender: true, athletics: false, greekLife: false,
       }),
       preSelection: true,
+      surveyTitle: '',
+      surveyDescription: '',
+      surveyDueDate: '',
     };
   }
 
@@ -45,7 +48,9 @@ export default class SurveyCreate extends React.Component {
     }
     // once continue button clicked, display the Questions Page
     return (
-      <QuestionsPage initialQuestionMap={this.state.initialQuestionMap} />
+      <div>
+        <QuestionsPage initialQuestionMap={this.state.initialQuestionMap} surveyTitle={this.state.surveyTitle} surveyDescription={this.state.surveyDescription} surveyDueDate={this.state.surveyDueDate} />
+      </div>
     );
   }
 }

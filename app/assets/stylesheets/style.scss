@@ -8,7 +8,21 @@
 
 }
 
+.body{
+  margin: 10px;
+}
 
+.navBar{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #DEDEDE;
+  background: #FFFFFF;
+}
+
+.pageBody{
+  margin: 25px;
+  background: #E5E5E5;
+}
 
 // to ensure bar are just lines
 input[type=options] {
@@ -26,29 +40,6 @@ input[type=title] {
     font-size: 16px;
     width: 300px;
 }
-
-// BOX STYLING
-.question {
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background: #FFFFFF;
-  border: 1px solid #EBEBEB;
-  box-sizing: border-box;
-  border-radius: 15px;
-  padding: 30px;
-  width: 75%;
-}
-
-.q_header{
-  font-size: 14px;
-  margin-bottom: 0px;
-}
-
-.q_subtext{
-  margin: 0;
-  margin-bottom: 10px;
-  font-weight: normal;
-}
-
 
 // BOX STYLING
 .question {
@@ -110,10 +101,21 @@ button:focus {
 
 // plain white rounded button square
 // LEARNING: If you set box-sizing: border-box; on an element padding and border are included in the width and height <-- use this for boxes of same size but different amount of content inside
-.bucket {
+
+.allBuckets{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.oneBucket {
   box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+
   width: 150px;
-  height: 50px;
+  height: 150px;
   border: 1px solid #DEDEDE;
   background: #FFFFFF;
   margin: 20px;
@@ -121,36 +123,23 @@ button:focus {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   // WHY does the up down thing only happen when i add padding?
-  padding: 60px 0px;
+  padding: 60px 10px;
 }
 
-.distributionSelected {
+// .details {
+//   align-self: bottom;
+// }
+
+.distributionButton {
   background: #FFFFFF;
-  border: 1px solid #DEDEDE;
   box-sizing: border-box;
   border-radius: 15px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 15px;
   margin: 10px;
-  width: 25%;
-}
-
-.distributionDisselected {
-  background: rgba(222, 222, 222, 0.3);
-  border: 1px solid #DEDEDE;
-  box-sizing: border-box;
-  border-radius: 15px;
-  padding: 15px;
-  margin: 10px;
-  width: 25%;
-}
-
-
-.blueUser {
-  color: #181d27
-}
-.darkGreenUser {
-  color: #FFFFFF
+  // QUESTION: how do i improve this so that's it's resizable with page?
+  width: 150px;
+  height: 150px;
 }
 
 .redText{
@@ -163,16 +152,10 @@ button:focus {
   color: #0000FF
 }
 
-
-// #similar {
-//   position: element(#Range);
-//   transform: translateY(-100%);
-// }
-//
-// #dissimilar {
-//   position: element(#Range);
-//   right: 100px;
-// }
+.italics{
+  font-weight: lighter;
+  text-transform: lowercase;
+}
 
 // Dashboard STYLING
 #create_survey {
@@ -234,23 +217,152 @@ button:focus {
 .group_number_warning p {
   padding-left: 20px;
   padding-right: 20px;
-
 }
 
 /****** style slider ******/
+input[type=range] {
+  height: 25px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 100%;
+}
 input[type=range]:focus {
   outline: none;
 }
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
-  height: 14px;
+  height: 19px;
   cursor: pointer;
   animate: 0.2s;
-  // box-shadow: 1px 1px 1px #50555C;
+  box-shadow: 0px 0px 0px #50555C;
   background: #DEDEDE;
   border-radius: 14px;
   border: 0px solid #000000;
 }
 input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 19px;
+  width: 19px;
+  border-radius: 50px;
   background: #518063;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: 0px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #DEDEDE;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 19px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #50555C;
+  background: #DEDEDE;
+  border-radius: 14px;
+  border: 0px solid #000000;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 19px;
+  width: 19px;
+  border-radius: 50px;
+  background: #518063;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 19px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #DEDEDE;
+  border: 0px solid #000000;
+  border-radius: 28px;
+  box-shadow: 0px 0px 0px #50555C;
+}
+input[type=range]::-ms-fill-upper {
+  background: #DEDEDE;
+  border: 0px solid #000000;
+  border-radius: 28px;
+  box-shadow: 0px 0px 0px #50555C;
+}
+input[type=range]::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 0px #000000;
+  border: 0px solid #000000;
+  height: 19px;
+  width: 19px;
+  border-radius: 50px;
+  background: #518063;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #DEDEDE;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #DEDEDE;
+}
+
+.priorityBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.questionHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/********* select-css ********/
+.select-css {
+    display: block;
+    font-weight: 700;
+    color: #444;
+    padding: .6em 1.4em .5em .8em;
+    width: 18%;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid #aaa;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+    border-radius: .5em;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+      linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+}
+.select-css::-ms-expand {
+    display: none;
+}
+// .select-css:focus {
+//     border-color: #aaa;
+//     box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+//     box-shadow: 0 0 0 3px -moz-mac-focusring;
+//     color: #222;
+//     outline: none;
+// }
+.select-css option {
+    font-weight:normal;
+}
+
+.fontawesomeIcons{
+  color: #C4C4C4;
+  border: none;
+}
+
+.heart {
+  color: red;
 }

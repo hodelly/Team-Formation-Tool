@@ -8,8 +8,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import Question from './question';
+import SurveyHeader from './surveyHeader';
 import {
-  classScheduleQuestion, cantWorkWithQuestion, prefWorkingTimeQuestion, workingStylesQuestion, genderQuestion, ethnicityQuestion, athleticsQuestion, greekLifeQuestion,
+  classScheduleQuestion, cantWorkWithQuestion, prefWorkingTimeQuestion, workingStyleQuestion, genderQuestion, ethnicityQuestion, athleticsQuestion, greekLifeQuestion,
 } from '../utils/standardQuestions';
 
 library.add(faChevronLeft);
@@ -63,7 +64,7 @@ export default class QuestionsPage extends React.Component {
   }
 
   onComplete = (survey) => {
-  // Print on results into console on Complete
+    // Print on results into console on Complete
     // console.log(`Survey Questions: ${JSON.stringify(survey)}`);
     console.log(`Survey Results: ${JSON.stringify(survey.data)}`);
   }
@@ -84,9 +85,9 @@ export default class QuestionsPage extends React.Component {
         questionMap: prevState.questionMap.set(prevState.questionID, prefWorkingTimeQuestion),
         questionID: prevState.questionID + 1,
       }));
-    } else if (value && key === 'workingStyles') {
+    } else if (value && key === 'workingStyle') {
       this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, workingStylesQuestion),
+        questionMap: prevState.questionMap.set(prevState.questionID, workingStyleQuestion),
         questionID: prevState.questionID + 1,
       }));
     } else if (value && key === 'ethnicity') {
@@ -314,6 +315,7 @@ export default class QuestionsPage extends React.Component {
 
 
     if (this.state.inPreview) {
+      console.log(`${this.state.questionMap}`);
       return (
         <div>
           <script src="https://surveyjs.azureedge.net/1.0.79/survey.react.min.js" />
@@ -330,6 +332,7 @@ export default class QuestionsPage extends React.Component {
           </Link>
           <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
           <Link to="/groupsize"><button className="regularGreen" type="button"> Publish Survey </button></Link>
+          <SurveyHeader surveyTitle={this.props.surveyTitle} surveyDescription={this.props.surveyDescription} surveyDueDate={this.props.surveyDueDate} />
           {questions}
           <button type="button" onClick={this.addQuestion}> Add Question </button>
         </div>
