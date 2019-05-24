@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 // icons
@@ -81,7 +80,7 @@ class SimpleModal extends React.Component {
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
-            <Button type="button" onClick={this.handleClose}> <FontAwesomeIcon icon="times" /> </Button>
+            <Button className="xOut" type="button" onClick={this.handleClose}> <FontAwesomeIcon icon="times" /> </Button>
             <img src={questionImagePath} width="100%" height="undefined" alt={questionImagePath} />
           </div>
         </Modal>

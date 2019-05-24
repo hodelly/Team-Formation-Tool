@@ -37,10 +37,10 @@ export default class PreSelection extends React.Component {
       const questionImagePath = `${key}Image`;
       // create buttons
       if (clicked) {
-        return (<button className="oneBucket" type="button" style={{ border: '4px solid #518063' }} onClick={() => { this.props.handleClick(key); }}> {questionTitle} <SimpleModal questionImagePath={questionImagePath} /> </button>);
+        return (<div className="oneBucketDiv"> <button type="button" style={{ border: '4px solid #518063' }} onClick={() => { this.props.handleClick(key); }}> <div className="bucketText"> {questionTitle} </div> <SimpleModal questionImagePath={questionImagePath} /> </button> </div>);
       }
       // else
-      return (<button className="oneBucket" type="button" style={{ border: '1px solid #DEDEDE' }} onClick={() => { this.props.handleClick(key); }}> {questionTitle} <SimpleModal questionImagePath={questionImagePath} /> </button>);
+      return (<div className="oneBucketDiv"> <button type="button" style={{ border: '1px solid #DEDEDE' }} onClick={() => { this.props.handleClick(key); }}> <div className="bucketText"> {questionTitle} </div> <SimpleModal questionImagePath={questionImagePath} /> </button> </div>);
     });
 
     return (
