@@ -276,3 +276,31 @@ button:focus {
   padding-right: 20px;
 
 }
+//RESULTS Styling
+#results_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#results_toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+#results_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#results_description {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
