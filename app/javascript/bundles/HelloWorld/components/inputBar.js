@@ -39,10 +39,18 @@ export default class inputBar extends React.Component {
     return (
       <div>
         <FontAwesomeIcon icon={['far', 'circle']} />
-        {' '}
-        <input autoFocus type="options" value={this.props.choices.get(this.props.inputBarID)} onChange={this.onInputChange} onKeyDown={this.onKeyDown} onFocus={this.handleFocus} />
-        <button type="button" onClick={this.handleDelete}>
-          <FontAwesomeIcon icon="times" />
+        <input
+          autoFocus
+          type="options"
+          cols="40"
+          rows="5"
+          value={this.props.choices.get(this.props.inputBarID)}
+          onChange={this.onInputChange}
+          onKeyDown={this.onKeyDown}
+          onFocus={this.handleFocus}
+        />
+        <button className="xOut" type="button" onClick={this.handleDelete}>
+          <FontAwesomeIcon style={{ color: '#AEAEAF' }} icon="times" />
         </button>
       </div>
     );

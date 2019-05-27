@@ -36,9 +36,9 @@ export const ethnicityQuestion = {
   similar: true,
 };
 
-export const workingStylesQuestion = {
+export const workingStyleQuestion = {
   type: 'radiogroup',
-  name: 'workingStyles',
+  name: 'workingStyle',
   title: 'How would you describe your teamwork or working style?',
   isRequired: true,
   colCount: 4,
