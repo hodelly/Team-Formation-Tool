@@ -72,8 +72,9 @@ export default class QuestionsPage extends React.Component {
 
   addToMap = (value, key, map) => {
     if (value && key === 'classSchedule') {
+      const newQuestion = Object.assign({}, classScheduleQuestion);
       this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, classScheduleQuestion),
+        questionMap: prevState.questionMap.set(prevState.questionID, newQuestion),
         questionID: prevState.questionID + 1,
       }));
     } else if (value && key === 'cantWorkWith') {
@@ -324,7 +325,6 @@ export default class QuestionsPage extends React.Component {
     });
 
     if (this.state.inPreview) {
-      console.log(`${this.state.questionMap}`);
       return (
         <div>
           <script src="https://surveyjs.azureedge.net/1.0.79/survey.react.min.js" />
@@ -336,16 +336,24 @@ export default class QuestionsPage extends React.Component {
     } else {
       return (
         <div>
-          <Link to="/dashboard">
-            <button className="goToDashboard" type="button"> <FontAwesomeIcon icon="chevron-left" /> Survey Dashboard </button>
-          </Link>
-          <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
-          <Link to="/groupsize"><button onClick={this.getQuestionMapAsApiObject} className="regularGreen" type="button"> Publish Survey </button></Link>
-          <SurveyHeader surveyTitle={this.props.surveyTitle} surveyDescription={this.props.surveyDescription} surveyDueDate={this.props.surveyDueDate} />
-          {questions}
-          <button className="addQuestion" type="button" onClick={this.addQuestion}> <FontAwesomeIcon icon="plus-circle" /> Question </button>
-          <div className="questionNavBar">
-            {questionNavBar}
+          <div className="navBar">
+            <Link to="/dashboard">
+              <button className="goToDashboard" type="button"> <FontAwesomeIcon icon="chevron-left" /> Survey Dashboard </button>
+            </Link>
+            <div className="buttonGroup">
+              <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
+              <Link to="/groupsize"><button onClick={this.getQuestionMapAsApiObject} className="regularGreen" type="button"> Publish Survey </button></Link>
+            </div>
+          </div>
+          <div className="pageBody">
+            <SurveyHeader surveyTitle={this.props.surveyTitle} surveyDescription={this.props.surveyDescription} surveyDueDate={this.props.surveyDueDate} />
+            <div className="questionNavBarAndAddQuestion">
+              <button className="addQuestion" type="button" onClick={this.addQuestion}> <FontAwesomeIcon icon="plus-circle" /> Question </button>
+              <div className="questionNavBar">
+                {questionNavBar}
+              </div>
+            </div>
+            {questions}
           </div>
         </div>
       );

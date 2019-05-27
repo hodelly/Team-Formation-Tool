@@ -25,34 +25,39 @@ export default class PreSelection extends React.Component {
       let questionTitle = 'invalid question';
       // TO DO: should be a better way than to manually check all the question. Standard Question Array?
       // set title
-      if (key === 'gender') questionTitle = genderQuestion.title;
-      if (key === 'ethnicity') questionTitle = ethnicityQuestion.title;
-      if (key === 'workingStyle') questionTitle = workingStyleQuestion.title;
-      if (key === 'prefWorkingTime') questionTitle = prefWorkingTimeQuestion.title;
-      if (key === 'cantWorkWith') questionTitle = cantWorkWithQuestion.title;
-      if (key === 'classSchedule') questionTitle = classScheduleQuestion.title;
-      if (key === 'athletics') questionTitle = athleticsQuestion.title;
-      if (key === 'greekLife') questionTitle = greekLifeQuestion.title;
+      if (key === 'gender') questionTitle = 'Gender';
+      if (key === 'ethnicity') questionTitle = 'Ethnicity';
+      if (key === 'workingStyle') questionTitle = 'Working Style';
+      if (key === 'prefWorkingTime') questionTitle = 'Preferred Working Time';
+      if (key === 'cantWorkWith') questionTitle = 'Teammate Preference';
+      if (key === 'classSchedule') questionTitle = 'Class Schedule';
+      if (key === 'athletics') questionTitle = 'Athletics';
+      if (key === 'greekLife') questionTitle = 'Greek Affiliation';
 
       const questionImagePath = `${key}Image`;
       // create buttons
       if (clicked) {
-        return (<div className="oneBucketDiv"> <button type="button" style={{ border: '4px solid #518063' }} onClick={() => { this.props.handleClick(key); }}> <div className="bucketText"> {questionTitle} </div> <SimpleModal questionImagePath={questionImagePath} /> </button> </div>);
+        return (
+          <button className="oneBucketDiv" type="button" style={{ border: '4px solid #518063' }} onClick={() => { this.props.handleClick(key); }}>
+            <div className="bucketText"> {questionTitle} </div>
+            <SimpleModal questionImagePath={questionImagePath} />
+          </button>
+        );
       }
       // else
-      return (<div className="oneBucketDiv"> <button type="button" style={{ border: '1px solid #DEDEDE' }} onClick={() => { this.props.handleClick(key); }}> <div className="bucketText"> {questionTitle} </div> <SimpleModal questionImagePath={questionImagePath} /> </button> </div>);
+      return (<button className="oneBucketDiv" type="button" style={{ border: '1px solid #DEDEDE' }} onClick={() => { this.props.handleClick(key); }}> <div className="bucketText"> {questionTitle} </div> <SimpleModal questionImagePath={questionImagePath} /> </button>);
     });
 
     return (
       <div>
         <div className="navBar">
           <Link to="/dashboard">
-            <button className="goToDashboard" type="button"> <FontAwesomeIcon icon="chevron-left" /> Survey Dashboard </button>
+            <button className="goToDashboard" type="button"> <FontAwesomeIcon style={{ background: 'white' }} icon="chevron-left" /> Survey Dashboard </button>
           </Link>
           <button className="regularGreen" type="button" onClick={this.props.handleContinue}> Continue </button>
         </div>
         <div className="pageBody">
-          <h1> Question Bucket </h1>
+          <h7 style={{ fontSize: '17px' }}> Question Bucket </h7>
           <p> Before you begin, you can select pre-made questions that the Team Formation Tool Store in its bucket. <br /> <br />
             1. Click on the tile to add it to your survey. <br />
             2. Click on a highlighted tile to remove it from your survey. <br />

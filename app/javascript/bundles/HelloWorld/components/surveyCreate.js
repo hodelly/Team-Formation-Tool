@@ -1,5 +1,6 @@
 import React from 'react';
 import { Map } from 'immutable';
+import axios from 'axios';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -61,7 +62,8 @@ export default class SurveyCreate extends React.Component {
     //   const response_values = question.choices.toIndexedSeq().toArray();
     //
     //   // is default
-    //   // ???
+    //   // const is_default = false;
+    //   // make all the bucket one's true, non-bucket one's false
     //
     //   // question title
     //   const question_title = question.title;
@@ -102,9 +104,18 @@ export default class SurveyCreate extends React.Component {
     // };
   }
 
+  createSurvey = (survey) => {
+    axios.post('http://localhost:3000/api/v1/surveys', survey).then((response) => {
+      console.log(response.data);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
 
   render() {
     // if continue button not clicked display buckets
+    console.log(this.props.canvas);
     if (this.state.preSelection) {
       return (
         <PreSelection initialQuestionMap={this.state.initialQuestionMap} handleContinue={this.handleContinue} handleClick={this.handleClick} />

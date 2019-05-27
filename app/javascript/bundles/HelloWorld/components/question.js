@@ -59,19 +59,19 @@ export default class Question extends React.Component {
           </select>
         </div>
         {options}
-        <Importance importance={this.props.importance} updateImportance={this.props.updateImportance} />
+        <hr />
         <Distribution />
-        <span className="fontawesomeIcons"> <button type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon style={{ color: '#C4C4C4' }} icon="trash" /> </button> </span>
+        <hr />
+        <Importance importance={this.props.importance} updateImportance={this.props.updateImportance} />
+        <hr />
+        <span className="fontawesomeIcons"> <button className="trash" type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon style={{ color: '#C4C4C4' }} icon="trash" /> </button> </span>
       </div>
     );
   }
 }
 
-// <img src={icons} alt="failed" />
-// <img src={icons} alt="failed" width="100" height="50" />
-
-
-// <span className="fontawesomeIcons"> <button type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon icon="trash" /> </button> </span>;
 
 // lEARNING: can print props
 // console.log(this.props);
+// learning: how to have images:
+// <img src={icons} alt="failed" width="100" height="50" />
