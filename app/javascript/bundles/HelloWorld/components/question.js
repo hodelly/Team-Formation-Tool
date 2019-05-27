@@ -4,6 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 // components
+import { FaHeart } from 'react-icons/fa';
 import Options from './options';
 import Importance from './importance';
 import Distribution from './distribution';
@@ -48,25 +49,29 @@ export default class Question extends React.Component {
 
     return (
       <div className="question">
-        <QuestionHeader title={this.props.title} questionID={this.props.questionID} updateQuestionTitle={this.props.updateQuestionTitle} />
-        <select name="questionType" onChange={this.onSelectChange} value={this.props.type}>
-          <option value="checkbox">Checkbox</option>
-          <option value="radiogroup">Multiple Choice</option>
-          <option value="comment">Short Answer</option>
-          <option value="dropdown">Lookup</option>
-        </select>
+        <div className="questionHeader">
+          <QuestionHeader title={this.props.title} questionID={this.props.questionID} updateQuestionTitle={this.props.updateQuestionTitle} />
+          <select className="select-css" name="questionType" onChange={this.onSelectChange} value={this.props.type}>
+            <option value="checkbox">Checkbox</option>
+            <option value="radiogroup">Multiple Choice</option>
+            <option value="comment">Short Answer</option>
+            <option value="dropdown">Lookup</option>
+          </select>
+        </div>
         {options}
-        <Importance importance={this.props.importance} updateImportance={this.props.updateImportance} />
+        <hr />
         <Distribution />
-        <button type="button" onClick={this.deleteQuestion}>
-          {' '}
-          <FontAwesomeIcon icon="trash" />
-          {' '}
-        </button>
+        <hr />
+        <Importance importance={this.props.importance} updateImportance={this.props.updateImportance} />
+        <hr />
+        <span className="fontawesomeIcons"> <button className="trash" type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon style={{ color: '#C4C4C4' }} icon="trash" /> </button> </span>
       </div>
     );
   }
 }
 
+
 // lEARNING: can print props
 // console.log(this.props);
+// learning: how to have images:
+// <img src={icons} alt="failed" width="100" height="50" />

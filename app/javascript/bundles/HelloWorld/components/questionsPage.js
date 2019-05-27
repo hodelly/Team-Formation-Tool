@@ -6,13 +6,15 @@ import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faPlusCircle, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import Question from './question';
+import SurveyHeader from './surveyHeader';
 import {
-  classScheduleQuestion, cantWorkWithQuestion, prefWorkingTimeQuestion, workingStylesQuestion, genderQuestion, ethnicityQuestion, athleticsQuestion, greekLifeQuestion,
+  classScheduleQuestion, cantWorkWithQuestion, prefWorkingTimeQuestion, workingStyleQuestion, genderQuestion, ethnicityQuestion, athleticsQuestion, greekLifeQuestion,
 } from '../utils/standardQuestions';
 
-library.add(faChevronLeft);
+
+library.add(faChevronLeft, faPlusCircle, faEllipsisV);
 
 export default class QuestionsPage extends React.Component {
   constructor(props) {
@@ -63,15 +65,16 @@ export default class QuestionsPage extends React.Component {
   }
 
   onComplete = (survey) => {
-  // Print on results into console on Complete
+    // Print on results into console on Complete
     // console.log(`Survey Questions: ${JSON.stringify(survey)}`);
     console.log(`Survey Results: ${JSON.stringify(survey.data)}`);
   }
 
   addToMap = (value, key, map) => {
     if (value && key === 'classSchedule') {
+      const newQuestion = Object.assign({}, classScheduleQuestion);
       this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, classScheduleQuestion),
+        questionMap: prevState.questionMap.set(prevState.questionID, newQuestion),
         questionID: prevState.questionID + 1,
       }));
     } else if (value && key === 'cantWorkWith') {
@@ -84,9 +87,9 @@ export default class QuestionsPage extends React.Component {
         questionMap: prevState.questionMap.set(prevState.questionID, prefWorkingTimeQuestion),
         questionID: prevState.questionID + 1,
       }));
-    } else if (value && key === 'workingStyles') {
+    } else if (value && key === 'workingStyle') {
       this.setState(prevState => ({
-        questionMap: prevState.questionMap.set(prevState.questionID, workingStylesQuestion),
+        questionMap: prevState.questionMap.set(prevState.questionID, workingStyleQuestion),
         questionID: prevState.questionID + 1,
       }));
     } else if (value && key === 'ethnicity') {
@@ -281,11 +284,14 @@ export default class QuestionsPage extends React.Component {
     }));
   }
 
+  getQuestionMapAsApiObject = () => {
+    this.props.getQuestionMapAsApiObject(this.state.questionMap);
+  }
+
   render() {
     // console.log(this.state.questionMap);
     console.log(`${this.state.questionMap}`);
     const questions = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
-      // console.log(`${questionObject.choices}`);
       return (
         <Question
           key={key}
@@ -312,6 +318,11 @@ export default class QuestionsPage extends React.Component {
       );
     });
 
+    const questionNavBar = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
+      return (
+        <button className="questionNavBarButton" type="button"> <FontAwesomeIcon icon="ellipsis-v" /> <FontAwesomeIcon icon="ellipsis-v" /> Question {key} </button>
+      );
+    });
 
     if (this.state.inPreview) {
       return (
@@ -325,13 +336,25 @@ export default class QuestionsPage extends React.Component {
     } else {
       return (
         <div>
-          <Link to="/dashboard">
-            <button className="goToDashboard" type="button"> <FontAwesomeIcon icon="chevron-left" /> Survey Dashboard </button>
-          </Link>
-          <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
-          <Link to="/groupsize"><button className="regularGreen" type="button"> Publish Survey </button></Link>
-          {questions}
-          <button type="button" onClick={this.addQuestion}> Add Question </button>
+          <div className="navBar">
+            <Link to="/dashboard">
+              <button className="goToDashboard" type="button"> <FontAwesomeIcon icon="chevron-left" /> Survey Dashboard </button>
+            </Link>
+            <div className="buttonGroup">
+              <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
+              <Link to="/dashboard"><button onClick={this.getQuestionMapAsApiObject} className="regularGreen" type="button"> Publish Survey </button></Link>
+            </div>
+          </div>
+          <div className="pageBody">
+            <SurveyHeader surveyTitle={this.props.surveyTitle} surveyDescription={this.props.surveyDescription} surveyDueDate={this.props.surveyDueDate} />
+            <div className="questionNavBarAndAddQuestion">
+              <button className="addQuestion" type="button" onClick={this.addQuestion}> <FontAwesomeIcon icon="plus-circle" /> Question </button>
+              <div className="questionNavBar">
+                {questionNavBar}
+              </div>
+            </div>
+            {questions}
+          </div>
         </div>
       );
     }

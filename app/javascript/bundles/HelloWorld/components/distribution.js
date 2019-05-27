@@ -27,34 +27,61 @@ export default class Importance extends React.Component {
 
 
   render() {
-    return (
-      <div>
-        <h4 className="q_header"> Distribution </h4>
-        <h6 className="q_subtext"> How are students distributed accross groups? </h6>
-        <button type="button" onClick={this.setSimilar} className="distributionSelected">
-        Students within groups are more
-          {' '}
-          <span className="blueText">similar</span>
-          {' '}
-          <FontAwesomeIcon icon="user" />
-          <FontAwesomeIcon icon="user" />
-          <FontAwesomeIcon icon="user" />
-          <FontAwesomeIcon icon="user" />
-          <FontAwesomeIcon icon="user" />
-        </button>
-        <button type="button" onClick={this.setDissimilar} className="distributionDisselected">
-          {' '}
-Students within groups are more
-          <span className="redText">dissimilar</span>
-          {' '}
-          <FontAwesomeIcon icon="user" color="#FFFFFF" />
-          <FontAwesomeIcon id="darkGreenUser" icon="user" />
-          <FontAwesomeIcon id="medGreenUser" icon="user" />
-          <FontAwesomeIcon id="lightGreenUser" icon="user" />
-          <FontAwesomeIcon id="yellowUser" icon="user" />
-        </button>
-      </div>
-    );
+    if (this.state.similar) {
+      return (
+        <div>
+          <h4 className="q_header"> Distribution </h4>
+          <h6 className="q_subtext"> How are students distributed accross groups? </h6>
+          <div className="distributionButtons">
+            <button type="button" onClick={this.setSimilar} style={{ border: '4px solid #518063' }} className="distributionButton">
+            Students within groups will share
+              <span className="blueText"> similar responses </span>  <br />
+              <FontAwesomeIcon className="userIcon" icon="user" />
+              <FontAwesomeIcon className="userIcon" icon="user" />
+              <FontAwesomeIcon className="userIcon" icon="user" />  <br />
+              <FontAwesomeIcon className="userIcon" icon="user" />
+              <FontAwesomeIcon className="userIcon" icon="user" />
+            </button>
+            <button type="button" onClick={this.setDissimilar} style={{ border: '1px solid #DEDEDE' }} className="distributionButton">
+            Students within groups will have
+              <span className="redText"> dissimilar responses</span> <br />
+              <FontAwesomeIcon style={{ color: '#202C39', fontSize: '15px', padding: '2px' }} icon="user" />
+              <FontAwesomeIcon style={{ color: '#254D32', fontSize: '15px', padding: '2px' }} icon="user" />
+              <FontAwesomeIcon style={{ color: '#3A7D44', fontSize: '15px', padding: '2px' }} icon="user" />  <br />
+              <FontAwesomeIcon style={{ color: '#69B578', fontSize: '15px', padding: '2px' }} icon="user" />
+              <FontAwesomeIcon style={{ color: '#D0DB97', fontSize: '15px', padding: '2px' }} icon="user" />
+            </button>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h4 className="q_header"> Distribution </h4>
+          <h6 className="q_subtext"> How are students distributed accross groups? </h6>
+          <div className="distributionButtons">
+            <button type="button" onClick={this.setSimilar} style={{ border: '1px solid #DEDEDE' }} className="distributionButton">
+            Students within groups will share
+              <span className="blueText"> similar responses </span>  <br />
+              <FontAwesomeIcon className="userIcon" icon="user" />
+              <FontAwesomeIcon className="userIcon" icon="user" />
+              <FontAwesomeIcon className="userIcon" icon="user" /> <br />
+              <FontAwesomeIcon className="userIcon" icon="user" />
+              <FontAwesomeIcon className="userIcon" icon="user" />
+            </button>
+            <button type="button" onClick={this.setDissimilar} style={{ border: '4px solid #518063' }} className="distributionButton">
+            Students within groups will have
+              <span className="redText"> dissimilar responses</span> <br />
+              <FontAwesomeIcon style={{ color: '#202C39', fontSize: '15px', padding: '2px' }} icon="user" />
+              <FontAwesomeIcon style={{ color: '#254D32', fontSize: '15px', padding: '2px' }} icon="user" />
+              <FontAwesomeIcon style={{ color: '#3A7D44', fontSize: '15px', padding: '2px' }} icon="user" />
+              <FontAwesomeIcon style={{ color: '#69B578', fontSize: '15px', padding: '2px' }} icon="user" /> <br />
+              <FontAwesomeIcon style={{ color: '#D0DB97', fontSize: '15px', padding: '2px' }} icon="user" />
+            </button>
+          </div>
+        </div>
+      );
+    }
   }
 }
 

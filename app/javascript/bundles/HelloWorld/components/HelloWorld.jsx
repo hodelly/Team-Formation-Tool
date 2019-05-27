@@ -1,5 +1,5 @@
 // import PropTypes from 'prop-types';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import Dashboard from './dashboard';
@@ -34,7 +34,7 @@ export default class HelloWorld extends React.Component {
 
   render() {
     return (
-      <Router>
+      <Router onUpdate={() => window.scrollTo(0, 0)}>
         <Switch>
           <Route
             exact
@@ -60,6 +60,7 @@ export default class HelloWorld extends React.Component {
             render={routeProps => (
               <SurveyCreate
                 {...routeProps}
+                canvas={this.props}
               />
             )}
           />
