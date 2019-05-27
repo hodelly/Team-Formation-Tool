@@ -44,11 +44,11 @@ export default class Importance extends React.Component {
           <button type="button" onClick={this.setDissimilar} style={{ border: '1px solid #DEDEDE' }} className="distributionButton">
           Students within groups are more
             <span className="redText">dissimilar</span>
-            <FontAwesomeIcon icon="user" color="#FFFFFF" />
-            <FontAwesomeIcon id="darkGreenUser" icon="user" />
-            <FontAwesomeIcon id="medGreenUser" icon="user" />
-            <FontAwesomeIcon id="lightGreenUser" icon="user" />
-            <FontAwesomeIcon id="yellowUser" icon="user" />
+            <FontAwesomeIcon style={{ color: '#202C39' }} icon="user" />
+            <FontAwesomeIcon style={{ color: '#254D32' }} icon="user" />
+            <FontAwesomeIcon style={{ color: '#3A7D44' }} icon="user" />
+            <FontAwesomeIcon style={{ color: '#69B578' }} icon="user" />
+            <FontAwesomeIcon style={{ color: '#D0DB97' }} icon="user" />
           </button>
         </div>
       );
@@ -69,11 +69,11 @@ export default class Importance extends React.Component {
           <button type="button" onClick={this.setDissimilar} style={{ border: '4px solid #518063' }} className="distributionButton">
           Students within groups are more
             <span className="redText">dissimilar</span>
-            <FontAwesomeIcon icon="user" color="#FFFFFF" />
-            <FontAwesomeIcon icon="user" />
-            <FontAwesomeIcon icon="user" />
-            <FontAwesomeIcon icon="user" />
-            <FontAwesomeIcon icon="user" />
+            <FontAwesomeIcon style={{ color: '#202C39' }} icon="user" />
+            <FontAwesomeIcon style={{ color: '#254D32' }} icon="user" />
+            <FontAwesomeIcon style={{ color: '#3A7D44' }} icon="user" />
+            <FontAwesomeIcon style={{ color: '#69B578' }} icon="user" />
+            <FontAwesomeIcon style={{ color: '#D0DB97' }} icon="user" />
           </button>
         </div>
       );

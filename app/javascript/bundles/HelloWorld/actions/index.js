@@ -13,6 +13,7 @@ export function fetchSurveys() {
   // };
 }
 
+// whenever all the compiled survey data structure
 export function postSurvey(survey) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/api/v1/surveys`, survey).then((response) => {

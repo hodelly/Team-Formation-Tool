@@ -61,9 +61,7 @@ export default class Question extends React.Component {
         {options}
         <Importance importance={this.props.importance} updateImportance={this.props.updateImportance} />
         <Distribution />
-        <FontAwesomeIcon style={{ color: 'red' }} icon="trash" />
-        <FaHeart className="heart" />
-        <span className="fontawesomeIcons"> <button type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon icon="trash" /> </button> </span>
+        <span className="fontawesomeIcons"> <button type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon style={{ color: '#C4C4C4' }} icon="trash" /> </button> </span>
       </div>
     );
   }

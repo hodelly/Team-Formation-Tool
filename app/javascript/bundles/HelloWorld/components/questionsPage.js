@@ -6,14 +6,15 @@ import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faPlusCircle, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import Question from './question';
 import SurveyHeader from './surveyHeader';
 import {
   classScheduleQuestion, cantWorkWithQuestion, prefWorkingTimeQuestion, workingStyleQuestion, genderQuestion, ethnicityQuestion, athleticsQuestion, greekLifeQuestion,
 } from '../utils/standardQuestions';
 
-library.add(faChevronLeft);
+
+library.add(faChevronLeft, faPlusCircle, faEllipsisV);
 
 export default class QuestionsPage extends React.Component {
   constructor(props) {
@@ -282,11 +283,14 @@ export default class QuestionsPage extends React.Component {
     }));
   }
 
+  getQuestionMapAsApiObject = () => {
+    this.props.getQuestionMapAsApiObject(this.state.questionMap);
+  }
+
   render() {
     // console.log(this.state.questionMap);
     console.log(`${this.state.questionMap}`);
     const questions = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
-      // console.log(`${questionObject.choices}`);
       return (
         <Question
           key={key}
@@ -313,6 +317,11 @@ export default class QuestionsPage extends React.Component {
       );
     });
 
+    const questionNavBar = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
+      return (
+        <button className="questionNavBarButton" type="button"> <FontAwesomeIcon icon="ellipsis-v" /> <FontAwesomeIcon icon="ellipsis-v" /> Question {key} </button>
+      );
+    });
 
     if (this.state.inPreview) {
       console.log(`${this.state.questionMap}`);
@@ -331,10 +340,13 @@ export default class QuestionsPage extends React.Component {
             <button className="goToDashboard" type="button"> <FontAwesomeIcon icon="chevron-left" /> Survey Dashboard </button>
           </Link>
           <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
-          <Link to="/groupsize"><button className="regularGreen" type="button"> Publish Survey </button></Link>
+          <Link to="/groupsize"><button onClick={this.getQuestionMapAsApiObject} className="regularGreen" type="button"> Publish Survey </button></Link>
           <SurveyHeader surveyTitle={this.props.surveyTitle} surveyDescription={this.props.surveyDescription} surveyDueDate={this.props.surveyDueDate} />
           {questions}
-          <button type="button" onClick={this.addQuestion}> Add Question </button>
+          <button className="addQuestion" type="button" onClick={this.addQuestion}> <FontAwesomeIcon icon="plus-circle" /> Question </button>
+          <div className="questionNavBar">
+            {questionNavBar}
+          </div>
         </div>
       );
     }
