@@ -342,7 +342,7 @@ export default class QuestionsPage extends React.Component {
             </Link>
             <div className="buttonGroup">
               <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
-              <Link to="/groupsize"><button onClick={this.getQuestionMapAsApiObject} className="regularGreen" type="button"> Publish Survey </button></Link>
+              <Link to="/dashboard"><button onClick={this.getQuestionMapAsApiObject} className="regularGreen" type="button"> Publish Survey </button></Link>
             </div>
           </div>
           <div className="pageBody">

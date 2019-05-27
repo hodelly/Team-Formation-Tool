@@ -114,7 +114,7 @@ button:focus {
 .regularGreen{
   background-color: #518063;
   border: none;
-  padding: 5px 40px;
+  padding: 10px 40px;
   font-size: 13px;
   border-radius: 10px;
   color: #FFFFFF;
@@ -278,20 +278,38 @@ hr {
   margin: 10px;
 }
 .surveyRow p {
-  padding: 5px;
+  padding: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 .dashboard_chart {
   align-self:center;
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 300px;
+  transform: rotate(-90deg);
+}
+.dashboard_header {
+  font-size:36px;
+  font-weight: bold;
+}
+.dashboard_survey_date {
+  font-style: italic;
 }
 .dashboard_chart h1 {
   margin:-115px;
-  margin-left: 50px;
+  margin-top: -200px;
+  margin-left: 90px;
   width: 100px;
+  transform: rotate(90deg);
+  font-size:30px;
+  font-weight: bold;
 }
 .survey_box a {
   text-decoration: none;
+}
+.dashboard_nosurvey h1 {
+  color: #AEAEAF;
+  font-style: italic;
 }
 // GroupNumber page Styling
 .groupNumber {
