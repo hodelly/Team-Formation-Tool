@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
 import ResultQuestions from './resultQuestions';
+import ResultTable from './resultTable';
 
 
 library.add(faChevronLeft);
@@ -39,7 +40,7 @@ export default class surveyResults extends React.Component {
   renderBottom() {
     if (this.state.renderResults) {
       return (
-        <div>returning results</div>
+        <ResultTable responses={this.state.survey.survey_responses} questions={this.state.survey.questions} />
       );
     } else {
       return (
