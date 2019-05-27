@@ -2,10 +2,9 @@ class Question < ApplicationRecord
   MULTIPLE_CHOICE = 'MULTIPLE_CHOICE'.freeze
   CHECKBOX = 'CHECKBOX'.freeze
   SHORT_ANSWER = 'SHORT_ANSWER'.freeze
-  PARAGRAPH = 'PARAGRAPH'.freeze
 
   QUESTION_TYPES = [
-    MULTIPLE_CHOICE, CHECKBOX, SHORT_ANSWER, PARAGRAPH
+    MULTIPLE_CHOICE, CHECKBOX, SHORT_ANSWER
   ].freeze
   validates :question_title, presence: true
   serialize :response_values, JSON # for multiple choice and checkbox
