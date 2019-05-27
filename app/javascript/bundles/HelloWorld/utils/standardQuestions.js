@@ -6,7 +6,7 @@ export const genderQuestion = {
   title: 'Which gender do you identify with? ',
   hasOther: true,
   isRequired: true,
-  colCount: 4,
+  colCount: 1,
   choices: Map({
     0: 'Female',
     1: 'Male',
@@ -23,7 +23,7 @@ export const ethnicityQuestion = {
   title: 'What is your ethnicity?',
   hasOther: true,
   isRequired: true,
-  colCount: 4,
+  colCount: 1,
   choices: Map({
     0: 'Asian, Pacific Islander',
     1: 'Black or African American',

@@ -59,8 +59,8 @@ export default class surveyResults extends React.Component {
         </div>
         <div id="results_toggle">
           <div className="toggle_buttons">
-            <button className="invertedGreen" type="button" onClick={this.showQuestions}>Questions</button>
-            <button className="regularGreen" type="button" onClick={this.showResults}>Responses ({this.state.survey.num_responses})</button>
+            <button className="invertedGreen" id="toggle_button" type="button" onClick={this.showQuestions}>Questions</button>
+            <button className="regularGreen" id="toggle_button" type="button" onClick={this.showResults}>Responses ({this.state.survey.num_responses})</button>
           </div>
           <div id="results_info">
             <h1>{this.state.survey.title}</h1>
