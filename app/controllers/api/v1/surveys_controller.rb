@@ -21,13 +21,13 @@ class Api::V1::SurveysController < ApplicationController
 
   def index
     # TODO: different renders for instructors vs students? 
-    render json: Survey.for_instructor(current_sis_user)
+    render json: Survey.for_instructor(current_sis_user), :methods => :num_responses
     # TODO: also consider for_course_id scope for students
   end
 
   def show
     @survey = Survey.find(params[:id])
-    render json: @survey.to_json(:include => [:questions]), status: :ok
+    render json: @survey.to_json(), status: :ok
   end
 
   private 

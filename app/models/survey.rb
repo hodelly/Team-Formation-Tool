@@ -6,7 +6,7 @@ class Survey < ApplicationRecord
   has_many :questions, through: :survey_questions
   validates :sis_instructor_id, presence: true 
   serialize :sis_instructor_id, JSON
-  validates :group_size, presence: true, numericality: { only_integer: true }
+  validates :group_size, numericality: { only_integer: true }
   validates :due_date, presence: true, numericality: true
   validates :is_published, inclusion: { in: [true, false] }
   has_many :survey_responses
@@ -21,6 +21,24 @@ class Survey < ApplicationRecord
     where(course_id: course_id) 
   end)
 
+  def num_responses
+    survey_responses.size
+  end
+
+  def as_json(options={})
+    if true # is_instructor? TODO: find out best practice for working with user type
+      super(:only => [:id, :course_id, :title, :description, :group_size, :due_date],
+            :methods => [:num_responses],
+            :include => [:questions, :survey_responses]
+      )
+    else
+      super(:only => [:course_id, :title, :description, :group_size, :due_date],
+            :methods => [:num_responses],
+            :include => [:questions]
+      )
+    end
+  end
+
   def self.create_from_params(params)
     s = new
     s.course_id = params[:course_id]
@@ -28,7 +46,7 @@ class Survey < ApplicationRecord
     s.title = params[:title]
     s.is_published = params[:is_published] == 'true'
     s.description = params[:description] || ''
-    s.group_size = params[:group_size].to_i
+    s.group_size = params[:group_size] ? params[:group_size].to_i : 0
     s.due_date = Time.at(params[:due_date].to_f/1000)
     s
   end

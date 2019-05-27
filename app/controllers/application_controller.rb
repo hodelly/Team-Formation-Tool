@@ -18,10 +18,22 @@ class ApplicationController < ActionController::Base
     # @current_sis_user ||= session[:netid] # TODO: Canvas capatibility
   end
 
+  def is_instructor?
+    true
+  end
+
   def require_authentication
     unless authenticated?
       session[:return_url] = request.url
       redirect_to '/auth/cas'
     end
   end
+
+  def canvas_data
+    canvas = CanvasResolver.resolve(:canvas)
+    ## Question: This is null. Am I auppose to be able to get a value from this or should I be using the mocks?
+    course_id = 34590
+    # Also saying that canvas_bulk_hash doesnt exist but I am not sure why?
+    @canvas_data = canvas.canvas_bulk_hash(course_id)
+  end 
 end
