@@ -5,6 +5,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
+import ResultQuestions from './resultQuestions';
 
 
 library.add(faChevronLeft);
@@ -42,7 +43,7 @@ export default class surveyResults extends React.Component {
       );
     } else {
       return (
-        <div>return questions</div>
+        <ResultQuestions questions={this.state.survey.questions} />
       );
     }
   }
@@ -59,8 +60,8 @@ export default class surveyResults extends React.Component {
         </div>
         <div id="results_toggle">
           <div className="toggle_buttons">
-            <button className="invertedGreen" id="toggle_button" type="button" onClick={this.showQuestions}>Questions</button>
-            <button className="regularGreen" id="toggle_button" type="button" onClick={this.showResults}>Responses ({this.state.survey.num_responses})</button>
+            <button id="toggle_button_question" className={(this.state.renderResults) ? 'not_active' : 'active'} type="button" onClick={this.showQuestions}>Questions</button>
+            <button id="toggle_button_response" className={(this.state.renderResults) ? 'active' : 'not_active'} type="button" onClick={this.showResults}>Responses ({this.state.survey.num_responses})</button>
           </div>
           <div id="results_info">
             <h1>{this.state.survey.title}</h1>
