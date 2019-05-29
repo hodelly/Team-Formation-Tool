@@ -69,14 +69,7 @@ export default class HelloWorld extends React.Component {
             render={routeProps => (
               <SurveyResults
                 {...routeProps}
-              />
-            )}
-          />
-          <Route
-            path="/groupsize"
-            render={routeProps => (
-              <GroupNumber
-                {...routeProps}
+                canvas={this.props}
               />
             )}
           />

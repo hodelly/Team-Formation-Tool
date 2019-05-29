@@ -40,7 +40,7 @@ export default class surveyResults extends React.Component {
   renderBottom() {
     if (this.state.renderResults) {
       return (
-        <ResultTable responses={this.state.survey.survey_responses} questions={this.state.survey.questions} />
+        <ResultTable canvas={this.props.canvas} showQs={this.showQuestions} responses={this.state.survey.survey_responses} questions={this.state.survey.questions} />
       );
     } else {
       return (
