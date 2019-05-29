@@ -17,12 +17,14 @@ export default class Importance extends React.Component {
     this.setState(prevState => ({
       similar: true,
     }));
+    this.props.updateDistribution(this.props.questionID, true);
   };
 
   setDissimilar = () => {
     this.setState(prevState => ({
       similar: false,
     }));
+    this.props.updateDistribution(this.props.questionID, false);
   };
 
 

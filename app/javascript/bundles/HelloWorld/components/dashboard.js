@@ -19,7 +19,7 @@ export default class Dashboard extends React.Component {
 
   componentDidMount(props) {
     axios.get('http://localhost:3000/api/v1/surveys').then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       for (const [id, survey] of response.data.entries()) {
         const dueDate = moment(survey.due_date);
         const today = moment(new Date());
@@ -38,7 +38,7 @@ export default class Dashboard extends React.Component {
         }
       }
     }).catch((error) => {
-      console.log(error);
+      // console.log(error);
     });
   }
 
@@ -125,7 +125,7 @@ export default class Dashboard extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
         <div id="create_survey">

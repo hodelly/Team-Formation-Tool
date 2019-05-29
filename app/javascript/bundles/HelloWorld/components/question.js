@@ -60,9 +60,9 @@ export default class Question extends React.Component {
         </div>
         {options}
         <hr />
-        <Distribution />
+        <Distribution questionID={this.props.questionID} distribution={this.props.distribution} updateDistribution={this.props.updateDistribution} />
         <hr />
-        <Importance importance={this.props.importance} updateImportance={this.props.updateImportance} />
+        <Importance questionID={this.props.questionID} importance={this.props.importance} updateImportance={this.props.updateImportance} />
         <hr />
         <span className="fontawesomeIcons"> <button className="trash" type="button" onClick={this.deleteQuestion}> <FontAwesomeIcon style={{ color: '#C4C4C4' }} icon="trash" /> </button> </span>
       </div>

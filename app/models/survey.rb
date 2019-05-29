@@ -30,7 +30,17 @@ class Survey < ApplicationRecord
     if true # is_instructor? TODO: find out best practice for working with user type
       super(:only => [:id, :course_id, :title, :description, :group_size, :due_date],
             :methods => [:num_responses],
-            :include => [:questions, :survey_responses]
+            :include => [
+              :survey_questions => {
+                :only => [:id, :weight],
+                :include => [:question]}, 
+              :survey_responses => {
+                :only => [:sis_user_id, :is_submitted],
+                :include => [
+                  :responses => {:only => [:survey_question_id, :value]}
+                ]
+              }
+            ]
       )
     else
       super(:only => [:course_id, :title, :description, :group_size, :due_date],
