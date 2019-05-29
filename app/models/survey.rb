@@ -28,7 +28,9 @@ class Survey < ApplicationRecord
 
   def as_json(options={})
     if true # is_instructor? TODO: find out best practice for working with user type
-      super(:only => [:id, :course_id, :title, :description, :group_size, :due_date],
+      super(:only => [:id, :course_id, :title, 
+                      :description, :group_size, 
+                      :due_date, :is_published],
             :methods => [:num_responses],
             :include => [
               :survey_questions => {
