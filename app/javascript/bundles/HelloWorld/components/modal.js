@@ -57,7 +57,6 @@ class SimpleModal extends React.Component {
   };
 
   render() {
-    console.log(this.props.questionImagePath);
     let questionImagePath = 'undefined';
     // TO DO: needs to be better way of doing this. Why doesn't props method way work??
     if (this.props.questionImagePath === 'prefWorkingTimeImage') questionImagePath = prefWorkingTimeImage;
