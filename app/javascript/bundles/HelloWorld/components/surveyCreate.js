@@ -13,17 +13,15 @@ library.add(faChevronLeft);
 export default class SurveyCreate extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    console.log('on survey create');
     // initial questions
     this.state = {
       initialQuestionMap: Map({
         classSchedule: false, cantWorkWith: false, prefWorkingTime: false, workingStyle: false, ethnicity: true, gender: true, athletics: false, greekLife: false,
       }),
       preSelection: true,
-      surveyTitle: '',
+      surveyTitle: 'Default Survey Title',
       surveyDescription: '',
-      surveyDueDate: '',
+      surveyDueDate: '1559096453175', // CHANGE FIRST
       questionMapAsApiObject: [],
     };
   }
@@ -40,68 +38,64 @@ export default class SurveyCreate extends React.Component {
     }));
   }
 
-  getQuestionMapAsApiObject = (questionMap) => {
-    console.log('do nothing for now');
-    // const allQuestions = []; // stores all the questions
-    // // for every question in the map
-    // questionMap.entrySeq().forEach((e) => {
-    //   const key = e[0];
-    //   const question = e[1];
-    //   /** create an api question object * */
-    //   // question type
-    //   const question_type = 'unknown';
-    //   if (question.type === 'checkbox') question_type = 'CHECKBOX';
-    //   else if (question.type === 'radiogroup') question_type = 'MULTIPLE_CHOICE';
-    //   else if (question.type === 'dropdown') question_type = 'DROP_DOWN';
-    //   else if (question.type === 'comment') question_type = 'SHORT_ANSWER';
-    //
-    //   // weight
-    //   const weight = question.importance;
-    //
-    //   // reponses
-    //   const response_values = question.choices.toIndexedSeq().toArray();
-    //
-    //   // is default
-    //   // const is_default = false;
-    //   // make all the bucket one's true, non-bucket one's false
-    //
-    //   // question title
-    //   const question_title = question.title;
-    //
-    //
-    //   // create object
-    //   const newQuestion = {
-    //     question_type,
-    //     weight,
-    //     response_values,
-    //     // is_default
-    //     question_title,
-    //     // is_enabled:
-    //   };
-    //
-    //   allQuestions[key] = newQuestion;
-    // });
-    //
-    // // store this new value in state
-    // this.setState(prevState => ({
-    //   questionMapAsApiObject: allQuestions,
-    // }));
-  }
+  saveSurvey = (questionMap) => {
+    /* stores all the individual question information */
+    const allQuestions = [];
+    let j = 0;
+    questionMap.entrySeq().forEach((e) => { // for every question in the map
+      const key = e[0];
+      const question = e[1]; // create an api question object
+      // question type
+      let question_type = 'unknown';
+      if (question.type === 'checkbox') question_type = 'CHECKBOX';
+      else if (question.type === 'radiogroup' || question.type === 'dropdown') question_type = 'MULTIPLE_CHOICE';
+      else if (question.type === 'comment') question_type = 'SHORT_ANSWER';
 
-  createAPIobject = () => {
-    console.log('do nothing for now');
+      let weight = question.importance; // weight: a combination of similarity & importance
+      if (question.similar === false) {
+        weight *= -1;
+      }
+      const response_values = question.choices.toIndexedSeq().toArray(); // reponses
+      const is_default = false; // TO DO: make all the bucket one's true, non-bucket one's false
+      const question_title = question.title; // question title
 
-    // const questionMapAsApiObject = this.state.getQuestionMapAsApiObject();
-    //
-    // const apiObject = {
-    //   course_id: '', // unsure how to get
-    //   title: this.state.surveyTitle,
-    //   sis_instructor_id: '', // unsure how to get
-    //   survey_questions: this.state.questionMapAsApiObject,
-    //   due_date: this.state.surveyDueDate,
-    //   group_size: '', // taken out?
-    //   description: this.state.surveyDescription,
-    // };
+      // create object
+      const newQuestion = {
+        question_type,
+        weight,
+        response_values,
+        is_default,
+        question_title,
+      };
+      allQuestions[j] = newQuestion;
+      j += 1;
+    });
+
+    // // // checking question object
+    // console.log('questions are: \n');
+    // let i = 0;
+    // for (i = 0; i < allQuestions.length; i += 1) {
+    //   console.log(`${allQuestions[i].question_type} `);
+    //   console.log(`${allQuestions[i].weight} `);
+    //   console.log(`${allQuestions[i].response_values} `);
+    //   console.log(`${allQuestions[i].is_default} `);
+    //   console.log(`${allQuestions[i].question_title} `);
+    // }
+    // // console.log('LOGGING PROPS:');
+    // // console.log(this.props);
+
+    const apiObject = {
+      course_id: this.props.canvas.canvas_enrollments[0].course_id, // getting course ID off of first student
+      title: this.state.surveyTitle,
+      is_published: true,
+      sis_instructor_id: '0', // don't have this data yet
+      survey_questions: allQuestions,
+      due_date: this.state.surveyDueDate,
+      description: this.state.surveyDescription,
+    };
+    // console.log(apiObject);
+
+    this.createSurvey(apiObject);
   }
 
   createSurvey = (survey) => {
@@ -112,10 +106,27 @@ export default class SurveyCreate extends React.Component {
     });
   }
 
+  updateSurveyTitle = (value) => {
+    this.setState(prevState => ({
+      surveyTitle: value,
+    }));
+  }
+
+  updateSurveyDescription = (value) => {
+    this.setState(prevState => ({
+      surveyDescription: value,
+    }));
+  }
+
+  updateSurveyDueDate = (value) => {
+    this.setState(prevState => ({
+      surveyDueDate: value,
+    }));
+  }
 
   render() {
     // if continue button not clicked display buckets
-    console.log(this.props.canvas);
+    // console.log(this.props.canvas);
     if (this.state.preSelection) {
       return (
         <PreSelection initialQuestionMap={this.state.initialQuestionMap} handleContinue={this.handleContinue} handleClick={this.handleClick} />
@@ -126,10 +137,15 @@ export default class SurveyCreate extends React.Component {
       <div>
         <QuestionsPage
           initialQuestionMap={this.state.initialQuestionMap}
+          saveSurvey={this.saveSurvey}
+
           surveyTitle={this.state.surveyTitle}
           surveyDescription={this.state.surveyDescription}
           surveyDueDate={this.state.surveyDueDate}
-          getQuestionMapAsApiObject={this.getQuestionMapAsApiObject}
+
+          updateSurveyTitle={this.updateSurveyTitle}
+          updateSurveyDescription={this.updateSurveyDescription}
+          updateSurveyDueDate={this.updateSurveyDueDate}
         />
       </div>
     );

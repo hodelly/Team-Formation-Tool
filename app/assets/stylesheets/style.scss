@@ -102,12 +102,13 @@ button:focus {
 // white button, green text
 .invertedGreen{
   background-color: #FFFFFF;
-  padding: 5px 60px;
+  padding: 10px 40px;
   font-size: 13px;
   border: none;
   border-radius: 10px;
   color: #518063;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin:10px;
 }
 
 // green button, white text
@@ -200,6 +201,11 @@ button:focus {
 
 .xOut {
   // float: right;
+  border: none;
+}
+
+.xOutBucket{
+  float: right;
   border: none;
 }
 
@@ -340,6 +346,25 @@ hr {
   padding-left: 20px;
   padding-right: 20px;
 }
+.group_num_header {
+  font-size: 17px;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+.group_num_p {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.group_num {
+  display: flex;
+  flex-direction: column;
+
+}
+.group_num_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 //RESULTS Styling
 #results_header {
   display: flex;
@@ -365,14 +390,13 @@ hr {
 #toggle_button_question {
   width: 120px;
   height: 35px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-size: 13px;
   // border: 2px #518063;
   border-radius: 10px 0px 0px 10px;
 }
 #toggle_button_response {
-  border: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   font-size: 13px;
   border-radius: 0px 10px 10px 0px;
   border-color: #518063;
@@ -405,7 +429,24 @@ hr {
 #results_description p {
   color: #518063;
 }
-
+// Results Questions Toggle Page STYLING
+.result_question {
+  background: #FFFFFF;
+  border: 1px solid #F1F1F1;
+  box-sizing: border-box;
+  margin-left:50px;
+  margin-top: 30px;
+  border-radius:5px;
+  margin-right:100px;
+}
+.qNum {
+  color: #518063;
+}
+.result_q_title {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #F1F1F1;
+}
 /****** style slider ******/
 input[type=range] {
   height: 25px;

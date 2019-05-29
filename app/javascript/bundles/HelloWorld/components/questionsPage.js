@@ -118,7 +118,6 @@ export default class QuestionsPage extends React.Component {
 
   startPreview = () => {
     // surveyData blank slate
-
     const surveyData = {
       title: 'Default Title',
       pages: [
@@ -248,7 +247,7 @@ export default class QuestionsPage extends React.Component {
     const choicesMap = question.choices;
     if (choicesMap.size > 1) {
       const newChoicesMap = choicesMap.delete(inputBarID);
-      console.log(newChoicesMap);
+      // console.log(newChoicesMap);
       question.choices = newChoicesMap;
 
       // set the updated question as the question in state
@@ -275,7 +274,6 @@ export default class QuestionsPage extends React.Component {
     const oldQuestion = this.state.questionMap.get(questionID);
     const question = Object.assign({}, oldQuestion);
 
-    // update it's slider value
     question.similar = value;
 
     // set the updated question as the question in state
@@ -284,13 +282,13 @@ export default class QuestionsPage extends React.Component {
     }));
   }
 
-  getQuestionMapAsApiObject = () => {
-    this.props.getQuestionMapAsApiObject(this.state.questionMap);
+  saveSurvey = () => {
+    this.props.saveSurvey(this.state.questionMap);
   }
 
   render() {
     // console.log(this.state.questionMap);
-    console.log(`${this.state.questionMap}`);
+    // console.log(`${this.state.questionMap}`);
     const questions = this.state.questionMap.entrySeq().map(([key, questionObject]) => {
       return (
         <Question
@@ -342,11 +340,19 @@ export default class QuestionsPage extends React.Component {
             </Link>
             <div className="buttonGroup">
               <button className="invertedGreen" type="button" onClick={this.startPreview}> Preview </button>
-              <Link to="/dashboard"><button onClick={this.getQuestionMapAsApiObject} className="regularGreen" type="button"> Publish Survey </button></Link>
+              <Link to="/dashboard"><button className="regularGreen" onClick={this.saveSurvey} type="button"> Publish Survey </button></Link>
             </div>
           </div>
           <div className="pageBody">
-            <SurveyHeader surveyTitle={this.props.surveyTitle} surveyDescription={this.props.surveyDescription} surveyDueDate={this.props.surveyDueDate} />
+            <SurveyHeader
+              surveyTitle={this.props.surveyTitle}
+              surveyDescription={this.props.surveyDescription}
+              surveyDueDate={this.props.surveyDueDate}
+
+              updateSurveyTitle={this.props.updateSurveyTitle}
+              updateSurveyDescription={this.props.updateSurveyDescription}
+              updateSurveyDueDate={this.props.updateSurveyDueDate}
+            />
             <div className="questionNavBarAndAddQuestion">
               <button className="addQuestion" type="button" onClick={this.addQuestion}> <FontAwesomeIcon icon="plus-circle" /> Question </button>
               <div className="questionNavBar">

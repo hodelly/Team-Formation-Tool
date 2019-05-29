@@ -1,6 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
-// import { Link } from 'react-router-dom';
+import GroupNumberModal from './groupNumberModal';
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
@@ -19,13 +18,22 @@ export default class resultTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // questions: '',
+      modalShow: false,
     };
   }
 
   componentDidMount(props) {
 
   }
+
+
+  handleClose = () => {
+    this.setState({ modalShow: false });
+  };
+
+  handleOpen = () => {
+    this.setState({ modalShow: true });
+  };
 
   render() {
     const classes = makeStyles(theme => ({
@@ -55,6 +63,12 @@ export default class resultTable extends React.Component {
 
     return (
       <div id="results_questions">
+        <div id="result_table_header">
+          <h1>Completed</h1>
+          <button className="regularGreen" type="button" onClick={this.props.showQs}> Change Weights </button>
+          <button className="regularGreen" type="button" onClick={this.handleOpen}> Generate Groups </button>
+          <GroupNumberModal canvas={this.props.canvas} isOpen={this.state.modalShow} close={this.handleClose} />
+        </div>
         <link
           rel="stylesheet"
           href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
@@ -80,6 +94,10 @@ export default class resultTable extends React.Component {
             </TableBody>
           </Table>
         </Paper>
+
+       
+
+
       </div>
     );
   }

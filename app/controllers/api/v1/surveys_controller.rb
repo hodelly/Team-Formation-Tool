@@ -9,7 +9,7 @@ class Api::V1::SurveysController < ApplicationController
     @survey.survey_questions << @survey_questions
 
     if @survey.save
-      render json: @survey, status: :created 
+      render json: @survey, status: :created
     else
       render json: @survey.errors, status: :unprocessable_entity
     end
@@ -20,7 +20,7 @@ class Api::V1::SurveysController < ApplicationController
   end
 
   def index
-    # TODO: different renders for instructors vs students? 
+    # TODO: different renders for instructors vs students?
     render json: Survey.for_instructor(current_sis_user), :methods => :num_responses
     # TODO: also consider for_course_id scope for students
   end
@@ -30,12 +30,12 @@ class Api::V1::SurveysController < ApplicationController
     render json: @survey.to_json(), status: :ok
   end
 
-  private 
+  private
 
   # validate params
   def survey_params
-    params.require(:survey).permit(:course_id, :sis_instructor_id, :group_size, 
-                                   :due_date, :title, :description, 
+    params.require(:survey).permit(:course_id, :sis_instructor_id, :group_size,
+                                   :due_date, :title, :description,
                                    :note_from_instructor, :is_published)
   end
 

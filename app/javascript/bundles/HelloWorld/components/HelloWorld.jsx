@@ -20,7 +20,7 @@ export default class HelloWorld extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
+    // console.log(props);
     this.state = {
     };
   }
@@ -69,14 +69,7 @@ export default class HelloWorld extends React.Component {
             render={routeProps => (
               <SurveyResults
                 {...routeProps}
-              />
-            )}
-          />
-          <Route
-            path="/groupsize"
-            render={routeProps => (
-              <GroupNumber
-                {...routeProps}
+                canvas={this.props}
               />
             )}
           />
