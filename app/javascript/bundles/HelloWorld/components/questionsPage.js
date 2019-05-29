@@ -28,7 +28,7 @@ export default class QuestionsPage extends React.Component {
       colCount: 4,
       choices: Map({ 0: 'choice1', 1: 'choice2', 2: 'choice3' }), // LEARNING: map stores the keys as strings when defining it over here. Uses keys to reference into the map!!!
       importance: 5,
-      similar: true,
+      distribution: true,
     };
     // set State
     this.state = {
@@ -274,7 +274,7 @@ export default class QuestionsPage extends React.Component {
     const oldQuestion = this.state.questionMap.get(questionID);
     const question = Object.assign({}, oldQuestion);
 
-    question.similar = value;
+    question.distribution = value;
 
     // set the updated question as the question in state
     this.setState(prevState => ({
@@ -310,7 +310,7 @@ export default class QuestionsPage extends React.Component {
           importance={questionObject.importance}
           updateImportance={this.updateImportance}
 
-          similar={questionObject.similar}
+          distribution={questionObject.distribution}
           updateDistribution={this.updateDistribution}
         />
       );

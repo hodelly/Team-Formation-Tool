@@ -52,7 +52,7 @@ export default class SurveyCreate extends React.Component {
       else if (question.type === 'comment') question_type = 'SHORT_ANSWER';
 
       let weight = question.importance; // weight: a combination of similarity & importance
-      if (question.similar === false) {
+      if (question.distribution === false) {
         weight *= -1;
       }
       const response_values = question.choices.toIndexedSeq().toArray(); // reponses
@@ -71,7 +71,7 @@ export default class SurveyCreate extends React.Component {
       j += 1;
     });
 
-    // // // checking question object
+    // // checking question object
     // console.log('questions are: \n');
     // let i = 0;
     // for (i = 0; i < allQuestions.length; i += 1) {

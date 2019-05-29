@@ -17,6 +17,7 @@
 
 .italics {
   font-style: italic;
+  margin-bottom: 10px;
 }
 
 .redText{
@@ -622,6 +623,39 @@ input[type=range]:focus::-ms-fill-upper {
   border: none;
 }
 
-.heart {
-  color: red;
+// RESULTS PAGE
+.weightingHeader{
+  background: #518063;
+  color: white;
+  margin-left: -31px;
+  margin-right: -31px;
+  line-height: 22px;
+}
+
+.greyedOut{
+  background: rgba(234, 234, 234, 0.5);
+  margin-left: -31px;
+margin-right: -31px;
+margin-bottom: -10px;
+margin-top: -30px;
+border-radius: 15px;
+}
+
+.resultsOptions {
+  display: flex;
+  flex-direction: column;
+  padding-left: 31px;
+  padding-right: 31px;
+  padding-bottom: 10px;
+  padding-top: 30px;
+}
+
+.optionsFont {
+  font-style: italic;
+  color: #9E9E9E;
+}
+
+.resultsWeighting {
+  margin-left: 31px;
+  margin-right: 31px;
 }
