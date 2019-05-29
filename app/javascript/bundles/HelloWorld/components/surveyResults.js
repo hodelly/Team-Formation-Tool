@@ -40,7 +40,7 @@ export default class surveyResults extends React.Component {
   renderBottom() {
     if (this.state.renderResults) {
       return (
-        <ResultTable responses={this.state.survey.survey_responses} questions={this.state.survey.questions} />
+        <ResultTable responses={this.state.survey.survey_responses} questions={this.state.survey} />
       );
     } else {
       return (
@@ -50,7 +50,6 @@ export default class surveyResults extends React.Component {
   }
 
   render() {
-    console.log(this.state.survey);
     return (
       <div id="survey_results">
         <div id="results_header">
