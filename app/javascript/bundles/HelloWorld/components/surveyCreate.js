@@ -4,6 +4,7 @@ import axios from 'axios';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 import PreSelection from './preSelection';
 import QuestionsPage from './questionsPage';
 
@@ -21,7 +22,7 @@ export default class SurveyCreate extends React.Component {
       preSelection: true,
       surveyTitle: 'Default Survey Title',
       surveyDescription: '',
-      surveyDueDate: '1559096453175', // CHANGE FIRST
+      surveyDueDate: moment(new Date()),
       questionMapAsApiObject: [],
     };
   }
@@ -118,9 +119,11 @@ export default class SurveyCreate extends React.Component {
     }));
   }
 
-  updateSurveyDueDate = (value) => {
+  updateSurveyDueDate = (date) => { // lEARNING: convertion. use of moment.
+    const m = moment(date, 'YYYY-M-D');
+    const mill = m.valueOf();
     this.setState(prevState => ({
-      surveyDueDate: value,
+      surveyDueDate: mill,
     }));
   }
 
