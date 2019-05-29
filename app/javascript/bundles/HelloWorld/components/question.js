@@ -60,7 +60,11 @@ export default class Question extends React.Component {
         </div>
         {options}
         <hr />
-        <Distribution questionID={this.props.questionID} distribution={this.props.distribution} updateDistribution={this.props.updateDistribution} />
+        <Distribution
+          questionID={this.props.questionID}
+          distribution={this.props.distribution}
+          updateDistribution={this.props.updateDistribution}
+        />
         <hr />
         <Importance questionID={this.props.questionID} importance={this.props.importance} updateImportance={this.props.updateImportance} />
         <hr />

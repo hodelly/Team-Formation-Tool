@@ -13,7 +13,7 @@ export const genderQuestion = {
     2: 'Prefer not to say',
   }),
   importance: 3,
-  similar: true,
+  distribution: true,
 };
 
 
@@ -33,7 +33,7 @@ export const ethnicityQuestion = {
     5: 'Prefer not to say',
   }),
   importance: 3,
-  similar: true,
+  distribution: true,
 };
 
 export const workingStyleQuestion = {
@@ -49,7 +49,7 @@ export const workingStyleQuestion = {
     3: 'Creative: I like to see things from many angles. I don\'t rush to a solution. If we have to take a step back and approach a problem from a new direction that\'s OK with me.',
   }),
   importance: 3,
-  similar: false,
+  distribution: false,
 };
 
 export const prefWorkingTimeQuestion = {
@@ -68,7 +68,7 @@ export const prefWorkingTimeQuestion = {
     6: 'Other: 12:00 am - 3:00 am)',
   }),
   importance: 3,
-  similar: true,
+  distribution: true,
 };
 
 export const cantWorkWithQuestion = {
@@ -81,7 +81,7 @@ export const cantWorkWithQuestion = {
     0: 'inputStudent1', 1: 'inputStudent2', 2: 'inputStudent3', 3: 'inputStudent4', 4: 'inputStudent5',
   }),
   importance: 3,
-  similar: true,
+  distribution: true,
 };
 
 export const classScheduleQuestion = {
@@ -94,7 +94,7 @@ export const classScheduleQuestion = {
     0: '9L', 1: '10', 2: '10A', 3: '11', 4: '12', 5: '2', 6: '2A', 7: '3A', 8: '3B', 9: '6A', 10: '6B',
   }),
   importance: 3,
-  similar: true,
+  distribution: true,
 };
 
 export const athleticsQuestion = {
@@ -107,7 +107,7 @@ export const athleticsQuestion = {
     0: 'Yes', 1: 'No',
   }),
   importance: 3,
-  similar: false,
+  distribution: false,
 };
 
 export const greekLifeQuestion = {
@@ -120,5 +120,5 @@ export const greekLifeQuestion = {
     0: 'Yes', 1: 'No',
   }),
   importance: 3,
-  similar: false,
+  distribution: false,
 };

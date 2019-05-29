@@ -7,29 +7,23 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 library.add(faUser);
 
 
-export default class Importance extends React.Component {
+export default class Distribution extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { similar: true };
+    this.state = { };
   }
 
   setSimilar = () => {
-    this.setState(prevState => ({
-      similar: true,
-    }));
     this.props.updateDistribution(this.props.questionID, true);
   };
 
   setDissimilar = () => {
-    this.setState(prevState => ({
-      similar: false,
-    }));
     this.props.updateDistribution(this.props.questionID, false);
   };
 
 
   render() {
-    if (this.state.similar) {
+    if (this.props.distribution) {
       return (
         <div>
           <h4 className="q_header"> Distribution </h4>
