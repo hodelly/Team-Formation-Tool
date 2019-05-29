@@ -19,9 +19,9 @@ export default class SurveyCreate extends React.Component {
         classSchedule: false, cantWorkWith: false, prefWorkingTime: false, workingStyle: false, ethnicity: true, gender: true, athletics: false, greekLife: false,
       }),
       preSelection: true,
-      surveyTitle: '',
+      surveyTitle: 'Default Survey Title',
       surveyDescription: '',
-      surveyDueDate: '1559096453175',
+      surveyDueDate: '1559096453175', // CHANGE FIRST
       questionMapAsApiObject: [],
     };
   }
@@ -71,28 +71,29 @@ export default class SurveyCreate extends React.Component {
       j += 1;
     });
 
-    // // checking question object
-    console.log('questions are: \n');
-    let i = 0;
-    for (i = 0; i < allQuestions.length; i += 1) {
-      console.log(`${allQuestions[i].question_type} `);
-      console.log(`${allQuestions[i].weight} `);
-      console.log(`${allQuestions[i].response_values} `);
-      console.log(`${allQuestions[i].is_default} `);
-      console.log(`${allQuestions[i].question_title} `);
-    }
-    // console.log('LOGGING PROPS:');
-    // console.log(this.props);
+    // // // checking question object
+    // console.log('questions are: \n');
+    // let i = 0;
+    // for (i = 0; i < allQuestions.length; i += 1) {
+    //   console.log(`${allQuestions[i].question_type} `);
+    //   console.log(`${allQuestions[i].weight} `);
+    //   console.log(`${allQuestions[i].response_values} `);
+    //   console.log(`${allQuestions[i].is_default} `);
+    //   console.log(`${allQuestions[i].question_title} `);
+    // }
+    // // console.log('LOGGING PROPS:');
+    // // console.log(this.props);
 
     const apiObject = {
       course_id: this.props.canvas.canvas_enrollments[0].course_id, // getting course ID off of first student
       title: this.state.surveyTitle,
+      is_published: true,
       sis_instructor_id: '0', // don't have this data yet
       survey_questions: allQuestions,
       due_date: this.state.surveyDueDate,
       description: this.state.surveyDescription,
     };
-    console.log(apiObject);
+    // console.log(apiObject);
 
     this.createSurvey(apiObject);
   }

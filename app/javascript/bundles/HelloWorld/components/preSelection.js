@@ -45,7 +45,12 @@ export default class PreSelection extends React.Component {
         );
       }
       // else
-      return (<button className="oneBucketDiv" type="button" style={{ border: '1px solid #DEDEDE' }} onClick={() => { this.props.handleClick(key); }}> <div className="bucketText"> {questionTitle} </div> <SimpleModal questionImagePath={questionImagePath} /> </button>);
+      return (
+        <button className="oneBucketDiv" type="button" style={{ border: '1px solid #DEDEDE' }} onClick={() => { this.props.handleClick(key); }}>
+          <div className="bucketText"> {questionTitle} </div>
+          <SimpleModal questionImagePath={questionImagePath} />
+        </button>
+      );
     });
 
     return (
@@ -77,3 +82,6 @@ export default class PreSelection extends React.Component {
 // lEARNING: (1) can print props (2) can pass parameters into eventHandling functions (3) how to change style in react
 // (4) for a series of components, always try to create them through a map of ints, always avoid hard coding them in! (bars/buttons..)
 // console.log(this.props);
+
+
+// <div className="bucketText"> {questionTitle} </div>

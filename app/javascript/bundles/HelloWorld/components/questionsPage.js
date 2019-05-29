@@ -118,7 +118,6 @@ export default class QuestionsPage extends React.Component {
 
   startPreview = () => {
     // surveyData blank slate
-
     const surveyData = {
       title: 'Default Title',
       pages: [
