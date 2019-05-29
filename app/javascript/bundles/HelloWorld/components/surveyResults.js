@@ -38,13 +38,14 @@ export default class surveyResults extends React.Component {
   }
 
   renderBottom() {
+    console.log(this.state.survey.survey_responses);
     if (this.state.renderResults) {
       return (
-        <ResultTable responses={this.state.survey.survey_responses} questions={this.state.survey.questions} />
+        <ResultTable canvas={this.props.canvas} showQs={this.showQuestions} responses={this.state.survey.survey_responses} questions={this.state.survey.survey_questions} />
       );
     } else {
       return (
-        <ResultQuestions questions={this.state.survey.questions} />
+        <ResultQuestions questions={this.state.survey.survey_questions} />
       );
     }
   }
