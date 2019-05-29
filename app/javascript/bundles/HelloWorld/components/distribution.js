@@ -76,8 +76,8 @@ export default class Importance extends React.Component {
               <span className="redText"> dissimilar responses</span> <br />
               <FontAwesomeIcon style={{ color: '#202C39', fontSize: '15px', padding: '2px' }} icon="user" />
               <FontAwesomeIcon style={{ color: '#254D32', fontSize: '15px', padding: '2px' }} icon="user" />
-              <FontAwesomeIcon style={{ color: '#3A7D44', fontSize: '15px', padding: '2px' }} icon="user" />
-              <FontAwesomeIcon style={{ color: '#69B578', fontSize: '15px', padding: '2px' }} icon="user" /> <br />
+              <FontAwesomeIcon style={{ color: '#3A7D44', fontSize: '15px', padding: '2px' }} icon="user" /> <br />
+              <FontAwesomeIcon style={{ color: '#69B578', fontSize: '15px', padding: '2px' }} icon="user" />
               <FontAwesomeIcon style={{ color: '#D0DB97', fontSize: '15px', padding: '2px' }} icon="user" />
             </button>
           </div>

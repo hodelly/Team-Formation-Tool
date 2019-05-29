@@ -57,6 +57,7 @@ class SimpleModal extends React.Component {
   };
 
   render() {
+    console.log(this.props.questionImagePath);
     let questionImagePath = 'undefined';
     // TO DO: needs to be better way of doing this. Why doesn't props method way work??
     if (this.props.questionImagePath === 'prefWorkingTimeImage') questionImagePath = prefWorkingTimeImage;
@@ -79,7 +80,7 @@ class SimpleModal extends React.Component {
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
-            <Button className="xOut" type="button" onClick={this.handleClose}> <FontAwesomeIcon icon="times" /> </Button>
+            <Button className="xOutBucket" type="button" onClick={this.handleClose}> <FontAwesomeIcon icon="times" /> </Button>
             <img src={questionImagePath} width="100%" height="undefined" alt={questionImagePath} />
           </div>
         </Modal>
@@ -96,3 +97,6 @@ SimpleModal.propTypes = {
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);
 
 export default SimpleModalWrapped;
+
+// <Button className="xOut" type="button" onClick={this.handleClose}> <FontAwesomeIcon icon="times" /> </Button>
+// <img src={questionImagePath} width="100%" height="undefined" alt={questionImagePath} />
