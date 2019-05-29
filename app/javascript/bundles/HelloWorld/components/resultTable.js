@@ -1,6 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
-import { Link } from 'react-router-dom';
 import GroupNumberModal from './groupNumberModal';
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
