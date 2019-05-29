@@ -45,12 +45,6 @@ export default class QuestionsPage extends React.Component {
     // upon start, add all the bucket questions to the page
     this.props.initialQuestionMap.forEach(this.addToMap);
 
-    // add 1 question
-    this.setState(prevState => ({
-      questionMap: prevState.questionMap.set(prevState.id, prevState.questionType),
-      id: prevState + 1,
-    }));
-
     // give the survey a title
     const surveyData = {
       title: 'Survey Default Title',
@@ -113,6 +107,11 @@ export default class QuestionsPage extends React.Component {
         questionID: prevState.questionID + 1,
       }));
     }
+    // quick fix for technigala - the value should actually depend on which questions have been added
+    // TODO: fix
+    this.setState(prevState => ({
+      largestInputID: 11,
+    }));
   }
 
 
@@ -327,7 +326,7 @@ export default class QuestionsPage extends React.Component {
         <div>
           <script src="https://surveyjs.azureedge.net/1.0.79/survey.react.min.js" />
           <link href="https://surveyjs.azureedge.net/1.0.79/survey.css" type="text/css" rel="stylesheet" />
-          <button type="button" onClick={this.endPreview}> End Preview </button>
+          <button type="button" className="regularGreen" onClick={this.endPreview}> End Preview </button>
           <Survey.Survey json={this.state.surveyjs} onComplete={this.onComplete} />
         </div>
       );

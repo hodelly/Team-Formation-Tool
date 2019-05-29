@@ -7,6 +7,11 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 
+import MomentLocaleUtils, {
+  formatDate,
+  parseDate,
+} from 'react-day-picker/moment';
+
 
 library.add(faTrash);
 
@@ -25,8 +30,8 @@ export default class SurveyHeader extends React.Component {
     this.props.updateSurveyDescription(event.target.value);
   }
 
-  updateSurveyDueDate = (event) => {
-    this.props.updateSurveyDueDate(event.target.value);
+  updateSurveyDueDate = (day) => {
+    this.props.updateSurveyDueDate(day);
   }
 
 
@@ -36,11 +41,13 @@ export default class SurveyHeader extends React.Component {
       <div className="surveyHeader">
         <input className="surveyTitle" type="text" placeholder="ENGS 21 Group Formation Survey" value={this.props.surveyTitle} onChange={this.updateSurveyTitle} />
         <input className="surveyInfo" type="text" placeholder="Survey Description" value={this.props.surveyDescription} onChange={this.updateSurveyDescription} />
-        <input className="surveyInfo" type="text" placeholder="Survey due date" value={this.props.surveyDueDate} onChange={this.updateSurveyDueDate} />
-        <div>
-          <p>Please type a day:</p>
-          <DayPickerInput onDayChange={day => console.log(day)} />
-        </div>
+        <DayPickerInput
+          formatDate={formatDate}
+          parseDate={parseDate}
+          className="datePicker"
+          placeholder="Survey due date"
+          onDayChange={day => this.updateSurveyDueDate(day)} // LEARNING: use of handler that sends props
+        />
 
         <p> <span className="bold"> The group formation tool automatically retrieves this data from Canvas: </span> <br />
           <span className="italics"> Student First and Last Name <br />

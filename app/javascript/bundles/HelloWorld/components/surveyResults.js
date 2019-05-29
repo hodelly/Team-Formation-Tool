@@ -5,9 +5,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment';
+import { Map } from 'immutable';
 import ResultQuestions from './resultQuestions';
 import ResultTable from './resultTable';
-
 
 library.add(faChevronLeft);
 
