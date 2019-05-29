@@ -57,10 +57,10 @@ class Survey < ApplicationRecord
     s.course_id = params[:course_id]
     s.sis_instructor_id = params[:sis_instructor_id]
     s.title = params[:title]
-    s.is_published = params[:is_published] == 'true'
+    s.is_published = params[:is_published]
     s.description = params[:description] || ''
-    s.group_size = params[:group_size] ? params[:group_size].to_i : 0
-    s.due_date = Time.at(params[:due_date].to_f/1000)
+    s.group_size = params[:group_size] || 0
+    s.due_date = Time.at(params[:due_date].to_f/1000) # maybe not passed in as string?
     s
   end
 end
