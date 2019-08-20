@@ -87,4 +87,4 @@ Things you may want to cover:
 
 ## Authors
 
-Janvi Kalra, Annie Ke, Morgan Sorbaro, Nitasha Kochar, Wylie Kasai, Lindsey Hodel
+Lindsey Hodel, Janvi Kalra, Annie Ke, Morgan Sorbaro, Nitasha Kochar, Wylie Kasai
